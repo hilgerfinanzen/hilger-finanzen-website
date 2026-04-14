@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Layout-Ansatz</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', sans-serif; background: #1a1a2e; color: #fff; padding: 24px; }
+
+  h1 { font-size: 1.1rem; color: #C07830; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
+  .lead { font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-bottom: 28px; }
+
+  .options-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+  .opt-card {
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .opt-card:hover { border-color: #C07830; }
+  .opt-card.selected { border-color: #C07830; }
+
+  .opt-header {
+    background: rgba(255,255,255,0.05);
+    padding: 10px 14px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #C07830;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .checkmark { opacity: 0; transition: opacity 0.2s; }
+  .opt-card.selected .checkmark { opacity: 1; }
+
+  .preview-box {
+    background: #0B1D2E;
+    padding: 10px;
+    height: 260px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Shared mini elements */
+  .mini-nav {
+    height: 16px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 2px;
+    margin-bottom: 8px;
+    display: flex; align-items: center; padding: 0 6px; gap: 8px;
+  }
+  .mini-dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.2); }
+  .mini-logo { width: 28px; height: 4px; background: rgba(255,255,255,0.3); border-radius: 1px; margin-right: auto; }
+  .mini-hero {
+    background: linear-gradient(135deg, rgba(192,120,48,0.15), rgba(11,29,46,0.8));
+    border: 1px solid rgba(192,120,48,0.2);
+    border-radius: 3px;
+    padding: 8px;
+    margin-bottom: 7px;
+  }
+  .mini-h { height: 5px; background: rgba(255,255,255,0.5); border-radius: 1px; width: 70%; margin-bottom: 4px; }
+  .mini-sub { height: 3px; background: rgba(255,255,255,0.2); border-radius: 1px; width: 90%; margin-bottom: 3px; }
+  .mini-sub2 { height: 3px; background: rgba(255,255,255,0.2); border-radius: 1px; width: 75%; margin-bottom: 6px; }
+  .mini-badge {
+    display: inline-block;
+    background: rgba(192,120,48,0.25);
+    border: 1px solid rgba(192,120,48,0.4);
+    color: #C07830; font-size: 0.48rem; padding: 2px 6px; border-radius: 2px;
+    letter-spacing: 0.06em;
+  }
+
+  /* A: Single scroll */
+  .scroll-section {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 3px;
+    padding: 6px 7px;
+    margin-bottom: 5px;
+  }
+  .scroll-section-title {
+    height: 3px; width: 40%; background: #C07830; border-radius: 1px; margin-bottom: 4px; opacity: 0.7;
+  }
+  .scroll-content { height: 3px; background: rgba(255,255,255,0.15); border-radius: 1px; width: 85%; margin-bottom: 2px; }
+  .scroll-content2 { height: 3px; background: rgba(255,255,255,0.1); border-radius: 1px; width: 65%; }
+  .mini-chat-bubble {
+    position: absolute; bottom: 8px; right: 8px;
+    background: rgba(192,120,48,0.9);
+    border-radius: 50%;
+    width: 22px; height: 22px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.65rem;
+  }
+
+  /* B: Zwei Spalten */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .col-left { }
+  .col-right { }
+  .mini-chat-panel {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(192,120,48,0.25);
+    border-radius: 3px;
+    padding: 5px;
+    height: 100%;
+  }
+  .chat-title { height: 3px; background: #C07830; width: 50%; border-radius: 1px; margin-bottom: 5px; }
+  .chat-bubble-in {
+    background: rgba(255,255,255,0.08);
+    border-radius: 3px 3px 3px 0;
+    height: 14px; width: 80%; padding: 3px 4px;
+    font-size: 0.45rem; color: rgba(255,255,255,0.4);
+    margin-bottom: 4px;
+  }
+  .chat-bubble-out {
+    background: rgba(192,120,48,0.2);
+    border-radius: 3px 3px 0 3px;
+    height: 10px; width: 65%; padding: 2px 4px;
+    font-size: 0.45rem; color: rgba(192,120,48,0.6);
+    margin-bottom: 4px; margin-left: auto;
+  }
+  .chat-input-bar {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 2px;
+    height: 10px;
+    margin-top: auto;
+  }
+
+  /* C: Wizard/Steps */
+  .step-tabs {
+    display: flex; gap: 4px; margin-bottom: 6px;
+  }
+  .step-tab {
+    flex: 1; height: 20px; border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.45rem; font-weight: 600;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.3);
+  }
+  .step-tab.active {
+    background: rgba(192,120,48,0.2);
+    border-color: #C07830;
+    color: #C07830;
+  }
+  .step-tab.done { background: rgba(192,120,48,0.08); border-color: rgba(192,120,48,0.3); color: rgba(192,120,48,0.5); }
+  .step-content {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 3px;
+    padding: 8px;
+    margin-bottom: 5px;
+  }
+  .step-q { font-size: 0.55rem; color: rgba(255,255,255,0.6); margin-bottom: 5px; }
+  .step-opts { display: flex; flex-direction: column; gap: 3px; }
+  .step-opt {
+    height: 12px; background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 2px; padding: 0 5px;
+    font-size: 0.45rem; color: rgba(255,255,255,0.3);
+    display: flex; align-items: center;
+  }
+  .step-opt.sel { border-color: #C07830; color: #C07830; background: rgba(192,120,48,0.08); }
+  .step-nav { display: flex; justify-content: flex-end; margin-top: 4px; }
+  .step-btn {
+    background: #C07830; color: white; font-size: 0.45rem; padding: 2px 6px;
+    border-radius: 2px; font-weight: 600;
+  }
+
+  .opt-info {
+    padding: 12px 14px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    background: rgba(0,0,0,0.2);
+  }
+  .opt-title { font-size: 0.82rem; font-weight: 600; margin-bottom: 4px; }
+  .opt-desc { font-size: 0.7rem; color: rgba(255,255,255,0.45); line-height: 1.4; }
+  .rec-tag {
+    display: inline-block;
+    background: rgba(192,120,48,0.15);
+    border: 1px solid rgba(192,120,48,0.3);
+    color: #C07830;
+    font-size: 0.58rem;
+    padding: 2px 7px;
+    border-radius: 2px;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Welches Seiten-Layout passt am besten?</h1>
+<p class="lead">Alle Varianten enthalten: KI-Chatbot, Terminbuchung, Bedarfs-Schnellcheck + DACH-Botschaft</p>
+
+<div class="options-row">
+
+  <!-- Option A: Single Scroll -->
+  <div class="opt-card" onclick="pick(this,'scroll')">
+    <div class="opt-header">A — Einspaltig <span class="checkmark">✓</span></div>
+    <div class="preview-box">
+      <div class="mini-nav">
+        <div class="mini-logo"></div>
+        <div class="mini-dot"></div><div class="mini-dot"></div><div class="mini-dot"></div>
+      </div>
+      <div class="mini-hero">
+        <div class="mini-h"></div>
+        <div class="mini-sub"></div>
+        <div class="mini-sub2"></div>
+        <span class="mini-badge">🇩🇪 🇦🇹 🇨🇭 Deutschlandweit · DACH</span>
+      </div>
+      <!-- Schnellcheck -->
+      <div class="scroll-section">
+        <div class="scroll-section-title"></div>
+        <div style="font-size:0.48rem;color:rgba(255,255,255,0.4);margin-bottom:3px;">Bedarfs-Schnellcheck</div>
+        <div class="scroll-content"></div>
+        <div class="scroll-content2"></div>
+      </div>
+      <!-- Termin -->
+      <div class="scroll-section">
+        <div class="scroll-section-title"></div>
+        <div style="font-size:0.48rem;color:rgba(255,255,255,0.4);margin-bottom:3px;">Terminbuchung</div>
+        <div class="scroll-content"></div>
+        <div class="scroll-content2"></div>
+      </div>
+      <div class="mini-chat-bubble">💬</div>
+    </div>
+    <div class="opt-info">
+      <div class="opt-title">Einfach scrollen</div>
+      <div class="opt-desc">Alle Features untereinander — vertraut, mobile-freundlich, keine Navigation nötig</div>
+    </div>
+  </div>
+
+  <!-- Option B: Zwei Spalten mit Chatbot fix -->
+  <div class="opt-card" onclick="pick(this,'split')">
+    <div class="opt-header">B — Zwei Spalten <span class="checkmark">✓</span></div>
+    <div class="preview-box">
+      <div class="mini-nav">
+        <div class="mini-logo"></div>
+        <div class="mini-dot"></div><div class="mini-dot"></div><div class="mini-dot"></div>
+      </div>
+      <div class="mini-hero" style="margin-bottom:6px;">
+        <div class="mini-h"></div>
+        <span class="mini-badge">🇩🇪 🇦🇹 🇨🇭 Überall erreichbar</span>
+      </div>
+      <div class="two-col" style="height:140px;">
+        <div class="col-left" style="display:flex;flex-direction:column;gap:5px;">
+          <div class="scroll-section" style="flex:1">
+            <div class="scroll-section-title"></div>
+            <div style="font-size:0.45rem;color:rgba(255,255,255,0.35);margin-bottom:3px;">Schnellcheck</div>
+            <div class="scroll-content"></div>
+            <div class="scroll-content2"></div>
+          </div>
+          <div class="scroll-section" style="flex:1">
+            <div class="scroll-section-title"></div>
+            <div style="font-size:0.45rem;color:rgba(255,255,255,0.35);margin-bottom:3px;">Terminbuchung</div>
+            <div class="scroll-content"></div>
+            <div class="scroll-content2"></div>
+          </div>
+        </div>
+        <div class="col-right">
+          <div class="mini-chat-panel" style="display:flex;flex-direction:column;">
+            <div class="chat-title"></div>
+            <div style="font-size:0.48rem;color:#C07830;margin-bottom:5px;">KI-Berater</div>
+            <div class="chat-bubble-in">Guten Tag! Wie kann ich helfen?</div>
+            <div class="chat-bubble-out">Ich suche eine KMU-Versicherung</div>
+            <div class="chat-bubble-in">Gerne! Sind Sie in ganz DACH tätig?</div>
+            <div class="chat-input-bar" style="margin-top:auto;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="opt-info">
+      <div class="rec-tag">★ Empfehlung</div>
+      <div class="opt-title">Split: Inhalte + Chat</div>
+      <div class="opt-desc">Chatbot immer sichtbar rechts — perfekt für längere Gespräche, professioneller Look</div>
+    </div>
+  </div>
+
+  <!-- Option C: Wizard/Steps -->
+  <div class="opt-card" onclick="pick(this,'wizard')">
+    <div class="opt-header">C — Schritt-für-Schritt <span class="checkmark">✓</span></div>
+    <div class="preview-box">
+      <div class="mini-nav">
+        <div class="mini-logo"></div>
+        <div class="mini-dot"></div><div class="mini-dot"></div><div class="mini-dot"></div>
+      </div>
+      <div class="mini-hero" style="margin-bottom:6px;">
+        <div class="mini-h"></div>
+        <span class="mini-badge">DACH-weit · Online</span>
+      </div>
+      <div class="step-tabs">
+        <div class="step-tab done">✓ Bedarf</div>
+        <div class="step-tab active">Termin</div>
+        <div class="step-tab">Bestätigung</div>
+      </div>
+      <div class="step-content">
+        <div class="step-q">Wann passt es Ihnen am besten?</div>
+        <div class="step-opts">
+          <div class="step-opt sel">Mo 09:00 – Videocall</div>
+          <div class="step-opt">Di 14:00 – Videocall</div>
+          <div class="step-opt">Mi 11:00 – Telefon</div>
+        </div>
+      </div>
+      <div class="step-nav">
+        <div class="step-btn">Weiter →</div>
+      </div>
+      <div class="mini-chat-bubble">💬</div>
+    </div>
+    <div class="opt-info">
+      <div class="opt-title">Geführter Wizard</div>
+      <div class="opt-desc">Nutzer werden Schritt für Schritt geführt: Check → Termin → Bestätigung</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function pick(el, key) {
+    document.querySelectorAll('.opt-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    try { window.parent && window.parent.postMessage({type:'selection', choice: key}, '*'); } catch(e){}
+  }
+</script>
+</body>
+</html>

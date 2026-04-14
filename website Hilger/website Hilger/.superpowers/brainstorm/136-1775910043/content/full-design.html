@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>beratung.html – Vollständiger Entwurf</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0B1D2E;
+    --navy-mid: #122640;
+    --cream: #F4EFE6;
+    --copper: #C07830;
+    --copper-light: #D4922A;
+    --muted: #6B7A8D;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: #0f1923; color: #fff; }
+
+  /* ── Outer frame label ── */
+  .frame-label {
+    background: rgba(192,120,48,0.1);
+    border-bottom: 1px solid rgba(192,120,48,0.2);
+    padding: 10px 20px;
+    font-size: 0.72rem;
+    color: #C07830;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .frame-label span { color: rgba(255,255,255,0.4); font-size: 0.65rem; letter-spacing: 0; text-transform: none; }
+
+  /* ── Simulated browser chrome ── */
+  .browser {
+    background: #1e2a38;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+  .browser-bar {
+    background: #162030;
+    padding: 8px 14px;
+    display: flex; align-items: center; gap: 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .browser-dots { display: flex; gap: 5px; }
+  .browser-dot { width: 9px; height: 9px; border-radius: 50%; }
+  .bd-r { background: #ff5f57; }
+  .bd-y { background: #febc2e; }
+  .bd-g { background: #28c840; }
+  .browser-url {
+    flex: 1; background: rgba(255,255,255,0.06); border-radius: 4px;
+    padding: 4px 10px; font-size: 0.68rem; color: rgba(255,255,255,0.4);
+    max-width: 300px;
+  }
+
+  /* ── Page content ── */
+  .page { background: var(--navy); min-height: 500px; }
+
+  /* NAV */
+  .p-nav {
+    background: rgba(11,29,46,0.97);
+    padding: 14px 28px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .p-logo-name { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600; color: white; }
+  .p-logo-sub { font-size: 0.55rem; color: var(--copper-light); letter-spacing: 0.14em; text-transform: uppercase; }
+  .p-nav-links { display: flex; gap: 20px; list-style: none; }
+  .p-nav-links a { color: rgba(255,255,255,0.55); font-size: 0.72rem; text-decoration: none; }
+  .p-nav-links a.active { color: var(--copper-light); }
+
+  /* HERO */
+  .p-hero {
+    background: linear-gradient(135deg, #0B1D2E 60%, #122640);
+    padding: 40px 28px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .p-hero::before {
+    content: '';
+    position: absolute; top: -30%; right: -5%; width: 50%; height: 160%;
+    background: radial-gradient(ellipse, rgba(192,120,48,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .p-hero-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--copper-light); margin-bottom: 10px;
+  }
+  .p-hero-tag::before { content: ''; display: block; width: 18px; height: 1px; background: var(--copper-light); }
+  .p-hero-h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 400; line-height: 1.1; color: white;
+    margin-bottom: 10px;
+  }
+  .p-hero-h1 em { font-style: italic; color: var(--copper-light); }
+  .p-hero-sub { font-size: 0.78rem; color: rgba(255,255,255,0.55); line-height: 1.6; margin-bottom: 18px; max-width: 480px; font-weight: 300; }
+
+  .dach-strip {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    padding: 10px 14px;
+    background: rgba(192,120,48,0.08);
+    border: 1px solid rgba(192,120,48,0.2);
+    border-radius: 4px;
+    max-width: 520px;
+  }
+  .dach-flag { font-size: 1rem; }
+  .dach-text { font-size: 0.72rem; color: rgba(255,255,255,0.7); line-height: 1.4; }
+  .dach-text strong { color: var(--copper-light); }
+
+  /* MAIN LAYOUT */
+  .p-main {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 0;
+    min-height: 400px;
+  }
+
+  /* LEFT COLUMN */
+  .p-left {
+    padding: 28px;
+    border-right: 1px solid rgba(255,255,255,0.06);
+  }
+
+  /* Section title */
+  .sec-tag {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--copper); margin-bottom: 6px;
+  }
+  .sec-tag::before { content: ''; display: block; width: 14px; height: 1px; background: var(--copper); }
+  .sec-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 400; color: white;
+    margin-bottom: 18px; line-height: 1.2;
+  }
+  .sec-title em { font-style: italic; color: var(--copper-light); }
+
+  /* SCHNELLCHECK */
+  .check-progress {
+    display: flex; gap: 4px; margin-bottom: 16px;
+  }
+  .prog-step {
+    flex: 1; height: 3px; border-radius: 2px;
+    background: rgba(255,255,255,0.1);
+  }
+  .prog-step.done { background: var(--copper); }
+  .prog-step.active { background: rgba(192,120,48,0.5); }
+
+  .check-q {
+    font-size: 0.82rem; color: rgba(255,255,255,0.8);
+    margin-bottom: 12px; line-height: 1.5;
+  }
+  .check-label {
+    font-size: 0.6rem; color: var(--muted); letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 8px;
+  }
+  .check-options { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+  .check-opt {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 3px;
+    padding: 10px 14px;
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.6);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .check-opt:hover { border-color: var(--copper); color: white; }
+  .check-opt.selected { border-color: var(--copper); color: white; background: rgba(192,120,48,0.08); }
+  .check-opt-dot {
+    width: 14px; height: 14px; border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.2);
+    flex-shrink: 0;
+  }
+  .check-opt.selected .check-opt-dot { background: var(--copper); border-color: var(--copper); }
+  .check-next-btn {
+    background: var(--copper); color: white;
+    border: none; border-radius: 2px;
+    padding: 10px 20px; font-size: 0.78rem;
+    font-weight: 500; cursor: pointer;
+    letter-spacing: 0.04em; font-family: 'DM Sans', sans-serif;
+  }
+
+  .divider {
+    height: 1px; background: rgba(255,255,255,0.06);
+    margin: 24px 0;
+  }
+
+  /* TERMINBUCHUNG */
+  .termin-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;
+    margin-bottom: 14px;
+  }
+  .termin-slot {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 3px;
+    padding: 8px 6px; text-align: center;
+    font-size: 0.7rem; color: rgba(255,255,255,0.5);
+    cursor: pointer;
+  }
+  .termin-slot.active {
+    border-color: var(--copper);
+    color: var(--copper-light);
+    background: rgba(192,120,48,0.08);
+  }
+  .termin-slot .day { font-size: 0.58rem; color: rgba(255,255,255,0.3); display: block; margin-bottom: 2px; }
+  .termin-confirm {
+    background: var(--copper); color: white;
+    border: none; border-radius: 2px;
+    padding: 10px 20px; font-size: 0.78rem;
+    font-weight: 500; cursor: pointer;
+    letter-spacing: 0.04em; font-family: 'DM Sans', sans-serif;
+    width: 100%;
+  }
+
+  /* RIGHT COLUMN: CHAT */
+  .p-right {
+    background: #0d1f2f;
+    display: flex; flex-direction: column;
+  }
+  .chat-header {
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .chat-avatar {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--copper), var(--copper-light));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem; font-weight: 700; color: white;
+    flex-shrink: 0;
+  }
+  .chat-header-info {}
+  .chat-header-name { font-size: 0.78rem; font-weight: 600; color: white; }
+  .chat-header-status { font-size: 0.62rem; color: #4CAF50; display: flex; align-items: center; gap: 4px; }
+  .chat-header-status::before { content: ''; display: block; width: 5px; height: 5px; border-radius: 50%; background: #4CAF50; }
+
+  .chat-messages {
+    flex: 1; padding: 14px 14px 10px;
+    display: flex; flex-direction: column; gap: 10px;
+    overflow-y: auto; max-height: 280px;
+  }
+  .msg { max-width: 90%; }
+  .msg-bot .msg-bubble {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px 8px 8px 2px;
+    padding: 8px 11px;
+    font-size: 0.72rem; color: rgba(255,255,255,0.75);
+    line-height: 1.5;
+  }
+  .msg-user { align-self: flex-end; }
+  .msg-user .msg-bubble {
+    background: rgba(192,120,48,0.15);
+    border: 1px solid rgba(192,120,48,0.25);
+    border-radius: 8px 8px 2px 8px;
+    padding: 8px 11px;
+    font-size: 0.72rem; color: rgba(255,255,255,0.8);
+    line-height: 1.5;
+  }
+  .msg-time { font-size: 0.55rem; color: rgba(255,255,255,0.25); margin-top: 3px; }
+  .msg-bot .msg-time { text-align: left; }
+  .msg-user .msg-time { text-align: right; }
+
+  .chat-suggestions {
+    padding: 0 14px 10px;
+    display: flex; flex-wrap: wrap; gap: 5px;
+  }
+  .chat-sug {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 4px 10px;
+    font-size: 0.63rem;
+    color: rgba(255,255,255,0.5);
+    cursor: pointer;
+  }
+  .chat-sug:hover { border-color: var(--copper); color: var(--copper-light); }
+
+  .chat-input-area {
+    padding: 10px 12px;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    display: flex; gap: 6px; align-items: center;
+  }
+  .chat-input {
+    flex: 1; background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 3px; padding: 7px 10px;
+    font-size: 0.72rem; color: rgba(255,255,255,0.6);
+    font-family: 'DM Sans', sans-serif;
+    outline: none;
+  }
+  .chat-send {
+    background: var(--copper); border: none; border-radius: 3px;
+    width: 30px; height: 30px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 0.75rem;
+  }
+
+  /* annotation labels */
+  .annot {
+    position: absolute;
+    background: rgba(192,120,48,0.9);
+    color: white;
+    font-size: 0.6rem;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 2px;
+    letter-spacing: 0.06em;
+    pointer-events: none;
+  }
+
+  /* legend */
+  .legend {
+    padding: 14px 20px;
+    background: rgba(0,0,0,0.3);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex; gap: 16px; flex-wrap: wrap;
+  }
+  .leg-item { display: flex; align-items: center; gap: 6px; font-size: 0.68rem; color: rgba(255,255,255,0.45); }
+  .leg-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--copper); flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<div class="frame-label">
+  Vollständiger Entwurf: beratung.html
+  <span>Subseite · passt zum Hilger-Design · alle Features eingebaut</span>
+</div>
+
+<div class="browser" style="margin: 12px;">
+  <div class="browser-bar">
+    <div class="browser-dots">
+      <div class="browser-dot bd-r"></div>
+      <div class="browser-dot bd-y"></div>
+      <div class="browser-dot bd-g"></div>
+    </div>
+    <div class="browser-url">hilger-versicherungen.de/beratung.html</div>
+  </div>
+
+  <div class="page">
+
+    <!-- NAV -->
+    <div class="p-nav">
+      <div>
+        <div class="p-logo-name">Hilger</div>
+        <div class="p-logo-sub">Versicherungen</div>
+      </div>
+      <ul class="p-nav-links">
+        <li><a href="#">Startseite</a></li>
+        <li><a href="#">Leistungen</a></li>
+        <li><a href="#">Über uns</a></li>
+        <li><a href="#" class="active">Beratung</a></li>
+        <li><a href="#">Kontakt</a></li>
+      </ul>
+    </div>
+
+    <!-- HERO -->
+    <div class="p-hero">
+      <div class="p-hero-tag">Online-Beratung</div>
+      <div class="p-hero-h1">Beratung ohne <em>Grenzen</em> —<br>persönlich, digital, überall.</div>
+      <div class="p-hero-sub">Unsere Experten beraten Sie unabhängig von Ihrem Standort. Ob München, Berlin oder Zürich — echte Bedarfsanalyse, überall in Deutschland, Österreich und der Schweiz.</div>
+      <div class="dach-strip">
+        <span class="dach-flag">🇩🇪</span>
+        <span class="dach-flag">🇦🇹</span>
+        <span class="dach-flag">🇨🇭</span>
+        <div class="dach-text">
+          <strong>Deutschlandweit & DACH-weit verfügbar</strong><br>
+          100 % digital — kein Ortstermin notwendig
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN: Two-column -->
+    <div class="p-main">
+
+      <!-- LEFT -->
+      <div class="p-left">
+
+        <!-- SCHNELLCHECK -->
+        <div class="sec-tag">Schritt 1</div>
+        <div class="sec-title">Ihr persönlicher<br><em>Bedarfs-Schnellcheck</em></div>
+
+        <div class="check-progress">
+          <div class="prog-step done"></div>
+          <div class="prog-step active"></div>
+          <div class="prog-step"></div>
+          <div class="prog-step"></div>
+        </div>
+
+        <div class="check-label">Frage 2 von 4</div>
+        <div class="check-q">In welchem Bereich haben Sie den größten Absicherungsbedarf?</div>
+
+        <div class="check-options">
+          <div class="check-opt">
+            <div class="check-opt-dot"></div>
+            Betriebshaftpflicht & Cyber
+          </div>
+          <div class="check-opt selected">
+            <div class="check-opt-dot"></div>
+            Betriebliche Altersvorsorge
+          </div>
+          <div class="check-opt">
+            <div class="check-opt-dot"></div>
+            Rechtsschutz
+          </div>
+          <div class="check-opt">
+            <div class="check-opt-dot"></div>
+            Ich bin mir nicht sicher
+          </div>
+        </div>
+
+        <button class="check-next-btn">Weiter →</button>
+
+        <div class="divider"></div>
+
+        <!-- TERMINBUCHUNG -->
+        <div class="sec-tag">Schritt 2</div>
+        <div class="sec-title">Termin <em>vereinbaren</em></div>
+
+        <div class="check-label" style="margin-bottom:10px;">Verfügbare Slots (diese Woche)</div>
+        <div class="termin-grid">
+          <div class="termin-slot">
+            <span class="day">Mo 14.04.</span>
+            09:00
+          </div>
+          <div class="termin-slot active">
+            <span class="day">Mo 14.04.</span>
+            11:00
+          </div>
+          <div class="termin-slot">
+            <span class="day">Di 15.04.</span>
+            10:00
+          </div>
+          <div class="termin-slot">
+            <span class="day">Di 15.04.</span>
+            14:00
+          </div>
+          <div class="termin-slot">
+            <span class="day">Mi 16.04.</span>
+            09:30
+          </div>
+          <div class="termin-slot">
+            <span class="day">Do 17.04.</span>
+            15:00
+          </div>
+        </div>
+        <button class="termin-confirm">Termin bestätigen – kostenlos & unverbindlich</button>
+
+      </div>
+
+      <!-- RIGHT: CHAT -->
+      <div class="p-right">
+        <div class="chat-header">
+          <div class="chat-avatar">KI</div>
+          <div class="chat-header-info">
+            <div class="chat-header-name">Hilger KI-Berater</div>
+            <div class="chat-header-status">Online · Antwortet sofort</div>
+          </div>
+        </div>
+
+        <div class="chat-messages">
+          <div class="msg msg-bot">
+            <div class="msg-bubble">Guten Tag! Ich bin Ihr digitaler Berater von Hilger Versicherungen. Wie kann ich Ihnen heute helfen?</div>
+            <div class="msg-time">Jetzt</div>
+          </div>
+          <div class="msg msg-bot">
+            <div class="msg-bubble">Übrigens: Wir beraten Sie vollständig digital — egal ob Sie in München, Hamburg, Wien oder Zürich sind. 🇩🇪🇦🇹🇨🇭</div>
+            <div class="msg-time">Jetzt</div>
+          </div>
+          <div class="msg msg-user">
+            <div class="msg-bubble">Ich suche eine Cyberversicherung für mein KMU</div>
+            <div class="msg-time">Gerade eben</div>
+          </div>
+          <div class="msg msg-bot">
+            <div class="msg-bubble">Sehr gerne! Für eine Cyberversicherung sind vor allem Unternehmensgröße und digitale Infrastruktur entscheidend. Wie viele Mitarbeiter hat Ihr Unternehmen?</div>
+            <div class="msg-time">Gerade eben</div>
+          </div>
+        </div>
+
+        <div class="chat-suggestions">
+          <div class="chat-sug">Betriebshaftpflicht</div>
+          <div class="chat-sug">Altersvorsorge</div>
+          <div class="chat-sug">Termin buchen</div>
+          <div class="chat-sug">Kosten & Preise</div>
+        </div>
+
+        <div class="chat-input-area">
+          <input class="chat-input" placeholder="Ihre Frage..." readonly>
+          <button class="chat-send">→</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="legend" style="margin: 0 12px 12px; border-radius: 0 0 8px 8px; background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.06); border-top: none;">
+  <div class="leg-item"><div class="leg-dot"></div> Datei: <strong style="color:rgba(255,255,255,0.6)">beratung.html</strong> (neue Subseite)</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#4CAF50"></div> Nav-Link in index.html wird aktualisiert</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#64B5F6"></div> Gleiche Fonts & CSS-Variablen wie Hauptseite</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#BA68C8"></div> Chatbot: statisch (Alpine.js, kein Backend)</div>
+</div>
+
+</body>
+</html>

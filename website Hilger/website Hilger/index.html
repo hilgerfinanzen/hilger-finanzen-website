@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/favicon.png">
+  <meta name="theme-color" content="#0B1D2E">
+  <title>Hilger Finanzen – Unabhängige Versicherungsmaklerin in Garching bei München</title>
+  <meta name="description" content="Katarzyna Hilger – Unabhängige Versicherungsmaklerin seit 2009. Kostenlose Beratung für Privatkunden und Unternehmen. Deutschlandweit. Jetzt Termin vereinbaren.">
+  <meta name="keywords" content="Versicherungsmaklerin, Garching, München, Versicherung, Beratung, Privatkunden, Unternehmen, Berufsunfähigkeit, Krankenversicherung, Betriebshaftpflicht">
+  <meta name="author" content="Katarzyna Hilger – Hilger Finanzen">
+  <meta property="og:title" content="Hilger Finanzen – Unabhängige Versicherungsmaklerin">
+  <meta property="og:description" content="Persönliche, unabhängige Versicherungsberatung für Privatkunden und Unternehmen. Kostenlos und unverbindlich. Deutschlandweit.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_DE">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+  <style>
+    :root {
+      --navy: #0B1D2E;
+      --navy-mid: #122640;
+      --cream: #EEF3FA;
+      --cream-dark: #E2EAF4;
+      --copper: #1A6BB8;
+      --copper-light: #3B82D4;
+      --text: #1C2B3A;
+      --muted: #6B7A8D;
+      --light: #F4F7FB;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--cream); overflow-x: hidden; }
+    h1, h2, h3 { font-family: 'Cormorant Garamond', serif; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1.25rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: all 0.4s ease;
+    }
+    nav.scrolled {
+      background: rgba(11,29,46,0.96);
+      backdrop-filter: blur(12px);
+      padding: 0.875rem 2rem;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.2);
+    }
+    .nav-logo { display: flex; align-items: center; }
+    .nav-logo-img { height: 52px; width: auto; object-fit: contain; background: white; padding: 5px 12px; border-radius: 4px; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.875rem;
+      transition: color 0.2s; position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; right: 100%; height: 1px;
+      background: var(--copper-light); transition: right 0.3s ease;
+    }
+    .nav-links a:hover { color: white; }
+    .nav-links a:hover::after { right: 0; }
+
+    /* BUTTONS */
+    .btn-primary {
+      background: var(--copper); color: white; padding: 0.625rem 1.5rem;
+      border-radius: 2px; font-size: 0.875rem; font-weight: 500; text-decoration: none;
+      transition: all 0.2s; border: none; cursor: pointer; letter-spacing: 0.03em;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .btn-primary:hover { background: var(--copper-light); transform: translateY(-1px); box-shadow: 0 8px 20px rgba(26,107,184,0.3); }
+    .btn-outline {
+      background: transparent; color: white; padding: 0.625rem 1.5rem;
+      border-radius: 2px; font-size: 0.875rem; font-weight: 500; text-decoration: none;
+      transition: all 0.2s; border: 1px solid rgba(255,255,255,0.4); cursor: pointer;
+    }
+    .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.08); }
+    .btn-white {
+      background: white; color: var(--copper); padding: 0.875rem 2.5rem;
+      border-radius: 2px; font-size: 0.9rem; font-weight: 600; text-decoration: none;
+      display: inline-block; transition: all 0.2s; border: none; cursor: pointer;
+    }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,0.15); }
+
+    /* MOBILE */
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .nav-hamburger span { display: block; width: 24px; height: 1.5px; background: white; transition: all 0.3s; }
+    .mobile-menu {
+      position: fixed; inset: 0; background: var(--navy); z-index: 200;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2rem;
+    }
+    .mobile-menu a { font-family: 'Cormorant Garamond', serif; font-size: 2.25rem; color: white; text-decoration: none; }
+    .mobile-close {
+      position: absolute; top: 1.5rem; right: 1.75rem;
+      background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer;
+    }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh; position: relative;
+      background: linear-gradient(to right, rgba(11,29,46,0.92) 55%, rgba(11,29,46,0.55) 100%), url('images/hero-bg-web.jpg') center/cover no-repeat;
+      display: flex; align-items: center; overflow: hidden;
+    }
+    .hero-pattern {
+      position: absolute; inset: 0; opacity: 0.03;
+      background-image: repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(255,255,255,0.5) 40px, rgba(255,255,255,0.5) 41px);
+    }
+    .hero-glow {
+      position: absolute; top: -20%; right: -10%; width: 60%; height: 140%;
+      background: radial-gradient(ellipse, rgba(26,107,184,0.09) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      position: relative; z-index: 2; max-width: 900px; margin: 0 auto;
+      padding: 9rem 2rem 6rem; width: 100%;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--copper-light); font-weight: 500; margin-bottom: 2rem;
+    }
+    .hero-tag::before { content: ''; display: block; width: 24px; height: 1px; background: var(--copper-light); }
+    .hero-h1 {
+      font-size: clamp(2.5rem, 5vw, 4.25rem); font-weight: 400; line-height: 1.1;
+      color: white; margin-bottom: 1.5rem; letter-spacing: -0.01em; max-width: 780px;
+    }
+    .hero-claim {
+      font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 400;
+      color: var(--copper-light); margin-bottom: 1.25rem; letter-spacing: 0.02em;
+    }
+    .hero-sub { font-size: 1rem; line-height: 1.8; color: rgba(255,255,255,0.6); margin-bottom: 2.75rem; font-weight: 300; max-width: 640px; }
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 4rem; }
+    .hero-ctas .btn-primary, .hero-ctas .btn-outline { padding: 0.875rem 2rem; font-size: 0.9rem; }
+    .hero-boxes { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: rgba(255,255,255,0.08); border-radius: 6px; overflow: hidden; }
+    .hero-box {
+      background: rgba(255,255,255,0.04); padding: 1.75rem 1.5rem;
+      transition: background 0.2s;
+    }
+    .hero-box:hover { background: rgba(255,255,255,0.07); }
+    .hero-box-link { cursor: pointer; text-decoration: none; display: block; }
+    .hero-box-link .hero-box-label::after { content: ' →'; opacity: 0; transition: opacity 0.2s; }
+    .hero-box-link:hover .hero-box-label::after { opacity: 1; }
+    .hero-box-label { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--copper-light); font-weight: 600; margin-bottom: 0.75rem; }
+    .hero-box-text { font-size: 0.875rem; color: rgba(255,255,255,0.65); line-height: 1.6; font-weight: 300; }
+    .hero-scroll {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      color: rgba(255,255,255,0.35); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+      animation: bounce 2s ease-in-out infinite;
+    }
+    @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
+    @media (max-width: 640px) { .hero-boxes { grid-template-columns: 1fr; } }
+
+    /* TRUST BAR */
+    #trust { background: var(--cream-dark); padding: 3.5rem 2rem; border-bottom: 1px solid rgba(0,0,0,0.06); }
+    .trust-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4,1fr); gap: 2rem; text-align: center; }
+    .trust-num { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 600; font-style: italic; color: var(--copper); line-height: 1; letter-spacing: -0.02em; }
+    .trust-lbl { font-size: 0.78rem; color: var(--muted); letter-spacing: 0.05em; margin-top: 0.35rem; }
+
+    /* SECTION COMMONS */
+    section { padding: 6rem 2rem; }
+    .s-inner { max-width: 1200px; margin: 0 auto; }
+    .s-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--copper); font-weight: 500; margin-bottom: 0.875rem;
+    }
+    .s-tag::before { content: ''; display: block; width: 20px; height: 1px; background: var(--copper); }
+    .s-tag.light { color: var(--copper-light); }
+    .s-tag.light::before { background: var(--copper-light); }
+    .s-title { font-size: clamp(2.25rem, 3.5vw, 3.5rem); font-weight: 400; line-height: 1.1; color: var(--navy); margin-bottom: 1.25rem; letter-spacing: -0.01em; }
+    .s-title.light { color: white; }
+    .s-title em { font-style: italic; color: var(--copper); }
+    .s-title.light em { color: var(--copper-light); }
+    .s-desc { font-size: 1rem; line-height: 1.75; color: var(--muted); max-width: 560px; font-weight: 300; }
+    .s-desc.light { color: rgba(255,255,255,0.5); }
+
+    /* LEISTUNGEN */
+    #leistungen { background: var(--light); }
+    .leistungen-hdr { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; flex-wrap: wrap; gap: 1.5rem; }
+    .tab-sw { display: flex; background: var(--cream-dark); border-radius: 4px; padding: 3px; gap: 3px; }
+    .tab-btn {
+      padding: 0.5rem 1.25rem; font-size: 0.82rem; font-weight: 500;
+      border: none; background: transparent; cursor: pointer; border-radius: 3px;
+      transition: all 0.25s; color: var(--muted); font-family: 'DM Sans', sans-serif;
+    }
+    .tab-btn.active { background: white; color: var(--navy); box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+    .srv-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(215px,1fr)); gap: 1.5rem; }
+    .srv-card {
+      background: white; border-radius: 4px; padding: 2rem 1.75rem;
+      position: relative; overflow: hidden; transition: all 0.3s; cursor: pointer;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    .srv-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--copper); transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+    }
+    .srv-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+    .srv-card:hover::before { transform: scaleX(1); }
+    .srv-icon { font-size: 1.75rem; margin-bottom: 1rem; display: block; }
+    .srv-title { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 600; color: var(--navy); margin-bottom: 0.5rem; line-height: 1.2; }
+    .srv-desc { font-size: 0.82rem; line-height: 1.65; color: var(--muted); font-weight: 300; }
+    .srv-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.775rem; font-weight: 500; color: var(--copper); text-decoration: none; margin-top: 1rem; transition: gap 0.2s; }
+    .srv-link:hover { gap: 0.6rem; }
+
+    /* PROZESS */
+    #prozess { background: var(--navy); }
+    .prozess-steps {
+      display: grid; grid-template-columns: repeat(4,1fr);
+      gap: 0; margin-top: 4rem; position: relative;
+    }
+    .prozess-steps::before {
+      content: ''; position: absolute; top: 2rem;
+      left: 12.5%; right: 12.5%; height: 1px;
+      background: linear-gradient(to right, var(--copper), rgba(26,107,184,0.15));
+    }
+    .p-step { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 1.5rem; position: relative; z-index: 1; }
+    .p-img {
+      width: 5rem; height: 5rem; border-radius: 50%;
+      object-fit: cover; object-position: center;
+      margin-bottom: 1.5rem;
+      border: 2px solid var(--copper);
+      box-shadow: 0 0 0 4px rgba(26,107,184,0.18);
+    }
+    .p-title { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 500; color: white; margin-bottom: 0.625rem; }
+    .p-desc { font-size: 0.8rem; line-height: 1.65; color: rgba(255,255,255,0.4); font-weight: 300; }
+
+    /* USP */
+    #usp { background: var(--cream); }
+    .usp-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .usp-photo-wrap { position: relative; }
+    .usp-photo { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: top; border-radius: 6px; display: block; }
+    .usp-photo-badge { position: absolute; bottom: 1.5rem; left: -1.5rem; background: white; border-radius: 6px; padding: 1rem 1.25rem; box-shadow: 0 8px 24px rgba(11,29,46,0.12); display: flex; align-items: center; gap: 0.75rem; }
+    .usp-photo-badge-icon { width: 36px; height: 36px; background: var(--copper); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .usp-photo-badge-text { font-size: 0.75rem; color: var(--navy); font-weight: 500; line-height: 1.4; }
+    .usp-photo-badge-text span { display: block; color: var(--muted); font-weight: 300; font-size: 0.7rem; }
+    .usp-right { display: flex; flex-direction: column; gap: 1.5rem; }
+    .usp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 2rem; }
+    .usp-card { background: white; border-radius: 8px; padding: 1.5rem; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 4px 16px rgba(11,29,46,0.05); transition: transform 0.2s, box-shadow 0.2s; }
+    .usp-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(11,29,46,0.1); }
+    .usp-icon { width: 44px; height: 44px; border-radius: 10px; background: linear-gradient(135deg, var(--copper), var(--copper-light)); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 1rem; }
+    .usp-t { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; color: var(--navy); margin-bottom: 0.4rem; }
+    .usp-d { font-size: 0.8rem; line-height: 1.7; color: var(--muted); font-weight: 300; }
+
+    /* KI */
+    #ki { background: var(--navy-mid); position: relative; overflow: hidden; }
+    .ki-bg {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 20% 50%, rgba(26,107,184,0.07) 0%, transparent 60%),
+                  radial-gradient(ellipse at 80% 30%, rgba(255,255,255,0.02) 0%, transparent 60%);
+    }
+    .ki-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 1.25rem; margin-top: 3rem; }
+    .ki-card {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px; padding: 2rem; transition: all 0.3s;
+    }
+    .ki-card:hover { background: rgba(255,255,255,0.07); border-color: rgba(26,107,184,0.4); transform: translateY(-3px); }
+    .ki-icon { width: 64px; height: 64px; border-radius: 10px; object-fit: cover; margin-bottom: 1.25rem; border: 1px solid rgba(26,107,184,0.35); }
+    .ki-t { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600; color: white; margin-bottom: 0.5rem; }
+    .ki-d { font-size: 0.8rem; line-height: 1.65; color: rgba(255,255,255,0.45); font-weight: 300; }
+
+    /* APP */
+    #app { background: var(--navy-mid); position: relative; overflow: hidden; }
+    #app::before {
+      content: ''; position: absolute; top: -30%; left: -10%; width: 50%; height: 160%;
+      background: radial-gradient(ellipse, rgba(26,107,184,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .app-wrap { display: grid; grid-template-columns: 1fr 340px; gap: 5rem; align-items: center; position: relative; z-index: 1; }
+    .app-features { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2.5rem 0; }
+    .app-feat {
+      display: flex; align-items: flex-start; gap: 0.875rem;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 6px; padding: 1rem 1.25rem; transition: background 0.2s;
+    }
+    .app-feat:hover { background: rgba(255,255,255,0.07); }
+    .app-feat-icon { font-size: 1.25rem; flex-shrink: 0; }
+    .app-feat-t { font-size: 0.83rem; color: rgba(255,255,255,0.75); font-weight: 400; line-height: 1.45; }
+    .app-qr-card {
+      background: white; border-radius: 10px; padding: 2rem;
+      text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    }
+    .app-qr-card img { width: 180px; height: 180px; display: block; margin: 0 auto 1.25rem; }
+    .app-qr-label { font-size: 0.75rem; color: var(--muted); margin-bottom: 1.25rem; line-height: 1.5; }
+    .app-qr-name { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 600; color: var(--navy); margin-bottom: 0.25rem; }
+    .app-qr-sub { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .btn-app { display: block; background: var(--copper); color: white; text-decoration: none; padding: 0.75rem 1rem; border-radius: 4px; font-size: 0.83rem; font-weight: 500; transition: background 0.2s; }
+    .btn-app:hover { background: var(--copper-light); }
+    @media (max-width: 960px) { .app-wrap { grid-template-columns: 1fr; gap: 3rem; } .app-features { grid-template-columns: 1fr; } }
+
+    /* BERATERIN */
+    #beraterin { background: var(--light); }
+    .beraterin-wrap { display: grid; grid-template-columns: 420px 1fr; gap: 6rem; align-items: center; }
+    .beraterin-img-wrap { position: relative; }
+    .beraterin-img { width: 100%; border-radius: 6px; display: block; box-shadow: 0 20px 60px rgba(11,29,46,0.18); }
+    .beraterin-badge {
+      position: absolute; bottom: -1.5rem; right: -1.5rem;
+      background: var(--copper); color: white; border-radius: 6px;
+      padding: 1rem 1.5rem; text-align: center; box-shadow: 0 8px 24px rgba(26,107,184,0.3);
+    }
+    .beraterin-badge-num { font-family: 'Cormorant Garamond', serif; font-size: 2.25rem; font-weight: 600; line-height: 1; }
+    .beraterin-badge-lbl { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.85; margin-top: 0.2rem; }
+    .beraterin-name { font-family: 'Cormorant Garamond', serif; font-size: 2.75rem; font-weight: 400; color: var(--navy); line-height: 1.1; margin-bottom: 0.4rem; }
+    .beraterin-titel { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--copper); font-weight: 500; margin-bottom: 1.75rem; }
+    .beraterin-text { font-size: 0.95rem; line-height: 1.85; color: var(--muted); font-weight: 300; margin-bottom: 1.25rem; }
+    .beraterin-punkte { list-style: none; margin: 1.5rem 0 2rem; display: flex; flex-direction: column; gap: 0.6rem; }
+    .beraterin-punkte li { display: flex; align-items: center; gap: 0.75rem; font-size: 0.875rem; color: var(--text); }
+    .beraterin-punkte li::before { content: ''; display: block; width: 6px; height: 6px; border-radius: 50%; background: var(--copper); flex-shrink: 0; }
+    @media (max-width: 960px) { .beraterin-wrap { grid-template-columns: 1fr; gap: 4rem; } .beraterin-badge { bottom: 1rem; right: 1rem; } }
+
+    /* VERSICHERUNGSCHECK */
+    #vcheck { background: var(--light); }
+    .vcheck-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .vcheck-intro { font-size: 1.05rem; line-height: 1.8; color: var(--muted); font-weight: 300; margin-bottom: 1.75rem; }
+    .vcheck-body { font-size: 0.9rem; line-height: 1.85; color: var(--muted); font-weight: 300; margin-bottom: 1.25rem; }
+    .vcheck-list { list-style: none; margin: 0 0 1.75rem; display: flex; flex-direction: column; gap: 0.65rem; }
+    .vcheck-list li { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.875rem; color: var(--text); line-height: 1.55; }
+    .vcheck-list li::before { content: ''; display: block; width: 18px; height: 18px; background: var(--copper); border-radius: 50%; flex-shrink: 0; margin-top: 1px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='8' viewBox='0 0 10 8'%3E%3Cpath d='M1 4l2.5 2.5L9 1' stroke='white' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: center; }
+    .vcheck-steps { display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 2rem; }
+    .vcheck-step { display: flex; gap: 1rem; align-items: center; }
+    .vcheck-step-img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; object-position: center; flex-shrink: 0; border: 2px solid var(--copper); }
+    .vcheck-step-t { font-size: 0.875rem; color: var(--text); line-height: 1.6; }
+    .vcheck-card { background: white; border-radius: 6px; overflow: hidden; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 8px 30px rgba(11,29,46,0.07); position: sticky; top: 6rem; }
+    .vcheck-card-header { background: var(--navy); padding: 2rem 2.5rem; display: flex; align-items: center; gap: 1rem; }
+    .vcheck-card-header img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; object-position: top; border: 2px solid rgba(255,255,255,0.3); flex-shrink: 0; }
+    .vcheck-card-header-name { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: white; font-weight: 500; }
+    .vcheck-card-header-sub { font-size: 0.7rem; color: rgba(255,255,255,0.5); margin-top: 0.15rem; }
+    .vcheck-card-body { padding: 2rem 2.5rem; }
+    .vcheck-card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.75rem; font-weight: 500; color: var(--navy); margin-bottom: 0.5rem; line-height: 1.2; }
+    .vcheck-card-sub { font-size: 0.83rem; color: var(--muted); margin-bottom: 1.75rem; font-weight: 300; line-height: 1.6; }
+    .vcheck-for { background: var(--cream); border-radius: 4px; padding: 1.25rem 1.5rem; margin-bottom: 1.75rem; }
+    .vcheck-for-t { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--copper); margin-bottom: 0.75rem; }
+    .vcheck-for p { font-size: 0.83rem; color: var(--muted); line-height: 1.7; font-weight: 300; }
+    @media (max-width: 960px) { .vcheck-wrap { grid-template-columns: 1fr; gap: 3rem; } .vcheck-card { position: static; } }
+
+    /* FAQ */
+    #faq { background: var(--cream); }
+    .faq-grid { max-width: 780px; margin: 3rem auto 0; }
+    .faq-item {
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+      overflow: hidden;
+    }
+    .faq-q {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.25rem 0; cursor: pointer; gap: 1rem;
+      font-size: 0.95rem; font-weight: 500; color: var(--navy);
+      user-select: none;
+    }
+    .faq-q:hover { color: var(--copper); }
+    .faq-icon {
+      font-size: 1.25rem; color: var(--copper); flex-shrink: 0;
+      transition: transform 0.3s; font-style: normal;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+      font-size: 0.875rem; line-height: 1.8; color: var(--muted); font-weight: 300;
+    }
+    .faq-item.open .faq-a { max-height: 300px; padding-bottom: 1.25rem; }
+
+    /* CTA BAND */
+    #cta-band { background: var(--copper); padding: 5rem 2rem; text-align: center; }
+    .cta-h { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem,4vw,3.5rem); font-weight: 400; color: white; margin-bottom: 0.875rem; letter-spacing: -0.01em; }
+    .cta-d { font-size: 1rem; color: rgba(255,255,255,0.8); margin-bottom: 2.5rem; font-weight: 300; }
+
+    /* KONTAKT */
+    #kontakt { background: var(--cream); }
+    .kontakt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; margin-top: 3.5rem; align-items: start; }
+    .f-group { margin-bottom: 1.25rem; }
+    .f-label { display: block; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+    .f-in, .f-sel, .f-ta {
+      width: 100%; padding: 0.75rem 1rem;
+      background: white; border: 1px solid rgba(0,0,0,0.1); border-radius: 2px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--text);
+      transition: border-color 0.2s; appearance: none;
+    }
+    .f-in:focus, .f-sel:focus, .f-ta:focus { outline: none; border-color: var(--copper); box-shadow: 0 0 0 3px rgba(26,107,184,0.1); }
+    .f-ta { min-height: 120px; resize: vertical; }
+    .f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .k-info-t { font-family: 'Cormorant Garamond', serif; font-size: 1.75rem; color: var(--navy); margin-bottom: 0.5rem; }
+    .k-info-d { font-size: 0.875rem; color: var(--muted); line-height: 1.7; margin-bottom: 2rem; font-weight: 300; }
+    .k-det { display: flex; align-items: center; gap: 0.875rem; margin-bottom: 1rem; font-size: 0.875rem; color: var(--text); }
+    .k-det-icon { width: 36px; height: 36px; background: var(--cream-dark); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .k-note { margin-top: 2.5rem; padding: 1.5rem; background: var(--cream-dark); border-radius: 4px; border-left: 3px solid var(--copper); }
+    .k-note-tag { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--copper); margin-bottom: 0.5rem; }
+    .k-note-txt { font-size: 0.83rem; color: var(--muted); line-height: 1.6; font-weight: 300; }
+
+    /* FOOTER */
+    footer { background: var(--navy); padding: 3.5rem 2rem 2rem; }
+    .ft-top { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 2.5rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .ft-name { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; color: white; }
+    .ft-sub { font-size: 0.65rem; color: var(--copper-light); letter-spacing: 0.15em; text-transform: uppercase; }
+    .ft-desc { font-size: 0.8rem; color: rgba(255,255,255,0.38); line-height: 1.7; margin-top: 1rem; font-weight: 300; max-width: 230px; }
+    .ft-col-t { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 1.125rem; }
+    .ft-col ul { list-style: none; }
+    .ft-col li { margin-bottom: 0.625rem; }
+    .ft-col a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; font-weight: 300; }
+    .ft-col a:hover { color: white; }
+    .ft-bot { max-width: 1200px; margin: 0 auto; padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .ft-copy { font-size: 0.75rem; color: rgba(255,255,255,0.28); font-weight: 300; }
+    .ft-legal { display: flex; gap: 1.5rem; }
+    .ft-legal a { font-size: 0.75rem; color: rgba(255,255,255,0.28); text-decoration: none; transition: color 0.2s; }
+    .ft-legal a:hover { color: rgba(255,255,255,0.6); }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(24px); transition: all 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.1s; }
+    .d2 { transition-delay: 0.2s; }
+    .d3 { transition-delay: 0.3s; }
+    .d4 { transition-delay: 0.4s; }
+
+    /* SUCCESS state */
+    .form-success { display: none; text-align: center; padding: 2rem; }
+    .form-success.show { display: block; }
+
+    /* RESPONSIVE */
+    @media (max-width: 960px) {
+      .hero-inner { grid-template-columns: 1fr; padding: 7rem 1.5rem 4rem; }
+      .hero-right { display: none; }
+      .trust-inner { grid-template-columns: repeat(2,1fr); }
+      .prozess-steps { grid-template-columns: repeat(2,1fr); gap: 2.5rem; }
+      .prozess-steps::before { display: none; }
+      .usp-wrap { grid-template-columns: 1fr; gap: 3rem; }
+      .usp-photo-badge { left: 0; }
+      .testi-grid { grid-template-columns: 1fr; }
+      .kontakt-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .ft-top { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .nav-links, .nav-cta { display: none; }
+      .nav-hamburger { display: flex; }
+      .usp-grid { grid-template-columns: 1fr; }
+      .f-row { grid-template-columns: 1fr; }
+      .ft-top { grid-template-columns: 1fr; }
+      .prozess-steps { grid-template-columns: 1fr; }
+      .trust-inner { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body x-data="{ menuOpen: false, tab: 'gewerbe' }">
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="index.html" class="nav-logo">
+      <img src="images/logo.png" alt="Hilger Finanzen" class="nav-logo-img">
+    </a>
+    <ul class="nav-links">
+      <li><a href="#leistungen">Leistungen</a></li>
+      <li><a href="beratung.html">Online-Beratung</a></li>
+      <li><a href="#usp">Über uns</a></li>
+      <li><a href="#app">App</a></li>
+      <li><a href="#vcheck">Versicherungscheck</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+    </ul>
+    <a href="beratung.html" class="btn-primary nav-cta">Online-Beratung</a>
+    <div class="nav-hamburger" @click="menuOpen = true">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" x-show="menuOpen" x-transition style="display:none">
+    <button class="mobile-close" @click="menuOpen = false">✕</button>
+    <a href="#leistungen" @click="menuOpen = false">Leistungen</a>
+    <a href="beratung.html" @click="menuOpen = false">Online-Beratung</a>
+    <a href="#usp"        @click="menuOpen = false">Über uns</a>
+    <a href="#kontakt"    @click="menuOpen = false">Kontakt</a>
+    <a href="#kontakt"    @click="menuOpen = false" class="btn-primary" style="font-size:1rem;padding:.875rem 2rem">Beratung buchen</a>
+  </div>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-pattern"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-inner">
+      <div class="hero-tag">Unabhängige Versicherungsmaklerin · Seit 2009 · Persönlich · Langfristig</div>
+      <h1 class="hero-h1">
+        Versicherungslösungen,<br>
+        die zu Ihrem Leben<br>
+        und zu Ihrem Unternehmen passen.
+      </h1>
+      <div class="hero-claim">Persönlich. Unabhängig. Langfristig.</div>
+      <p class="hero-sub">
+        Ich begleite Privatpersonen und Unternehmen bei allen Versicherungsfragen –
+        mit klarer Beratung, durchdachten Konzepten und dem Anspruch, Sie nicht nur heute,
+        sondern dauerhaft verlässlich zu begleiten.
+      </p>
+      <div class="hero-ctas">
+        <a href="#kontakt" class="btn-primary">Kostenlose Beratung buchen</a>
+        <a href="#vcheck" class="btn-outline">Versicherungscheck starten</a>
+      </div>
+      <div class="hero-boxes">
+        <a class="hero-box hero-box-link" href="#leistungen" @click="tab = 'privat'">
+          <div class="hero-box-label">Für Privatkunden</div>
+          <div class="hero-box-text">Absicherung für Gesundheit, Einkommen, Familie und Vorsorge.</div>
+        </a>
+        <a class="hero-box hero-box-link" href="#leistungen" @click="tab = 'gewerbe'">
+          <div class="hero-box-label">Für Unternehmen</div>
+          <div class="hero-box-text">Individuelle Lösungen für Betrieb, Haftung, Mitarbeiter und Risiken.</div>
+        </a>
+        <div class="hero-box">
+          <div class="hero-box-label">Langfristige Betreuung</div>
+          <div class="hero-box-text">Persönliche Ansprechpartnerin statt wechselnder Hotlines.</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <svg width="20" height="28" viewBox="0 0 20 28" fill="none">
+        <rect x="1" y="1" width="18" height="26" rx="9" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="10" cy="8" r="2" fill="currentColor" opacity="0.7"/>
+      </svg>
+      Scrollen
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <div id="trust">
+    <div class="trust-inner">
+      <div class="reveal"><div class="trust-num" data-count="300" data-suffix="+">0+</div><div class="trust-lbl">Privatkunden</div></div>
+      <div class="reveal d1"><div class="trust-num" data-count="100" data-suffix="+">0+</div><div class="trust-lbl">Unternehmenskunden</div></div>
+      <div class="reveal d2"><div class="trust-num" data-count="15" data-suffix="">0</div><div class="trust-lbl">Jahre Erfahrung</div></div>
+      <div class="reveal d3"><div class="trust-num" data-count="100" data-suffix="%">0%</div><div class="trust-lbl">Unabhängiger Makler</div></div>
+    </div>
+  </div>
+
+  <!-- LEISTUNGEN -->
+  <section id="leistungen">
+    <div class="s-inner">
+      <div class="leistungen-hdr">
+        <div>
+          <div class="s-tag reveal">Unser Angebot</div>
+          <h2 class="s-title reveal">Leistungen, die<br><em>wirklich schützen</em></h2>
+        </div>
+        <div class="tab-sw reveal">
+          <button class="tab-btn" :class="{ active: tab === 'gewerbe' }" @click="tab = 'gewerbe'">Gewerbekunden</button>
+          <button class="tab-btn" :class="{ active: tab === 'privat'  }" @click="tab = 'privat'">Privatkunden</button>
+        </div>
+      </div>
+
+      <div class="srv-grid" x-show="tab === 'gewerbe'" x-transition>
+        <div class="srv-card reveal">
+          <span class="srv-icon">🏢</span>
+          <div class="srv-title">Betriebshaftpflicht</div>
+          <div class="srv-desc">Der unverzichtbare Basisschutz – schützt Ihr Unternehmen vor Schadensersatzansprüchen Dritter.</div>
+          <a href="#kontakt" class="srv-link">Mehr erfahren →</a>
+        </div>
+        <div class="srv-card reveal d1">
+          <span class="srv-icon">🔐</span>
+          <div class="srv-title">Cyberversicherung</div>
+          <div class="srv-desc">Absicherung gegen Hackerangriffe, Datenverlust und digitale Betriebsunterbrechungen.</div>
+          <a href="#kontakt" class="srv-link">Mehr erfahren →</a>
+        </div>
+        <div class="srv-card reveal d2">
+          <span class="srv-icon">⚖️</span>
+          <div class="srv-title">Rechtsschutz</div>
+          <div class="srv-desc">Kompetente Unterstützung bei rechtlichen Streitigkeiten – damit Sie sich aufs Kerngeschäft konzentrieren.</div>
+          <a href="#kontakt" class="srv-link">Mehr erfahren →</a>
+        </div>
+        <div class="srv-card reveal d3">
+          <span class="srv-icon">💼</span>
+          <div class="srv-title">Betriebliche Altersvorsorge</div>
+          <div class="srv-desc">Attraktive bAV-Lösungen zur Mitarbeiterbindung und steuerlich optimierten Absicherung Ihres Teams.</div>
+          <a href="#kontakt" class="srv-link">Mehr erfahren →</a>
+        </div>
+        <div class="srv-card reveal d4">
+          <span class="srv-icon">🚗</span>
+          <div class="srv-title">Flottenversicherung</div>
+          <div class="srv-desc">Maßgeschneiderter Kfz-Schutz für Fuhrparks aller Größen – transparent und kostenoptimiert.</div>
+          <a href="#kontakt" class="srv-link">Mehr erfahren →</a>
+        </div>
+      </div>
+
+      <div class="srv-grid" x-show="tab === 'privat'" x-transition style="display:none">
+        <div class="srv-card">
+          <span class="srv-icon">🛡️</span>
+          <div class="srv-title">Haftpflicht</div>
+          <div class="srv-desc">Der wichtigste Basisschutz – schützt vor finanziellen Folgen versehentlicher Schäden.</div>
+          <a href="#kontakt" class="srv-link">Mehr erfahren →</a>
+        </div>
+        <div class="srv-card">
+          <span class="srv-icon">❤️</span>
+          <div class="srv-title">Krankenversicherung</div>
+          <div class="srv-desc">Private KV oder optimierte GKV-Ergänzungen – individuell auf Ihre Situation abgestimmt.</div>
+          <a href="#kontakt" class="srv-link">Mehr erfahren →</a>
+        </div>
+        <div class="srv-card">
+          <span class="srv-icon">🌅</span>
+          <div class="srv-title">Altersvorsorge</div>
+          <div class="srv-desc">Steueroptimierte Vorsorgestrategien für einen finanziell sorgenfreien Ruhestand.</div>
+          <a href="#kontakt" class="srv-link">Mehr erfahren →</a>
+        </div>
+        <div class="srv-card">
+          <span class="srv-icon">💪</span>
+          <div class="srv-title">Berufsunfähigkeit</div>
+          <div class="srv-desc">Sichern Sie Ihr wichtigstes Kapital – Ihre Arbeitskraft. Eine der wichtigsten Versicherungen überhaupt.</div>
+          <a href="#kontakt" class="srv-link">Mehr erfahren →</a>
+        </div>
+        <div class="srv-card">
+          <span class="srv-icon">🏠</span>
+          <div class="srv-title">Immobilien</div>
+          <div class="srv-desc">Kauf, Verkauf oder Vermietung – ich begleite Sie als lizenzierte Immobilienmaklerin durch den gesamten Prozess.</div>
+          <a href="#kontakt" class="srv-link">Anfrage stellen →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROZESS -->
+  <section id="prozess">
+    <div class="s-inner">
+      <div class="s-tag light reveal">So arbeiten wir</div>
+      <h2 class="s-title light reveal">Vier Schritte zu Ihrer<br><em>optimalen Absicherung</em></h2>
+      <p class="s-desc light reveal">Strukturiert, transparent und auf Ihre Bedürfnisse ausgerichtet.</p>
+      <div class="prozess-steps">
+        <div class="p-step reveal">
+          <img src="images/schritt1-analyse.png" alt="Analyse" class="p-img">
+          <div class="p-title">Analyse</div>
+          <div class="p-desc">Wir erfassen Ihren genauen Bedarf – Branche, Risiken, Größe und bestehende Absicherungen.</div>
+        </div>
+        <div class="p-step reveal d1">
+          <img src="images/schritt2-vergleich.png" alt="Vergleich" class="p-img">
+          <div class="p-title">Vergleich</div>
+          <div class="p-desc">Unabhängiger Marktvergleich der führenden Anbieter – ohne Präferenzen, nur Ihr Vorteil zählt.</div>
+        </div>
+        <div class="p-step reveal d2">
+          <img src="images/schritt3-empfehlung.png" alt="Empfehlung" class="p-img">
+          <div class="p-title">Empfehlung</div>
+          <div class="p-desc">Klare, verständliche Empfehlung mit Begründung – damit Sie eine fundierte Entscheidung treffen.</div>
+        </div>
+        <div class="p-step reveal d3">
+          <img src="images/schritt4-betreuung.png" alt="Betreuung" class="p-img">
+          <div class="p-title">Betreuung</div>
+          <div class="p-desc">Langfristige Partnerschaft – wir begleiten Sie bei Änderungen, Schadensfällen und Anpassungen.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- USP -->
+  <section id="usp">
+    <div class="s-inner">
+      <div class="usp-wrap">
+
+        <!-- Linke Spalte: Foto -->
+        <div class="usp-photo-wrap reveal">
+          <img src="images/usp-photo.jpg" alt="Katarzyna Hilger" class="usp-photo">
+          <div class="usp-photo-badge">
+            <div class="usp-photo-badge-icon">⭐</div>
+            <div class="usp-photo-badge-text">
+              Seit 2009 für Sie da
+              <span>Unabhängige Versicherungsmaklerin</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rechte Spalte: Text + Karten -->
+        <div class="usp-right">
+          <div>
+            <div class="s-tag reveal">Warum Hilger Finanzen</div>
+            <h2 class="s-title reveal">Was uns<br>unterscheidet</h2>
+            <p class="s-desc reveal">Kein Callcenter, keine Vergleichsplattform. Ich bin Ihre persönliche Ansprechpartnerin – mit echtem Mehrwert.</p>
+          </div>
+          <div class="usp-grid">
+            <div class="usp-card reveal">
+              <div class="usp-icon">🔍</div>
+              <div class="usp-t">Individuelle Analyse</div>
+              <div class="usp-d">Keine Standardlösungen. Ich verstehe Ihre Situation, bevor ich empfehle.</div>
+            </div>
+            <div class="usp-card reveal d1">
+              <div class="usp-icon">⚖️</div>
+              <div class="usp-t">Unabhängiger Vergleich</div>
+              <div class="usp-d">Als freie Maklerin arbeite ich für Sie – nicht für Versicherungsgesellschaften.</div>
+            </div>
+            <div class="usp-card reveal d2">
+              <div class="usp-icon">🤝</div>
+              <div class="usp-t">Persönliche Betreuung</div>
+              <div class="usp-d">Immer dieselbe Ansprechpartnerin – kein Weitervermitteln, kein Callcenter.</div>
+            </div>
+            <div class="usp-card reveal d3">
+              <div class="usp-icon">🏆</div>
+              <div class="usp-t">Langfristige Partnerschaft</div>
+              <div class="usp-d">Ich begleite Sie durch alle Lebensphasen – vom ersten Vertrag bis zur Rente.</div>
+            </div>
+          </div>
+          <a href="#kontakt" class="btn-primary reveal" style="display:inline-block">Jetzt kennenlernen</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- KI -->
+  <section id="ki">
+    <div class="ki-bg"></div>
+    <div class="s-inner" style="position:relative;z-index:1">
+      <div class="s-tag light reveal">Innovation</div>
+      <h2 class="s-title light reveal">Beratung der<br><em>nächsten Generation</em></h2>
+      <p class="s-desc light reveal">Persönliche Expertise kombiniert mit moderner KI-Technologie – für schnellere, präzisere Ergebnisse.</p>
+      <div class="ki-grid">
+        <a href="beratung.html#chat" class="ki-card reveal" style="text-decoration:none;cursor:pointer;">
+          <img src="images/ki-chatbot.png" alt="KI-Chatbot" class="ki-icon">
+          <div class="ki-t">KI-Chatbot</div>
+          <div class="ki-d">Erste Fragen sofort beantwortet – rund um die Uhr. Ihr persönlicher Ansprechpartner übernimmt nahtlos.</div>
+        </a>
+        <div class="ki-card reveal d1">
+          <img src="images/ki-termin.jpg" alt="Online-Terminbuchung" class="ki-icon" style="object-position: top;">
+          <div class="ki-t">Online-Terminbuchung</div>
+          <div class="ki-d">Beratungstermin in 30 Sekunden buchen. Automatische Erinnerung, flexible Zeiten.</div>
+        </div>
+        <div class="ki-card reveal d2">
+          <img src="images/ki-bedarfsanalyse.png" alt="Bedarfsvoranalyse" class="ki-icon">
+          <div class="ki-t">Bedarfsvoranalyse</div>
+          <div class="ki-d">Intelligenter Fragebogen analysiert vorab Ihren Bedarf – die Beratung beginnt vor dem ersten Gespräch.</div>
+        </div>
+        <div class="ki-card reveal d3">
+          <img src="images/ki-vergleich.png" alt="Angebotsvergleich" class="ki-icon">
+          <div class="ki-t">Angebotsvergleich</div>
+          <div class="ki-d">Automatisierter Vergleich Dutzender Anbieter in Sekunden – transparent und auf Sie zugeschnitten.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BERATERIN -->
+  <section id="beraterin">
+    <div class="s-inner">
+      <div class="beraterin-wrap">
+        <div class="beraterin-img-wrap reveal">
+          <img src="images/portrait.jpg" alt="Katarzyna Hilger" class="beraterin-img">
+          <div class="beraterin-badge">
+            <div class="beraterin-badge-num">15+</div>
+            <div class="beraterin-badge-lbl">Jahre Erfahrung</div>
+          </div>
+        </div>
+        <div>
+          <div class="s-tag reveal">Ihre Beraterin</div>
+          <div class="beraterin-name reveal">Katarzyna Hilger</div>
+          <div class="beraterin-titel reveal">Unabhängige Versicherungsmaklerin · Seit 2009</div>
+          <p class="beraterin-text reveal">Als unabhängige Versicherungsmaklerin begleite ich Privatpersonen und Unternehmen seit über 15 Jahren. Mein Anspruch ist einfach: keine Standardlösungen, sondern ehrliche Beratung, die wirklich zu Ihnen passt.</p>
+          <p class="beraterin-text reveal">Ich kenne die Versicherungsbranche aus allen Perspektiven – und weiß genau, wo Verträge nicht halten, was sie versprechen. Dieses Wissen setze ich für Sie ein.</p>
+          <ul class="beraterin-punkte reveal">
+            <li>Unabhängig von Versicherungsgesellschaften</li>
+            <li>Persönliche Ansprechpartnerin – immer dieselbe</li>
+            <li>Klare Sprache statt Fachchinesisch</li>
+            <li>Beratung für Privatpersonen und Unternehmen</li>
+          </ul>
+          <a href="#kontakt" class="btn-primary reveal">Persönliches Gespräch vereinbaren</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APP -->
+  <section id="app">
+    <div class="s-inner">
+      <div class="app-wrap">
+        <div>
+          <div class="s-tag light reveal">Kostenlos für meine Kunden</div>
+          <h2 class="s-title light reveal">Ihre Versicherungen<br><em>immer in der Tasche.</em></h2>
+          <p class="s-desc light reveal">Als mein Kunde erhalten Sie kostenlosen Zugang zur myinsure-App – Ihrem digitalen Versicherungsordner. Alles auf einen Blick, jederzeit verfügbar.</p>
+          <div class="app-features reveal">
+            <div class="app-feat"><div class="app-feat-icon">📋</div><div class="app-feat-t">Verträge anlegen & verwalten</div></div>
+            <div class="app-feat"><div class="app-feat-icon">🚨</div><div class="app-feat-t">Schäden direkt melden</div></div>
+            <div class="app-feat"><div class="app-feat-icon">💎</div><div class="app-feat-t">Wertsachen einfügen & verwalten</div></div>
+            <div class="app-feat"><div class="app-feat-icon">✏️</div><div class="app-feat-t">Adresse & Daten ändern</div></div>
+          </div>
+          <a href="https://login.myinsure.de/start/?inviteKey=H7Wbj7Zv" target="_blank" rel="noopener" class="btn-primary reveal">Jetzt kostenlos registrieren →</a>
+        </div>
+        <div class="reveal">
+          <div class="app-qr-card">
+            <div class="app-qr-name">myinsure</div>
+            <div class="app-qr-sub">Ihre kostenlose Versicherungs-App</div>
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://login.myinsure.de/start/?inviteKey=H7Wbj7Zv" alt="QR-Code myinsure App">
+            <div class="app-qr-label">QR-Code scannen und<br>direkt loslegen</div>
+            <a href="https://login.myinsure.de/start/?inviteKey=H7Wbj7Zv" target="_blank" rel="noopener" class="btn-app">App öffnen</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VERSICHERUNGSCHECK -->
+  <section id="vcheck">
+    <div class="s-inner">
+      <div class="vcheck-wrap">
+        <div>
+          <div class="s-tag reveal">Kostenloser Service</div>
+          <h2 class="s-title reveal">Kostenloser<br><em>Versicherungscheck</em></h2>
+          <p class="vcheck-intro reveal">Passen Ihre Versicherungen noch zu Ihrem Leben?</p>
+          <p class="vcheck-body reveal">Viele zahlen seit Jahren für Verträge, die nicht mehr passen – oder haben Lücken, ohne es zu wissen. Ich prüfe Ihre bestehenden Verträge kostenlos, verständlich und unabhängig.</p>
+          <ul class="vcheck-list reveal" style="margin-top:1.75rem">
+            <li>Preis und Leistung Ihrer Verträge im Vergleich</li>
+            <li>Versorgungslücken und Doppelversicherungen aufdecken</li>
+            <li>Klare Empfehlungen – persönlich und konkret</li>
+            <li>100 % kostenlos und unverbindlich</li>
+          </ul>
+          <a href="#kontakt" class="btn-primary reveal" style="display:inline-block;margin-top:2rem">Versicherungscheck anfragen</a>
+        </div>
+
+        <div class="reveal">
+          <div class="vcheck-card">
+            <div class="vcheck-card-header">
+              <img src="images/portrait.jpg" alt="Katarzyna Hilger">
+              <div>
+                <div class="vcheck-card-header-name">Katarzyna Hilger</div>
+                <div class="vcheck-card-header-sub">Unabhängige Versicherungsmaklerin · Seit 2009</div>
+              </div>
+            </div>
+            <div class="vcheck-card-body">
+              <div class="vcheck-card-title">So läuft der Check ab</div>
+              <div class="vcheck-card-sub">Kostenlos, unverbindlich und in nur 3 Schritten.</div>
+              <div class="vcheck-steps">
+                <div class="vcheck-step">
+                  <img src="images/schritt1-analyse.png" alt="Analyse" class="vcheck-step-img">
+                  <div class="vcheck-step-t"><strong style="color:var(--navy)">Sie melden sich bei mir.</strong><br>Per Formular, Telefon oder WhatsApp.</div>
+                </div>
+                <div class="vcheck-step">
+                  <img src="images/schritt2-vergleich.png" alt="Vergleich" class="vcheck-step-img">
+                  <div class="vcheck-step-t"><strong style="color:var(--navy)">Ich prüfe Ihre Verträge.</strong><br>Auf Lücken, Doppelversicherungen und Einsparpotenziale.</div>
+                </div>
+                <div class="vcheck-step">
+                  <img src="images/schritt3-empfehlung.png" alt="Empfehlung" class="vcheck-step-img">
+                  <div class="vcheck-step-t"><strong style="color:var(--navy)">Sie erhalten klare Empfehlungen.</strong><br>Verständlich erklärt, ohne Fachsprache.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="s-inner">
+      <div style="text-align:center">
+        <div class="s-tag reveal">Häufige Fragen</div>
+        <h2 class="s-title reveal">Was Kunden<br><em>oft fragen</em></h2>
+      </div>
+      <div class="faq-grid">
+
+        <div class="faq-item reveal">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+            Was kostet eine Beratung bei Hilger Finanzen?
+            <i class="faq-icon">+</i>
+          </div>
+          <div class="faq-a">Die Erstberatung ist für Sie vollständig kostenlos und unverbindlich. Als unabhängige Maklerin werde ich von den Versicherungsgesellschaften vergütet — Sie zahlen keinen Aufpreis.</div>
+        </div>
+
+        <div class="faq-item reveal d1">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+            Wie läuft ein erstes Beratungsgespräch ab?
+            <i class="faq-icon">+</i>
+          </div>
+          <div class="faq-a">Wir besprechen in ca. 30–45 Minuten Ihre aktuelle Situation, Ihren Bedarf und Ihre Wünsche. Danach erhalten Sie ein konkretes, vergleichendes Angebot — ohne Druck und ohne Verpflichtung.</div>
+        </div>
+
+        <div class="faq-item reveal d2">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+            Beraten Sie auch außerhalb von München?
+            <i class="faq-icon">+</i>
+          </div>
+          <div class="faq-a">Ja, ich berate deutschlandweit — vollständig digital per Video oder Telefon. Ein Ortstermin ist nicht nötig. Kunden aus Hamburg, Berlin, Frankfurt und ganz Deutschland werden bereits betreut.</div>
+        </div>
+
+        <div class="faq-item reveal d3">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+            Was ist der Unterschied zwischen einem Makler und einem Vertreter?
+            <i class="faq-icon">+</i>
+          </div>
+          <div class="faq-a">Ein Versicherungsvertreter arbeitet für eine bestimmte Gesellschaft und kann nur deren Produkte vermitteln. Als unabhängige Maklerin bin ich ausschließlich Ihnen verpflichtet — ich vergleiche Dutzende Anbieter und finde das Beste für Sie.</div>
+        </div>
+
+        <div class="faq-item reveal">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+            Kann ich meine bestehenden Verträge prüfen lassen?
+            <i class="faq-icon">+</i>
+          </div>
+          <div class="faq-a">Absolut — das ist sogar sehr empfehlenswert. Ich analysiere Ihre bestehenden Verträge auf Lücken, Doppelversicherungen und Einsparpotenziale. Oft lässt sich bei gleicher Leistung einiges sparen.</div>
+        </div>
+
+        <div class="faq-item reveal d1">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+            Wie schnell erhalte ich ein Angebot?
+            <i class="faq-icon">+</i>
+          </div>
+          <div class="faq-a">In der Regel erhalten Sie nach unserem Erstgespräch innerhalb von 1–2 Werktagen ein konkretes, vergleichendes Angebot — übersichtlich aufbereitet und verständlich erklärt.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <section id="cta-band">
+    <div class="cta-h reveal">Bereit für die richtige Absicherung?</div>
+    <div class="cta-d reveal">Kostenlose Erstberatung – unverbindlich, transparent, auf Ihre Situation zugeschnitten.</div>
+    <a href="#kontakt" class="btn-white reveal">Jetzt kostenlosen Termin buchen</a>
+  </section>
+
+  <!-- KONTAKT -->
+  <section id="kontakt">
+    <div class="s-inner">
+      <div class="s-tag reveal">Kontakt</div>
+      <h2 class="s-title reveal">Sprechen Sie mit uns</h2>
+      <div class="kontakt-grid">
+        <div>
+          <form id="contactForm" action="https://formspree.io/f/mzdypjyg" method="POST">
+            <input type="hidden" name="_subject" value="Neue Anfrage über hilger-finanzen.de">
+            <input type="hidden" name="_language" value="de">
+            <div class="f-row">
+              <div class="f-group"><label class="f-label">Vorname</label><input type="text" name="vorname" class="f-in" placeholder="Max" required></div>
+              <div class="f-group"><label class="f-label">Nachname</label><input type="text" name="nachname" class="f-in" placeholder="Mustermann" required></div>
+            </div>
+            <div class="f-group"><label class="f-label">E-Mail</label><input type="email" name="email" class="f-in" placeholder="max@unternehmen.de" required></div>
+            <div class="f-group"><label class="f-label">Telefon</label><input type="tel" name="telefon" class="f-in" placeholder="+49 123 456789"></div>
+            <div class="f-group">
+              <label class="f-label">Ich bin</label>
+              <select name="kundtyp" class="f-sel">
+                <option value="">Bitte wählen…</option>
+                <option>Geschäftsführer / Entscheider (KMU)</option>
+                <option>Privatperson</option>
+                <option>Freiberufler / Selbstständig</option>
+                <option>Sonstiges</option>
+              </select>
+            </div>
+            <div class="f-group"><label class="f-label">Ihr Anliegen</label><textarea name="nachricht" class="f-ta" placeholder="Kurz beschreiben, wobei wir Ihnen helfen können…"></textarea></div>
+            <button type="submit" class="btn-primary" style="width:100%;padding:.875rem;font-size:.9rem">Anfrage absenden</button>
+          </form>
+          <div class="form-success" id="formSuccess">
+            <div style="font-size:2rem;margin-bottom:.75rem">✓</div>
+            <strong style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--navy)">Vielen Dank!</strong>
+            <p style="color:var(--muted);margin-top:.5rem;font-size:.875rem">Wir melden uns innerhalb eines Werktages bei Ihnen.</p>
+          </div>
+        </div>
+        <div class="reveal">
+          <div class="k-info-t">Katarzyna Hilger</div>
+          <div class="k-info-d">Lieber direkt? Ich bin persönlich erreichbar. Unverbindlich, ohne Verkaufsdruck.</div>
+          <div class="k-det"><div class="k-det-icon">📞</div><span><a href="tel:+498938078946" style="color:inherit;text-decoration:none">089 / 38078946</a></span></div>
+          <div class="k-det"><div class="k-det-icon">📱</div><span><a href="tel:+4917662633104" style="color:inherit;text-decoration:none">0176 / 62633104</a></span></div>
+          <div class="k-det"><div class="k-det-icon">📠</div><span>089 / 90541696</span></div>
+          <div class="k-det"><div class="k-det-icon">✉️</div><span><a href="mailto:info@hilger-finanzen.de" style="color:inherit;text-decoration:none">info@hilger-finanzen.de</a></span></div>
+          <div class="k-det"><div class="k-det-icon">📍</div><span>Hilger Finanzen<br>Am Mühlbach 2A<br>85748 Garching b. München</span></div>
+          <div style="margin-top:1.25rem;border-radius:6px;overflow:hidden;border:1px solid rgba(0,0,0,0.08);">
+            <iframe
+              src="https://www.google.com/maps?q=Am+M%C3%BChlbach+2a,+85748+Garching+bei+M%C3%BCnchen&output=embed"
+              width="100%" height="200" style="border:0;display:block;"
+              allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+              title="Hilger Finanzen – Am Mühlbach 2a, Garching bei München">
+            </iframe>
+          </div>
+          <div class="k-note">
+            <div class="k-note-tag">Erstberatung kostenlos</div>
+            <div class="k-note-txt">Keine versteckten Kosten. Unser erstes Gespräch ist vollständig kostenlos und unverbindlich.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="ft-top">
+      <div>
+        <img src="images/logo.png" alt="Hilger Finanzen" style="height:52px;width:auto;background:white;padding:6px 14px;border-radius:4px;display:block;margin-bottom:1rem;">
+        <div class="ft-desc">Ihr unabhängiger Versicherungsmakler für KMU und Privatkunden. Maßgeschneidert. Langfristig. Persönlich.</div>
+      </div>
+      <div class="ft-col">
+        <div class="ft-col-t">Leistungen</div>
+        <ul>
+          <li><a href="#leistungen">Betriebshaftpflicht</a></li>
+          <li><a href="#leistungen">Cyberversicherung</a></li>
+          <li><a href="#leistungen">Rechtsschutz</a></li>
+          <li><a href="#leistungen">Betriebliche AV</a></li>
+          <li><a href="#leistungen">Flottenversicherung</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <div class="ft-col-t">Unternehmen</div>
+        <ul>
+          <li><a href="#usp">Über uns</a></li>
+          <li><a href="#prozess">Beratungsprozess</a></li>
+          <li><a href="#ki">KI & Innovation</a></li>
+          <li><a href="#beraterin">Über mich</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <div class="ft-col-t">Kontakt</div>
+        <ul>
+          <li><a href="#kontakt">Beratung buchen</a></li>
+          <li><a href="mailto:info@hilger-finanzen.de">E-Mail schreiben</a></li>
+          <li><a href="tel:+498938078946">Jetzt anrufen</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <div class="ft-copy">© 2026 Hilger Finanzen. Alle Rechte vorbehalten.</div>
+      <div class="ft-legal">
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    }, { passive: true });
+
+    // Scroll reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    // Count-up animation
+    const countEls = document.querySelectorAll('.trust-num[data-count]');
+    const countObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        countObserver.unobserve(e.target);
+        const el = e.target;
+        const target = parseInt(el.dataset.count);
+        const suffix = el.dataset.suffix || '';
+        const duration = 1600;
+        const step = 16;
+        const increment = target / (duration / step);
+        let current = 0;
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= target) { current = target; clearInterval(timer); }
+          el.textContent = Math.floor(current) + suffix;
+        }, step);
+      });
+    }, { threshold: 0.5 });
+    countEls.forEach(el => countObserver.observe(el));
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      });
+    });
+
+    // Form submit handled by Formspree
+  </script>
+
+  <!-- WHATSAPP FLOATING BUTTON -->
+  <a href="https://wa.me/4917662633104" target="_blank" rel="noopener" title="WhatsApp schreiben"
+    style="position:fixed;bottom:1.75rem;right:1.75rem;z-index:999;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,0.45);transition:transform 0.2s,box-shadow 0.2s;"
+    onmouseover="this.style.transform='scale(1.1)';this.style.boxShadow='0 6px 24px rgba(37,211,102,0.55)'"
+    onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 4px 16px rgba(37,211,102,0.45)'">
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+</body>
+</html>

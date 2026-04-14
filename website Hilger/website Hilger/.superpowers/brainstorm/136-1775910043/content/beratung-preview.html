@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beratungsseite – Feature-Vorschau</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', sans-serif; background: #1a1a2e; color: #fff; padding: 24px; }
+
+  h1 { font-size: 1.1rem; color: #C07830; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
+  .lead { font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-bottom: 28px; }
+
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+  .card:hover { border-color: #C07830; transform: translateY(-2px); }
+  .card.selected { border-color: #C07830; background: rgba(192,120,48,0.12); }
+  .card.selected .card-label { background: #C07830; }
+
+  .card-label {
+    background: rgba(192,120,48,0.3);
+    color: #C07830;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .card.selected .card-label { color: white; }
+
+  .card-preview {
+    padding: 16px;
+    background: #0B1D2E;
+    min-height: 180px;
+    position: relative;
+  }
+
+  /* A: Terminbuchung */
+  .booking-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .booking-header {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .booking-slots {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+  .slot {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    padding: 8px 4px;
+    text-align: center;
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.6);
+  }
+  .slot.active { border-color: #C07830; color: #C07830; background: rgba(192,120,48,0.1); }
+  .book-btn {
+    background: #C07830;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* B: Kontaktformular */
+  .form-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .mock-field {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 3px;
+    padding: 7px 10px;
+    font-size: 0.68rem;
+    color: rgba(255,255,255,0.3);
+  }
+  .mock-textarea {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 3px;
+    padding: 7px 10px;
+    font-size: 0.68rem;
+    color: rgba(255,255,255,0.3);
+    height: 52px;
+  }
+
+  /* C: Bedarfs-Schnellcheck */
+  .quiz-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .quiz-q {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.4;
+  }
+  .quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .quiz-opt {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 3px;
+    padding: 7px 10px;
+    font-size: 0.68rem;
+    color: rgba(255,255,255,0.5);
+    cursor: pointer;
+  }
+  .quiz-opt.sel { border-color: #C07830; color: #C07830; background: rgba(192,120,48,0.08); }
+  .progress-bar {
+    height: 2px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 4px;
+  }
+  .progress-fill { height: 100%; width: 33%; background: #C07830; border-radius: 2px; }
+  .quiz-step { font-size: 0.6rem; color: rgba(255,255,255,0.3); margin-bottom: 6px; }
+
+  /* D: DACH-Karte */
+  .map-preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    height: 100%;
+  }
+  .map-svg { opacity: 0.9; }
+  .map-badge {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #C07830;
+    background: rgba(192,120,48,0.1);
+    border: 1px solid rgba(192,120,48,0.3);
+    padding: 4px 12px;
+    border-radius: 2px;
+  }
+
+  /* Chatbot (always present) */
+  .chat-preview {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    width: 120px;
+    background: rgba(11,29,46,0.95);
+    border: 1px solid rgba(192,120,48,0.3);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .chat-header {
+    background: rgba(192,120,48,0.15);
+    padding: 5px 8px;
+    font-size: 0.58rem;
+    color: #C07830;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .chat-dot { width: 5px; height: 5px; border-radius: 50%; background: #4CAF50; }
+  .chat-msg {
+    padding: 5px 8px;
+    font-size: 0.58rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.4;
+  }
+  .chat-input-mock {
+    margin: 4px 6px 6px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 2px;
+    padding: 4px 6px;
+    font-size: 0.55rem;
+    color: rgba(255,255,255,0.25);
+  }
+
+  .card-info {
+    padding: 12px 16px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .card-title { font-size: 0.82rem; font-weight: 600; color: white; margin-bottom: 4px; }
+  .card-desc { font-size: 0.72rem; color: rgba(255,255,255,0.45); line-height: 1.4; }
+
+  .always-tag {
+    display: inline-block;
+    background: rgba(76,175,80,0.15);
+    border: 1px solid rgba(76,175,80,0.3);
+    color: #81C784;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 2px;
+    margin-bottom: 10px;
+  }
+
+  .dach-note {
+    background: rgba(192,120,48,0.08);
+    border: 1px solid rgba(192,120,48,0.2);
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin-top: 16px;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.5;
+  }
+  .dach-note strong { color: #C07830; }
+
+  .checkmark { font-size: 1.2rem; position: absolute; top: 8px; right: 8px; opacity: 0; transition: opacity 0.2s; }
+  .card.selected .checkmark { opacity: 1; }
+</style>
+</head>
+<body>
+
+<h1>Beratungsseite – Feature-Auswahl</h1>
+<p class="lead">Der KI-Chatbot ist immer dabei. Welche weiteren Features sollen auf der Seite sein? Klicke an was passt.</p>
+
+<div class="grid">
+
+  <!-- A: Terminbuchung -->
+  <div class="card" onclick="toggleCard(this, 'termin')">
+    <div class="card-label">A — Terminbuchung <span class="checkmark">✓</span></div>
+    <div class="card-preview">
+      <div class="booking-preview">
+        <div class="booking-header">Wähle einen Termin</div>
+        <div class="booking-slots">
+          <div class="slot">Mo 9:00</div>
+          <div class="slot active">Mo 11:00</div>
+          <div class="slot">Di 10:00</div>
+          <div class="slot">Di 14:00</div>
+          <div class="slot">Mi 9:30</div>
+          <div class="slot">Mi 16:00</div>
+        </div>
+        <button class="book-btn">Termin bestätigen</button>
+      </div>
+      <div class="chat-preview">
+        <div class="chat-header"><span class="chat-dot"></span> KI-Assistent</div>
+        <div class="chat-msg">Guten Tag! Ich helfe Ihnen gern beim Terminbuchen.</div>
+        <div class="chat-input-mock">Nachricht...</div>
+      </div>
+    </div>
+    <div class="card-info">
+      <div class="card-title">Terminbuchung</div>
+      <div class="card-desc">Direkter Einstieg in ein persönliches Gespräch — per Formular oder Calendly-Link</div>
+    </div>
+  </div>
+
+  <!-- B: Kontaktformular -->
+  <div class="card" onclick="toggleCard(this, 'formular')">
+    <div class="card-label">B — Kontaktformular <span class="checkmark">✓</span></div>
+    <div class="card-preview">
+      <div class="form-preview">
+        <div class="form-row">
+          <div class="mock-field">Vorname</div>
+          <div class="mock-field">Nachname</div>
+        </div>
+        <div class="mock-field">E-Mail-Adresse</div>
+        <div class="mock-field">Thema: Gewerbe / Privat</div>
+        <div class="mock-textarea">Ihre Nachricht...</div>
+        <button class="book-btn">Anfrage senden</button>
+      </div>
+      <div class="chat-preview">
+        <div class="chat-header"><span class="chat-dot"></span> KI-Assistent</div>
+        <div class="chat-msg">Haben Sie Fragen? Ich beantworte sie sofort.</div>
+        <div class="chat-input-mock">Nachricht...</div>
+      </div>
+    </div>
+    <div class="card-info">
+      <div class="card-title">Kontaktformular</div>
+      <div class="card-desc">Klassisch, vertrauenswürdig — Interessenten hinterlassen Kontaktdaten für Rückruf</div>
+    </div>
+  </div>
+
+  <!-- C: Bedarfs-Schnellcheck -->
+  <div class="card" onclick="toggleCard(this, 'check')">
+    <div class="card-label">C — Bedarfs-Schnellcheck <span class="checkmark">✓</span></div>
+    <div class="card-preview">
+      <div class="quiz-preview">
+        <div class="progress-bar"><div class="progress-fill"></div></div>
+        <div class="quiz-step">Schritt 1 von 3</div>
+        <div class="quiz-q">Für wen suchen Sie Versicherungsschutz?</div>
+        <div class="quiz-options">
+          <div class="quiz-opt sel">Mein Unternehmen (KMU)</div>
+          <div class="quiz-opt">Mich privat</div>
+          <div class="quiz-opt">Beides</div>
+        </div>
+      </div>
+      <div class="chat-preview">
+        <div class="chat-header"><span class="chat-dot"></span> KI-Assistent</div>
+        <div class="chat-msg">Ich begleite Sie durch den Check!</div>
+        <div class="chat-input-mock">Fragen stellen...</div>
+      </div>
+    </div>
+    <div class="card-info">
+      <div class="card-title">Bedarfs-Schnellcheck</div>
+      <div class="card-desc">3–5 Fragen → personalisierte Empfehlung — stärkstes Lead-Werkzeug der Seite</div>
+    </div>
+  </div>
+
+  <!-- D: DACH-Karte -->
+  <div class="card" onclick="toggleCard(this, 'dach')">
+    <div class="card-label">D — DACH-Reichweite-Visual <span class="checkmark">✓</span></div>
+    <div class="card-preview" style="display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;">
+      <svg width="120" height="130" viewBox="0 0 120 130" class="map-svg">
+        <!-- Simplified DACH silhouette -->
+        <!-- Germany outline (simplified) -->
+        <path d="M38,15 L45,12 L55,14 L65,10 L78,15 L82,22 L85,30 L80,38 L85,44 L82,52 L78,58 L72,62 L75,70 L70,78 L65,85 L60,90 L55,85 L48,88 L42,82 L38,75 L35,68 L32,60 L28,55 L30,46 L26,38 L28,30 L32,22 Z"
+              fill="rgba(192,120,48,0.3)" stroke="#C07830" stroke-width="1.5"/>
+        <!-- Austria outline (simplified) -->
+        <path d="M38,92 L55,88 L70,90 L80,88 L88,92 L86,100 L80,104 L68,106 L55,104 L42,102 L36,98 Z"
+              fill="rgba(192,120,48,0.2)" stroke="#C07830" stroke-width="1.5"/>
+        <!-- Switzerland outline (simplified) -->
+        <path d="M42,108 L55,106 L66,108 L68,116 L60,120 L48,118 L40,114 Z"
+              fill="rgba(192,120,48,0.2)" stroke="#C07830" stroke-width="1.5"/>
+        <!-- Munich dot -->
+        <circle cx="62" cy="72" r="3.5" fill="#C07830"/>
+        <circle cx="62" cy="72" r="6" fill="rgba(192,120,48,0.25)"/>
+        <!-- Germany pin lines -->
+        <circle cx="48" cy="30" r="2" fill="rgba(255,255,255,0.4)"/>
+        <circle cx="70" cy="25" r="2" fill="rgba(255,255,255,0.4)"/>
+        <circle cx="35" cy="50" r="2" fill="rgba(255,255,255,0.4)"/>
+        <circle cx="76" cy="50" r="2" fill="rgba(255,255,255,0.4)"/>
+        <circle cx="55" cy="45" r="2" fill="rgba(255,255,255,0.4)"/>
+        <!-- Label -->
+        <text x="62" y="80" text-anchor="middle" fill="#C07830" font-size="5" font-family="sans-serif">München</text>
+      </svg>
+      <div class="map-badge">Beratung in ganz DACH</div>
+    </div>
+    <div class="card-info">
+      <div class="card-title">DACH-Reichweite-Visual</div>
+      <div class="card-desc">Karte oder Infografik zeigt: wir beraten überall — nicht nur lokal in München</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="dach-note">
+  <strong>Hinweis zur DACH-Botschaft:</strong> Unabhängig von der Feature-Wahl wird die Seite prominent kommunizieren: <em>"Deutschlandweite & DACH-weite Beratung – digital, persönlich, überall."</em> Das ist fester Bestandteil des Hero-Bereichs der Beratungsseite.
+</div>
+
+<script>
+  const selected = new Set();
+  function toggleCard(el, key) {
+    el.classList.toggle('selected');
+    if (selected.has(key)) selected.delete(key);
+    else selected.add(key);
+
+    // Report to parent frame if available
+    try {
+      const choices = [...selected].join(',');
+      window.parent && window.parent.postMessage({type:'selection', choices}, '*');
+    } catch(e) {}
+  }
+</script>
+</body>
+</html>
