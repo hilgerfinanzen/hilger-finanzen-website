@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/favicon.png">
+  <meta name="theme-color" content="#0B1D2E">
+  <title>Online-Beratung – Hilger Finanzen</title>
+  <meta name="description" content="Starten Sie jetzt Ihren kostenlosen Versicherungs-Schnellcheck oder vereinbaren Sie direkt einen Beratungstermin mit Katarzyna Hilger – deutschlandweit per Video oder Telefon.">
+  <meta property="og:title" content="Online-Beratung – Hilger Finanzen">
+  <meta property="og:description" content="Kostenloser Versicherungs-Schnellcheck und persönliche Beratung – unabhängig, transparent, deutschlandweit.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_DE">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+  <style>
+    :root {
+      --navy: #0B1D2E;
+      --navy-mid: #122640;
+      --cream: #EEF3FA;
+      --cream-dark: #E2EAF4;
+      --copper: #1A6BB8;
+      --copper-light: #3B82D4;
+      --text: #1C2B3A;
+      --muted: #6B7A8D;
+      --light: #F4F7FB;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--navy); overflow-x: hidden; }
+    h1, h2, h3 { font-family: 'Cormorant Garamond', serif; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1.25rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: all 0.4s ease;
+      background: rgba(11,29,46,0.97);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.2);
+    }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .nav-logo-img { height: 40px; width: auto; object-fit: contain; background: white; padding: 4px 10px; border-radius: 4px; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.875rem;
+      transition: color 0.2s; position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; right: 100%; height: 1px;
+      background: var(--copper-light); transition: right 0.3s ease;
+    }
+    .nav-links a:hover { color: white; }
+    .nav-links a:hover::after { right: 0; }
+    .nav-links a.active { color: var(--copper-light); }
+    .nav-links a.active::after { right: 0; }
+    .btn-primary {
+      background: var(--copper); color: white; padding: 0.625rem 1.5rem;
+      border-radius: 2px; font-size: 0.875rem; font-weight: 500; text-decoration: none;
+      transition: all 0.2s; border: none; cursor: pointer; letter-spacing: 0.03em;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .btn-primary:hover { background: var(--copper-light); transform: translateY(-1px); box-shadow: 0 8px 20px rgba(26,107,184,0.3); }
+
+    /* MOBILE NAV */
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .nav-hamburger span { display: block; width: 24px; height: 1.5px; background: white; transition: all 0.3s; }
+    .mobile-menu {
+      position: fixed; inset: 0; background: var(--navy); z-index: 200;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2rem;
+    }
+    .mobile-menu a { font-family: 'Cormorant Garamond', serif; font-size: 2.25rem; color: white; text-decoration: none; }
+    .mobile-close {
+      position: absolute; top: 1.5rem; right: 1.75rem;
+      background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer;
+    }
+    .btn-mobile-cta { font-size: 1rem; padding: 0.875rem 2rem; }
+
+    @media (max-width: 640px) {
+      .nav-links, .nav-cta { display: none; }
+      .nav-hamburger { display: flex; }
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 52vh;
+      background: var(--navy);
+      position: relative;
+      display: flex; align-items: center;
+      overflow: hidden;
+      padding-top: 5rem;
+    }
+    .hero-glow {
+      position: absolute; top: -20%; right: -10%; width: 60%; height: 140%;
+      background: radial-gradient(ellipse, rgba(26,107,184,0.09) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-pattern {
+      position: absolute; inset: 0; opacity: 0.03;
+      background-image: repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(255,255,255,0.5) 40px, rgba(255,255,255,0.5) 41px);
+    }
+    .hero-inner {
+      position: relative; z-index: 2;
+      max-width: 1200px; margin: 0 auto;
+      padding: 4rem 2rem 3.5rem; width: 100%;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--copper-light); font-weight: 500; margin-bottom: 1.25rem;
+    }
+    .hero-tag::before { content: ''; display: block; width: 24px; height: 1px; background: var(--copper-light); }
+    .hero-h1 {
+      font-size: clamp(2.25rem, 4vw, 3.75rem); font-weight: 400; line-height: 1.08;
+      color: white; margin-bottom: 1rem; letter-spacing: -0.01em;
+    }
+    .hero-h1 em { font-style: italic; font-weight: 300; color: var(--copper-light); }
+    .hero-sub { font-size: 1rem; line-height: 1.75; color: rgba(255,255,255,0.6); margin-bottom: 2rem; font-weight: 300; max-width: 540px; }
+    .dach-strip {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      background: rgba(26,107,184,0.08); border: 1px solid rgba(26,107,184,0.35);
+      border-radius: 4px; padding: 0.75rem 1.25rem; flex-wrap: wrap;
+    }
+    .dach-flags { font-size: 1.25rem; letter-spacing: 0.15em; }
+    .dach-text { font-size: 0.8rem; color: rgba(255,255,255,0.7); line-height: 1.45; }
+    .dach-text strong { color: var(--copper-light); display: block; }
+
+    /* MAIN LAYOUT */
+    .main-layout {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      min-height: calc(100vh - 52vh);
+      background: var(--navy);
+    }
+    .col-left {
+      padding: 3rem 2.5rem;
+      border-right: 1px solid rgba(255,255,255,0.06);
+    }
+    .col-right {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: #0d1f2f;
+    }
+
+    /* SECTION HEADERS (shared) */
+    .s-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--copper); font-weight: 500; margin-bottom: 0.6rem;
+    }
+    .s-tag::before { content: ''; display: block; width: 16px; height: 1px; background: var(--copper); }
+    .s-title {
+      font-size: clamp(1.5rem, 2.5vw, 2.25rem); font-weight: 400; line-height: 1.15;
+      color: white; margin-bottom: 1.75rem; letter-spacing: -0.01em;
+    }
+    .s-title em { font-style: italic; color: var(--copper-light); }
+
+    .section-divider {
+      height: 1px; background: rgba(255,255,255,0.07); margin: 2.5rem 0;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 860px) {
+      .main-layout { grid-template-columns: 1fr; }
+      .col-right { position: static; height: auto; min-height: 480px; }
+      .col-left { padding: 2rem 1.25rem; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    }
+    /* SCHNELLCHECK */
+    .progress-track {
+      display: flex; gap: 4px; margin-bottom: 1.5rem;
+    }
+    .prog-seg {
+      flex: 1; height: 3px; border-radius: 2px;
+      background: rgba(255,255,255,0.1); transition: background 0.3s;
+    }
+    .prog-seg.done { background: var(--copper); }
+    .prog-seg.active { background: rgba(26,107,184,0.45); }
+
+    .check-step-label {
+      font-size: 0.63rem; color: var(--muted); letter-spacing: 0.08em;
+      text-transform: uppercase; margin-bottom: 0.625rem;
+    }
+    .check-question {
+      font-size: 0.95rem; color: rgba(255,255,255,0.85);
+      line-height: 1.55; margin-bottom: 1.25rem; font-weight: 300;
+    }
+    .check-options { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .check-opt {
+      display: flex; align-items: center; gap: 0.75rem;
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 3px; padding: 0.75rem 1rem;
+      font-size: 0.82rem; color: rgba(255,255,255,0.65);
+      cursor: pointer; transition: all 0.2s;
+    }
+    .check-opt:hover { border-color: var(--copper); color: white; }
+    .check-opt.is-selected { border-color: var(--copper); color: white; background: rgba(26,107,184,0.07); }
+    .check-radio {
+      width: 15px; height: 15px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.2); flex-shrink: 0; transition: all 0.2s;
+    }
+    .check-opt.is-selected .check-radio { background: var(--copper); border-color: var(--copper); }
+
+    .btn-weiter {
+      background: var(--copper); color: white;
+      border: none; border-radius: 2px;
+      padding: 0.75rem 1.75rem; font-size: 0.875rem;
+      font-weight: 500; cursor: pointer; letter-spacing: 0.03em;
+      font-family: 'DM Sans', sans-serif; transition: all 0.2s;
+    }
+    .btn-weiter:hover { background: var(--copper-light); transform: translateY(-1px); }
+    .btn-weiter:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+    .check-result-advisor { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; }
+    .check-result-advisor img { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; object-position: top; border: 2px solid var(--copper); flex-shrink: 0; }
+    .check-result-advisor-name { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: white; font-weight: 500; }
+    .check-result-advisor-titel { font-size: 0.7rem; color: rgba(255,255,255,0.45); letter-spacing: 0.05em; }
+    .check-result-urgent { display: flex; align-items: center; gap: 0.5rem; background: rgba(255,100,100,0.12); border: 1px solid rgba(255,100,100,0.25); border-radius: 4px; padding: 0.625rem 1rem; margin-bottom: 1rem; font-size: 0.8rem; color: rgba(255,180,180,0.9); }
+    .check-result-contact { display: flex; gap: 0.625rem; flex-wrap: wrap; margin-top: 1rem; margin-bottom: 0; }
+    .btn-phone { display:inline-flex; align-items:center; gap:0.4rem; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 0.6rem 1rem; border-radius: 2px; font-size: 0.8rem; text-decoration: none; transition: all 0.2s; }
+    .btn-phone:hover { background: rgba(255,255,255,0.14); border-color: rgba(255,255,255,0.4); }
+    .btn-whatsapp { display:inline-flex; align-items:center; gap:0.4rem; background: rgba(37,211,102,0.12); border: 1px solid rgba(37,211,102,0.3); color: rgba(37,211,102,0.9); padding: 0.6rem 1rem; border-radius: 2px; font-size: 0.8rem; text-decoration: none; transition: all 0.2s; }
+    .btn-whatsapp:hover { background: rgba(37,211,102,0.2); }
+
+    .check-result {
+      background: rgba(26,107,184,0.07); border: 1px solid rgba(26,107,184,0.35);
+      border-radius: 4px; padding: 1.5rem;
+    }
+    .check-result-label {
+      font-size: 0.63rem; color: var(--copper-light); letter-spacing: 0.12em;
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .check-result-text {
+      font-size: 0.9rem; color: rgba(255,255,255,0.8); line-height: 1.6; margin-bottom: 1.25rem;
+    }
+
+    /* TERMINBUCHUNG */
+    #termin { scroll-margin-top: 5rem; }
+    .slot-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .slot {
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 3px; padding: 0.7rem 0.5rem; text-align: center;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .slot:hover { border-color: var(--copper); }
+    .slot.is-selected { border-color: var(--copper); background: rgba(26,107,184,0.08); }
+    .slot-day { font-size: 0.62rem; color: var(--muted); display: block; margin-bottom: 3px; }
+    .slot-time { font-size: 0.82rem; color: rgba(255,255,255,0.75); font-weight: 500; }
+    .slot.is-selected .slot-time { color: var(--copper-light); }
+
+    .btn-confirm {
+      width: 100%; background: var(--copper); color: white;
+      border: none; border-radius: 2px;
+      padding: 0.875rem; font-size: 0.875rem;
+      font-weight: 500; cursor: pointer; letter-spacing: 0.03em;
+      font-family: 'DM Sans', sans-serif; transition: all 0.2s;
+    }
+    .btn-confirm:hover { background: var(--copper-light); }
+    .btn-confirm:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .confirm-box {
+      background: rgba(76,175,80,0.07); border: 1px solid rgba(76,175,80,0.25);
+      border-radius: 4px; padding: 1.5rem; text-align: center;
+    }
+    .confirm-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+    .confirm-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: white; margin-bottom: 0.5rem; }
+    .confirm-sub { font-size: 0.82rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
+
+    /* CHATBOT */
+    .chat-header-bar {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      display: flex; align-items: center; gap: 0.75rem;
+      flex-shrink: 0;
+    }
+    .chat-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--copper), var(--copper-light));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; font-weight: 700; color: white; flex-shrink: 0;
+    }
+    .chat-name { font-size: 0.82rem; font-weight: 600; color: white; }
+    .chat-status {
+      font-size: 0.63rem; color: #4CAF50;
+      display: flex; align-items: center; gap: 4px;
+    }
+    .chat-status::before {
+      content: ''; display: block; width: 5px; height: 5px;
+      border-radius: 50%; background: #4CAF50;
+    }
+
+    .chat-messages {
+      flex: 1; padding: 1rem; overflow-y: auto;
+      display: flex; flex-direction: column; gap: 0.75rem;
+      scroll-behavior: smooth;
+    }
+    .msg-wrap { display: flex; flex-direction: column; }
+    .msg-wrap.user { align-items: flex-end; }
+    .msg-bubble {
+      max-width: 88%; padding: 0.625rem 0.875rem;
+      font-size: 0.78rem; line-height: 1.55; border-radius: 8px;
+    }
+    .msg-wrap.bot .msg-bubble {
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 8px 8px 8px 2px; color: rgba(255,255,255,0.8);
+    }
+    .msg-wrap.user .msg-bubble {
+      background: rgba(26,107,184,0.14); border: 1px solid rgba(26,107,184,0.35);
+      border-radius: 8px 8px 2px 8px; color: rgba(255,255,255,0.85);
+    }
+
+    .chat-suggestions {
+      padding: 0 1rem 0.625rem;
+      display: flex; flex-wrap: wrap; gap: 0.4rem; flex-shrink: 0;
+    }
+    .sug-btn {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px; padding: 0.3rem 0.75rem;
+      font-size: 0.68rem; color: rgba(255,255,255,0.55);
+      cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.2s;
+    }
+    .sug-btn:hover { border-color: var(--copper); color: var(--copper-light); }
+
+    .chat-input-row {
+      padding: 0.75rem 1rem;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      display: flex; gap: 0.5rem; align-items: center; flex-shrink: 0;
+    }
+    .chat-input {
+      flex: 1; background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12); border-radius: 3px;
+      padding: 0.6rem 0.875rem; font-size: 0.78rem;
+      color: rgba(255,255,255,0.75); font-family: 'DM Sans', sans-serif; outline: none;
+      transition: border-color 0.2s;
+    }
+    .chat-input:focus { border-color: var(--copper); }
+    .chat-input::placeholder { color: rgba(255,255,255,0.25); }
+    .chat-send-btn {
+      background: var(--copper); border: none; border-radius: 3px;
+      width: 34px; height: 34px; cursor: pointer; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 0.9rem; transition: background 0.2s;
+    }
+    .chat-send-btn:hover { background: var(--copper-light); }
+
+    /* FOOTER */
+    footer {
+      background: var(--navy-mid); border-top: 1px solid rgba(255,255,255,0.07);
+      padding: 2rem; text-align: center;
+    }
+    .footer-text { font-size: 0.75rem; color: var(--muted); line-height: 1.7; }
+    .footer-text a { color: var(--copper-light); text-decoration: none; }
+    .footer-text a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body x-data="{ menuOpen: false }">
+
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="images/logo.png" alt="Hilger Finanzen" class="nav-logo-img">
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#leistungen">Leistungen</a></li>
+      <li><a href="beratung.html" class="active">Online-Beratung</a></li>
+      <li><a href="index.html#usp">Über uns</a></li>
+      <li><a href="index.html#kontakt">Kontakt</a></li>
+    </ul>
+    <a href="#termin" class="btn-primary nav-cta">Termin buchen</a>
+    <div class="nav-hamburger" @click="menuOpen = true" role="button" aria-label="Menü öffnen" tabindex="0" @keydown.enter="menuOpen = true">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" x-show="menuOpen" x-transition>
+    <button class="mobile-close" @click="menuOpen = false">✕</button>
+    <a href="index.html#leistungen" @click="menuOpen = false">Leistungen</a>
+    <a href="beratung.html"         @click="menuOpen = false">Online-Beratung</a>
+    <a href="index.html#usp"        @click="menuOpen = false">Über uns</a>
+    <a href="index.html#kontakt"    @click="menuOpen = false">Kontakt</a>
+    <a href="#termin" @click="menuOpen = false" class="btn-primary btn-mobile-cta">Termin buchen</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-pattern"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-inner">
+      <div class="hero-tag">Online-Beratung</div>
+      <h1 class="hero-h1">Beratung ohne <em>Anfahrt</em> —<br>persönlich, digital, deutschlandweit.</h1>
+      <p class="hero-sub">Unsere Experten beraten Sie unabhängig von Ihrem Standort. Ob München, Berlin oder Hamburg — echte Bedarfsanalyse, wo immer Sie sind.</p>
+      <div class="dach-strip">
+        <span class="dach-flags">🇩🇪</span>
+        <div class="dach-text">
+          <strong>Deutschlandweit verfügbar</strong>
+          100 % digital — kein Ortstermin notwendig
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN: Two-column -->
+  <div class="main-layout">
+
+    <!-- LINKE SPALTE -->
+    <div class="col-left">
+      <!-- SCHNELLCHECK -->
+      <div x-data="schnellcheck()">
+        <div class="s-tag">Schritt 1</div>
+        <h2 class="s-title">Ihr persönlicher<br><em>Bedarfs-Schnellcheck</em></h2>
+
+        <!-- Fortschrittsbalken -->
+        <div class="progress-track" x-show="!done">
+          <template x-for="(q, i) in currentQuestions" :key="i">
+            <div class="prog-seg" :class="{ done: i < step, active: i === step }"></div>
+          </template>
+        </div>
+
+        <!-- Fragen -->
+        <div x-show="!done">
+          <div class="check-step-label" x-text="'Frage ' + (step + 1) + ' von ' + currentQuestions.length"></div>
+          <div class="check-question" x-text="current.text"></div>
+          <div class="check-options">
+            <template x-for="opt in current.opts" :key="opt">
+              <div class="check-opt" :class="{ 'is-selected': selected === opt }" @click="select(opt)">
+                <div class="check-radio"></div>
+                <span x-text="opt"></span>
+              </div>
+            </template>
+          </div>
+          <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap">
+            <button class="btn-weiter" @click="next()" :disabled="!selected">
+              <span x-text="step < currentQuestions.length - 1 ? 'Weiter →' : 'Auswertung anzeigen →'"></span>
+            </button>
+            <button x-show="step > 0" @click="back()"
+              style="background:none;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.55);padding:0.75rem 1.25rem;border-radius:2px;font-size:0.82rem;cursor:pointer;font-family:inherit;transition:all 0.2s"
+              onmouseover="this.style.borderColor='rgba(255,255,255,0.5)';this.style.color='white'"
+              onmouseout="this.style.borderColor='rgba(255,255,255,0.2)';this.style.color='rgba(255,255,255,0.55)'">
+              ← Zurück
+            </button>
+          </div>
+        </div>
+
+        <!-- Ergebnis -->
+        <div x-show="done" x-transition>
+          <div class="check-result">
+            <div class="check-result-label">Ihre persönliche Empfehlung</div>
+
+            <!-- Advisor photo + name -->
+            <div class="check-result-advisor">
+              <img src="images/portrait.jpg" alt="Katarzyna Hilger">
+              <div>
+                <div class="check-result-advisor-name">Das sagt Katarzyna Hilger</div>
+                <div class="check-result-advisor-titel">Unabhängige Versicherungs- &amp; Immobilienmaklerin</div>
+              </div>
+            </div>
+
+            <p class="check-result-text" x-text="resultText"></p>
+
+            <!-- Urgency box (only shown when "Sofort" selected) -->
+            <div class="check-result-urgent" x-show="urgencyText" x-transition>
+              <span style="font-size:1rem;">⚡</span>
+              <span x-text="urgencyText"></span>
+            </div>
+
+            <!-- Contact buttons -->
+            <div class="check-result-contact">
+              <a href="tel:+498938078946" class="btn-phone">
+                <span style="font-size:1rem;">📞</span> 089 / 38078946
+              </a>
+              <a href="https://wa.me/4917662633104" class="btn-whatsapp" target="_blank" rel="noopener">
+                <span style="font-size:1rem;">💬</span> WhatsApp
+              </a>
+            </div>
+
+            <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:1.25rem">
+              <a href="#termin" class="btn-weiter" style="display:inline-block;text-decoration:none;">Jetzt Termin buchen →</a>
+              <button @click="reset()"
+                style="background:none;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.55);padding:0.75rem 1.25rem;border-radius:2px;font-size:0.82rem;cursor:pointer;font-family:inherit">
+                ↺ Neu starten
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <!-- TERMINBUCHUNG -->
+      <div id="termin">
+        <div class="s-tag">Schritt 2</div>
+        <h2 class="s-title">Termin <em>vereinbaren</em></h2>
+        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1.75rem;line-height:1.7;">
+          Melden Sie sich einfach bei mir — ich melde mich innerhalb eines Werktages und finden gemeinsam einen passenden Termin. Alle Gespräche finden per Video oder Telefon statt.
+        </p>
+        <div style="display:flex;flex-direction:column;gap:0.875rem;">
+          <a href="tel:+498938078946" style="display:flex;align-items:center;gap:0.875rem;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:1rem 1.25rem;text-decoration:none;color:white;transition:background 0.2s;"
+            onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.06)'">
+            <span style="font-size:1.25rem;">📞</span>
+            <div>
+              <div style="font-size:0.85rem;font-weight:500;">Anrufen</div>
+              <div style="font-size:0.75rem;color:rgba(255,255,255,0.45);">089 / 38078946</div>
+            </div>
+          </a>
+          <a href="https://wa.me/4917662633104" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:0.875rem;background:rgba(37,211,102,0.08);border:1px solid rgba(37,211,102,0.25);border-radius:6px;padding:1rem 1.25rem;text-decoration:none;color:rgba(37,211,102,0.9);transition:background 0.2s;"
+            onmouseover="this.style.background='rgba(37,211,102,0.14)'" onmouseout="this.style.background='rgba(37,211,102,0.08)'">
+            <span style="font-size:1.25rem;">💬</span>
+            <div>
+              <div style="font-size:0.85rem;font-weight:500;">WhatsApp schreiben</div>
+              <div style="font-size:0.75rem;color:rgba(255,255,255,0.45);">0176 / 62633104</div>
+            </div>
+          </a>
+          <a href="mailto:info@hilger-finanzen.de" style="display:flex;align-items:center;gap:0.875rem;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:1rem 1.25rem;text-decoration:none;color:white;transition:background 0.2s;"
+            onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.06)'">
+            <span style="font-size:1.25rem;">✉️</span>
+            <div>
+              <div style="font-size:0.85rem;font-weight:500;">E-Mail schreiben</div>
+              <div style="font-size:0.75rem;color:rgba(255,255,255,0.45);">info@hilger-finanzen.de</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- RECHTE SPALTE: CHAT -->
+    <div class="col-right" id="chat">
+      <div x-data="chatbot()" style="display:contents">
+        <!-- Header -->
+        <div class="chat-header-bar">
+          <div class="chat-avatar">KI</div>
+          <div>
+            <div class="chat-name">Hilger Finanzen</div>
+            <div class="chat-status">Online · Antwortet sofort</div>
+          </div>
+        </div>
+
+        <!-- Nachrichten -->
+        <div class="chat-messages" x-ref="feed">
+          <template x-for="(msg, i) in messages" :key="i">
+            <div class="msg-wrap" :class="msg.from">
+              <div class="msg-bubble" x-text="msg.text"></div>
+            </div>
+          </template>
+        </div>
+
+        <!-- Schnellauswahl -->
+        <div class="chat-suggestions">
+          <button class="sug-btn" @click="send('Kfz-Versicherung')">Kfz-Versicherung</button>
+          <button class="sug-btn" @click="send('Betriebshaftpflicht')">Betriebshaftpflicht</button>
+          <button class="sug-btn" @click="send('Altersvorsorge')">Altersvorsorge</button>
+          <button class="sug-btn" @click="send('Termin buchen')">Termin buchen</button>
+          <button class="sug-btn" @click="send('Kosten und Preise')">Kosten &amp; Preise</button>
+        </div>
+
+        <!-- Eingabe -->
+        <div class="chat-input-row">
+          <input
+            class="chat-input"
+            type="text"
+            placeholder="Ihre Frage..."
+            x-model="input"
+            @keydown.enter="send()"
+          >
+          <button class="chat-send-btn" @click="send()" aria-label="Nachricht senden">→</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p class="footer-text">
+      © 2026 Hilger Finanzen — <a href="index.html">Startseite</a> · <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a><br>
+      Deutschlandweite Beratung · 100 % digital
+    </p>
+  </footer>
+
+<script>
+  function schnellcheck() {
+    return {
+      step: 0,
+      selected: null,
+      done: false,
+      path: null,
+      answers: [],
+      history: [],
+
+      questionsPrivat: [
+        {
+          text: 'Für wen suchen Sie Versicherungsschutz?',
+          opts: ['Mich privat', 'Mein Unternehmen', 'Beides']
+        },
+        {
+          text: 'In welchem Bereich haben Sie den größten Bedarf?',
+          opts: ['Haftpflicht', 'Krankenversicherung & Gesundheit', 'Berufsunfähigkeit', 'Altersvorsorge', 'Immobilien', 'Ich bin mir nicht sicher']
+        },
+        {
+          text: 'Haben Sie bereits Versicherungen?',
+          opts: ['Ja – bestehende Verträge prüfen lassen', 'Nein – ich suche neue Absicherung']
+        },
+        {
+          text: 'Wie dringend ist Ihr Bedarf?',
+          opts: ['Sofort – ich brauche schnell Hilfe', 'In den nächsten Wochen', 'Ich möchte mich erst informieren']
+        }
+      ],
+
+      questionsUnternehmen: [
+        {
+          text: 'Für wen suchen Sie Versicherungsschutz?',
+          opts: ['Mich privat', 'Mein Unternehmen', 'Beides']
+        },
+        {
+          text: 'In welchem Bereich haben Sie den größten Absicherungsbedarf?',
+          opts: ['Betriebshaftpflicht', 'Cyberversicherung', 'Betriebliche Altersvorsorge', 'Rechtsschutz', 'Flottenversicherung', 'Ich bin mir nicht sicher']
+        },
+        {
+          text: 'Wie viele Mitarbeiter hat Ihr Unternehmen?',
+          opts: ['1 – 10 Mitarbeiter', '11 – 50 Mitarbeiter', '51 – 100 Mitarbeiter', 'Mehr als 100']
+        },
+        {
+          text: 'Wie dringend ist Ihr Absicherungsbedarf?',
+          opts: ['Sofort – ich brauche schnell Hilfe', 'In den nächsten Wochen', 'Ich möchte mich erst informieren']
+        }
+      ],
+
+      get currentQuestions() {
+        return this.path === 'unternehmen' ? this.questionsUnternehmen : this.questionsPrivat;
+      },
+      get current() {
+        if (this.step === 2 && this.path === 'privat' && (this.answers[1] || '').includes('Immobilien')) {
+          return {
+            text: 'Was möchten Sie mit der Immobilie tun?',
+            opts: ['Kaufen', 'Verkaufen', 'Vermieten', 'Ich bin noch unentschlossen']
+          };
+        }
+        return this.currentQuestions[this.step];
+      },
+
+      get resultText() {
+        const a1 = this.answers[1] || '';
+        if (this.path === 'unternehmen') {
+          if (a1.includes('Betriebshaftpflicht')) return 'Betriebshaftpflicht ist der unverzichtbare Basisschutz für jedes Unternehmen. Ich vergleiche die besten Anbieter und finde den passenden Schutz für Ihren Betrieb.';
+          if (a1.includes('Cyber')) return 'Für Ihr KMU empfehle ich eine Kombination aus Betriebshaftpflicht und Cyberversicherung. Buchen Sie jetzt Ihren kostenlosen Beratungstermin.';
+          if (a1.includes('Altersvorsorge')) return 'Betriebliche Altersvorsorge ist steuerlich attraktiv und bindet Mitarbeiter langfristig. Ich zeige Ihnen die besten Modelle für Ihre Unternehmensgröße.';
+          if (a1.includes('Rechtsschutz')) return 'Gewerblicher Rechtsschutz schützt vor teuren Rechtsstreitigkeiten. Ich berate Sie persönlich zu den passenden Tarifen.';
+          if (a1.includes('Flotten')) return 'Flottenversicherungen für KMU sind mein Spezialgebiet. Ich erstelle Ihnen ein maßgeschneidertes Angebot.';
+          return 'Basierend auf Ihren Angaben erstelle ich Ihnen eine individuelle Empfehlung. Vereinbaren Sie jetzt Ihren kostenlosen Beratungstermin.';
+        } else {
+          if (a1.includes('Haftpflicht')) return 'Privathaftpflicht ist eine der wichtigsten Versicherungen überhaupt. Ich finde den passenden Schutz für Ihre persönliche Situation.';
+          if (a1.includes('Kranken')) return 'Ob private KV oder GKV-Ergänzung – ich analysiere Ihre Situation und finde die optimale Lösung für Ihre Gesundheitsabsicherung.';
+          if (a1.includes('Berufsunfähigkeit')) return 'Berufsunfähigkeit ist das größte finanzielle Risiko für Berufstätige. Ich helfe Ihnen, die richtige Absicherung zu finden.';
+          if (a1.includes('Altersvorsorge')) return 'Gute Altersvorsorge braucht die richtige Strategie. Ich berate Sie unabhängig, transparent und auf Ihre Lebenssituation abgestimmt.';
+          if (a1.includes('Immobilien')) {
+            const a2 = this.answers[2] || '';
+            if (a2.includes('Kaufen')) return 'Sie möchten eine Immobilie kaufen – ich begleite Sie als lizenzierte Immobilienmaklerin durch den gesamten Prozess. Sprechen Sie mich einfach an!';
+            if (a2.includes('Verkaufen')) return 'Sie möchten Ihre Immobilie verkaufen – ich helfe Ihnen, den besten Preis zu erzielen und alle Schritte professionell abzuwickeln.';
+            if (a2.includes('Vermieten')) return 'Sie möchten vermieten – ich unterstütze Sie bei der Mietersuche und sorge für einen reibungslosen Ablauf.';
+            return 'Als lizenzierte Immobilienmaklerin begleite ich Sie beim Kauf, Verkauf oder der Vermietung – persönlich und verlässlich. Sprechen Sie mich an!';
+          }
+          return 'Ich empfehle einen umfassenden Check Ihrer bestehenden Absicherung. Sprechen Sie mich an – kostenlos und unverbindlich.';
+        }
+      },
+
+      get urgencyText() {
+        const lastAnswer = this.answers[this.answers.length - 1] || '';
+        if (lastAnswer.includes('Sofort')) {
+          return 'Sie haben dringenden Bedarf angegeben – ich empfehle, mich direkt anzurufen oder per WhatsApp zu kontaktieren.';
+        }
+        return '';
+      },
+
+      select(opt) { this.selected = opt; },
+
+      next() {
+        if (!this.selected) return;
+        this.history.push({ step: this.step, path: this.path, answers: [...this.answers], selected: this.selected });
+        if (this.step === 0) {
+          this.path = this.selected.includes('Unternehmen') ? 'unternehmen' : 'privat';
+        }
+        this.answers.push(this.selected);
+        if (this.step < this.currentQuestions.length - 1) {
+          this.step++;
+          this.selected = null;
+        } else {
+          this.done = true;
+        }
+      },
+
+      back() {
+        if (this.done) { this.done = false; return; }
+        if (this.history.length === 0) return;
+        const prev = this.history.pop();
+        this.step = prev.step;
+        this.path = prev.path;
+        this.answers = prev.answers;
+        this.selected = prev.selected;
+      },
+
+      reset() {
+        this.step = 0; this.selected = null; this.done = false;
+        this.path = null; this.answers = []; this.history = [];
+      }
+    };
+  }
+
+  function terminbuchung_unused() {
+    return {
+      selectedSlot: null,
+      confirmed: false,
+      slots: [
+        { day: 'Mo 14.04.', time: '09:00' },
+        { day: 'Mo 14.04.', time: '11:00' },
+        { day: 'Di 15.04.', time: '10:00' },
+        { day: 'Di 15.04.', time: '14:00' },
+        { day: 'Mi 16.04.', time: '09:30' },
+        { day: 'Do 17.04.', time: '15:00' },
+      ],
+      select(slot) { this.selectedSlot = slot; },
+      confirm() {
+        if (!this.selectedSlot) return;
+        this.confirmed = true;
+      }
+    };
+  }
+
+  function chatbot() {
+    return {
+      input: '',
+      messages: [],
+      init() {
+        setTimeout(() => {
+          this.messages.push({ from: 'bot', text: 'Guten Tag! Wie kann ich Ihnen heute helfen?' });
+        }, 600);
+      },
+      getReply(text) {
+        const t = text.toLowerCase();
+
+        // Begrüßung
+        if (t.includes('hallo') || t.includes('guten') || t.includes('hi ') || t === 'hi' || t === 'hallo')
+          return 'Hallo! Schön, dass Sie da sind. Womit kann ich Ihnen helfen — haben Sie Fragen zu Versicherungen oder möchten Sie einen Termin vereinbaren?';
+        if (t.includes('danke'))
+          return 'Sehr gerne! Wenn Sie weitere Fragen haben oder einen Termin vereinbaren möchten — ich bin jederzeit für Sie da.';
+
+        // Termin & Kontakt
+        if (t.includes('termin'))
+          return 'Gerne! Schreiben Sie mir einfach per WhatsApp, rufen Sie an oder nutzen Sie das Kontaktformular — ich melde mich innerhalb eines Werktages.';
+        if (t.includes('kosten') || t.includes('preis') || t.includes('kostenlos') || t.includes('gratis'))
+          return 'Die Erstberatung ist für Sie komplett kostenlos und unverbindlich. Als unabhängige Maklerin werde ich von den Versicherern vergütet — Sie zahlen keinen Cent extra.';
+        if (t.includes('wie lang') || t.includes('dauer') || t.includes('wie lange'))
+          return 'Ein erstes Beratungsgespräch dauert 30–45 Minuten. Danach erhalten Sie innerhalb von 1–2 Tagen ein konkretes Angebot.';
+        if (t.includes('deutschland') || t.includes('standort') || t.includes('online') || t.includes('digital') || t.includes('video'))
+          return 'Ja, ich berate deutschlandweit — vollständig per Video oder Telefon. Kein Ortstermin nötig, egal ob Sie in München, Hamburg oder Berlin sind.';
+
+        // KFZ — spezifisch
+        if ((t.includes('kfz') || t.includes('auto') || t.includes('fahrzeug') || t.includes('kraftfahrzeug')) && (t.includes('wechsel') || t.includes('wechseln') || t.includes('kündigen') || t.includes('wann')))
+          return 'Die Kfz-Versicherung kann in der Regel zum 30. November gekündigt werden — dann gilt der neue Vertrag ab 1. Januar. Außerdem haben Sie ein Sonderkündigungsrecht wenn die Prämie steigt oder nach einem Schaden. Ich prüfe das gerne für Sie!';
+        if ((t.includes('kfz') || t.includes('auto')) && (t.includes('schaden') || t.includes('unfall')))
+          return 'Nach einem Kfz-Schaden ist schnelles Handeln wichtig. Ich begleite Sie bei der Schadensmeldung und achte darauf, dass Ihre Versicherung korrekt und schnell reguliert. Rufen Sie mich an: 089 / 38078946.';
+        if ((t.includes('kfz') || t.includes('auto')) && (t.includes('teuer') || t.includes('sparen') || t.includes('günstig')))
+          return 'Bei der Kfz-Versicherung lässt sich oft viel sparen — durch den richtigen Tarif, optimale SF-Klasse und passende Zusatzleistungen. Ich vergleiche für Sie kostenlos Dutzende Anbieter.';
+        if (t.includes('kfz') || t.includes('auto') || t.includes('fahrzeug'))
+          return 'Bei der Kfz-Versicherung vergleiche ich Haftpflicht, Teilkasko und Vollkasko für Sie. Möchten Sie wechseln, sparen oder haben Sie einen Schaden?';
+
+        // Krankenversicherung — spezifisch
+        if ((t.includes('kranken') || t.includes('pkv') || t.includes('gkv')) && (t.includes('wechsel') || t.includes('wechseln') || t.includes('wann')))
+          return 'In die PKV wechseln können Sie als Angestellter ab einem Jahreseinkommen von 69.300 € (2024). Als Selbstständiger jederzeit. Der Wechsel lohnt sich oft — aber er muss gut geplant sein. Ich analysiere Ihre Situation kostenlos.';
+        if (t.includes('zusatz') || t.includes('zusatzversicherung') || t.includes('zahn'))
+          return 'Eine Zahnzusatz- oder Krankenzusatzversicherung schließt die Lücken der gesetzlichen Kasse — z.B. bei Zahnersatz, Brille oder Chefarztbehandlung. Ich finde den besten Tarif für Ihren Bedarf.';
+        if (t.includes('kranken') || t.includes('pkv') || t.includes('gkv') || t.includes('gesundheit'))
+          return 'Bei der Krankenversicherung vergleiche ich GKV-Zusatzversicherungen und PKV-Tarife. Der Wechsel in die PKV lohnt sich oft — das hängt von Einkommen und Situation ab. Soll ich das für Sie prüfen?';
+
+        // Berufsunfähigkeit
+        if ((t.includes('berufsunfähigkeit') || t.includes('bu')) && (t.includes('wann') || t.includes('alter') || t.includes('jung')))
+          return 'Je früher Sie eine BU abschließen, desto günstiger ist der Beitrag — und desto geringer das Risiko abgelehnt zu werden. Am besten mit 20–35 Jahren. Ich finde den passenden Tarif für Sie.';
+        if (t.includes('berufsunfähigkeit') || t.includes('bu ') || t.includes('bu-') || t.includes('erwerbsunfähigkeit'))
+          return 'Die Berufsunfähigkeitsversicherung schützt Ihr Einkommen wenn Sie nicht mehr arbeiten können — sie ist neben der Haftpflicht die wichtigste Absicherung überhaupt. Je früher, desto günstiger. Ich finde den besten Tarif.';
+
+        // Hausrat & Gebäude
+        if ((t.includes('hausrat') || t.includes('wohngebäude') || t.includes('gebäude')) && (t.includes('wechsel') || t.includes('kündigen')))
+          return 'Hausrat- und Wohngebäudeversicherungen können Sie jährlich zum Vertragsende kündigen — meist mit 3 Monaten Frist. Ich prüfe Ihren Vertrag und finde bessere Konditionen.';
+        if (t.includes('hausrat'))
+          return 'Eine Hausratversicherung schützt Ihren Hausstand bei Einbruch, Feuer oder Wasserschaden. Wichtig: die Versicherungssumme sollte aktuell sein — viele sind unterversichert! Ich prüfe das für Sie.';
+        if (t.includes('wohngebäude') || t.includes('gebäude'))
+          return 'Die Wohngebäudeversicherung schützt Ihr Haus vor Feuer, Sturm, Hagel und Leitungswasser. Als Eigentümer ist sie Pflicht. Ich vergleiche die besten Tarife für Sie.';
+
+        // Haftpflicht
+        if (t.includes('haftpflicht') && !t.includes('betriebs') && !t.includes('berufs'))
+          return 'Die private Haftpflichtversicherung ist unverzichtbar — ein kleiner Fehler kann Sie schnell Hunderttausende kosten. Ich empfehle mindestens 10 Mio. € Deckungssumme. Sehr günstig im Verhältnis zum Schutz.';
+
+        // Altersvorsorge
+        if ((t.includes('rente') || t.includes('altersvorsorge')) && (t.includes('wann') || t.includes('früh') || t.includes('anfang')))
+          return 'Mit der Altersvorsorge sollte man so früh wie möglich anfangen — der Zinseszinseffekt ist enorm. Wer mit 25 statt 35 beginnt, zahlt oft die Hälfte für dasselbe Ergebnis. Ich zeige Ihnen die besten Möglichkeiten.';
+        if (t.includes('riester'))
+          return 'Riester lohnt sich vor allem für Familien mit Kindern und Geringverdiener wegen der staatlichen Zulagen. Für andere gibt es oft bessere Alternativen. Ich analysiere was für Sie am meisten Sinn macht.';
+        if (t.includes('rürup') || t.includes('basisrente'))
+          return 'Rürup/Basisrente ist ideal für Selbstständige und Gutverdiener — die Beiträge sind steuerlich absetzbar. Ich vergleiche die besten fondsgebundenen Rürup-Tarife für Sie.';
+        if (t.includes('altersvorsorge') || t.includes('rente') || t.includes('vorsorge'))
+          return 'Für die Altersvorsorge gibt es viele Bausteine: Riester, Rürup, private Rentenversicherung oder fondsgebundene Lösungen. Was für Sie passt, hängt von Ihrer Situation ab. Ich berate Sie unabhängig.';
+        if (t.includes('bav') || t.includes('betriebliche alters'))
+          return 'Betriebliche Altersvorsorge ist steuerlich sehr attraktiv — Beiträge werden aus dem Bruttogehalt gezahlt, das spart Steuern und Sozialabgaben. Ich zeige Ihnen die besten Modelle.';
+
+        // Reise & Leben
+        if (t.includes('reise'))
+          return 'Reisekrankenversicherung, Reiserücktritt oder Gepäckschutz — je nach Reiseziel und Häufigkeit gibt es unterschiedliche Lösungen. Eine Jahres-Reisekrankenversicherung lohnt sich oft schon ab zwei Reisen pro Jahr.';
+        if (t.includes('leben') || t.includes('risikolebens'))
+          return 'Eine Risikolebensversicherung sichert Ihre Familie ab wenn Sie der Hauptverdiener sind — sie ist überraschend günstig. Besonders wichtig bei laufenden Krediten oder kleinen Kindern.';
+
+        // Gewerbekunden
+        if (t.includes('gewerbe') || t.includes('unternehmen') || t.includes('firma') || t.includes('betrieb') || t.includes('selbstständig') || t.includes('freiberuf'))
+          return 'Für Unternehmen und Selbstständige biete ich: Betriebshaftpflicht, Berufshaftpflicht, Cyberversicherung, Rechtsschutz und betriebliche Altersvorsorge. Was ist Ihre Branche?';
+        if ((t.includes('betriebs') || t.includes('betrieb')) && t.includes('haftpflicht'))
+          return 'Betriebshaftpflicht ist der unverzichtbare Basisschutz — sie schützt vor Schadensersatzansprüchen Dritter. Für viele Branchen auch gesetzlich vorgeschrieben. Ich vergleiche die besten Anbieter für Ihre Branche.';
+        if (t.includes('berufs') && t.includes('haftpflicht'))
+          return 'Berufshaftpflicht schützt Freiberufler und Dienstleister bei Fehlern und Schadenersatzansprüchen. Für Ärzte, Anwälte, Berater & Co. oft Pflicht. Ich finde den richtigen Tarif für Ihre Tätigkeit.';
+        if (t.includes('cyber'))
+          return 'Cyberversicherungen werden für KMU immer wichtiger — Hackerangriffe, Datenverlust oder Betriebsunterbrechungen können existenzbedrohend sein. Ich vergleiche die besten Tarife für Ihre Unternehmensgröße.';
+        if (t.includes('rechtsschutz'))
+          return 'Rechtsschutzversicherung schützt vor teuren Rechtsstreitigkeiten — für Privatkunden und Unternehmen. Wichtig: es gibt Wartezeiten, also nicht erst im Streitfall abschließen! Ich vergleiche die besten Tarife.';
+        if (t.includes('flotte') || (t.includes('auto') && t.includes('firm')))
+          return 'Flottenversicherungen für KMU sind mein Spezialgebiet. Ab zwei Fahrzeugen gibt es günstigere Konditionen als Einzelverträge. Ab wie vielen Fahrzeugen suchen Sie eine Lösung?';
+        if (t.includes('geschäftsunterbrechung') || t.includes('betriebsunterbrechung'))
+          return 'Eine Betriebsunterbrechungsversicherung zahlt Ihren laufenden Betrieb weiter wenn er stillsteht — z.B. durch Feuer oder Wasserschaden. Oft unterschätzt, aber bei einem Ernstfall existenzsichernd.';
+
+        // Immobilien
+        if (t.includes('immobilie') || t.includes('haus kauf') || t.includes('wohnung kauf') || t.includes('kaufen') || t.includes('verkaufen') || t.includes('vermieten'))
+          return 'Als lizenzierte Immobilienmaklerin begleite ich Sie beim Kauf, Verkauf oder der Vermietung — persönlich und verlässlich in der Region München. Sprechen Sie mich direkt an!';
+
+        // Wechsel & Kündigung allgemein
+        if (t.includes('kündigung') || t.includes('kündigen') || t.includes('wechsel') || t.includes('wechseln'))
+          return 'Ein Wechsel ist oft einfacher als gedacht. Die meisten Versicherungen können jährlich zum Vertragsende gekündigt werden — bei Prämienerhöhung sogar sofort. Ich übernehme die Kündigung für Sie kostenlos.';
+        if (t.includes('bestehend') || t.includes('vertrag') || t.includes('prüfen') || t.includes('check'))
+          return 'Gerne prüfe ich Ihre bestehenden Verträge kostenlos auf Lücken, Doppelversicherungen und Einsparpotenziale. Viele Kunden sparen dabei 200–500 € im Jahr. Einfach Termin vereinbaren!';
+        if (t.includes('schaden') || t.includes('schadenmeldung'))
+          return 'Im Schadensfall stehe ich an Ihrer Seite — ich begleite die Schadensmeldung und sorge dafür, dass Ihre Versicherung schnell und fair reguliert. Rufen Sie mich direkt an: 089 / 38078946.';
+
+        return 'Das beantworte ich gerne im persönlichen Gespräch. Rufen Sie mich an unter 089 / 38078946 oder schreiben Sie mir per WhatsApp — kostenlos und unverbindlich.';
+      },
+      send(text) {
+        const msg = (text || this.input).trim();
+        if (!msg) return;
+        this.messages.push({ from: 'user', text: msg });
+        this.input = '';
+        const self = this;
+        setTimeout(() => {
+          self.messages.push({ from: 'bot', text: self.getReply(msg) });
+          const feed = document.querySelector('.chat-messages');
+          if (feed) feed.scrollTop = feed.scrollHeight;
+        }, 420);
+      }
+    };
+  }
+</script>
+
+  <!-- WHATSAPP FLOATING BUTTON -->
+  <a href="https://wa.me/4917662633104" target="_blank" rel="noopener" title="WhatsApp schreiben"
+    style="position:fixed;bottom:1.75rem;right:1.75rem;z-index:999;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,0.45);transition:transform 0.2s,box-shadow 0.2s;"
+    onmouseover="this.style.transform='scale(1.1)';this.style.boxShadow='0 6px 24px rgba(37,211,102,0.55)'"
+    onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 4px 16px rgba(37,211,102,0.45)'">
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+</body>
+</html>
