@@ -1221,6 +1221,33 @@
     }, { threshold: 0.5 });
     countEls.forEach(el => countObserver.observe(el));
 
+    // Service tabs fallback for strict CSP: Alpine's inline expressions can be blocked.
+    function setupServiceTabs() {
+      const section = document.getElementById('leistungen');
+      if (!section) return;
+      const buttons = section.querySelectorAll('.tab-btn');
+      const grids = section.querySelectorAll('.srv-grid');
+      const businessGrid = grids[0];
+      const privateGrid = grids[1];
+      const businessCta = businessGrid ? businessGrid.nextElementSibling : null;
+      const privateCta = privateGrid ? privateGrid.nextElementSibling : null;
+      const setTab = (tab) => {
+        const privateActive = tab === 'privat';
+        buttons.forEach((button, index) => button.classList.toggle('active', privateActive ? index === 1 : index === 0));
+        if (businessGrid) businessGrid.style.display = privateActive ? 'none' : 'grid';
+        if (businessCta) businessCta.style.display = privateActive ? 'none' : 'block';
+        if (privateGrid) privateGrid.style.display = privateActive ? 'grid' : 'none';
+        if (privateCta) privateCta.style.display = privateActive ? 'block' : 'none';
+      };
+      if (buttons[0]) buttons[0].addEventListener('click', () => setTab('gewerbe'));
+      if (buttons[1]) buttons[1].addEventListener('click', () => setTab('privat'));
+      const heroLinks = document.querySelectorAll('.hero-box-link');
+      if (heroLinks[0]) heroLinks[0].addEventListener('click', () => setTab('privat'));
+      if (heroLinks[1]) heroLinks[1].addEventListener('click', () => setTab('gewerbe'));
+      setTab('gewerbe');
+    }
+    setupServiceTabs();
+
     // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', e => {
