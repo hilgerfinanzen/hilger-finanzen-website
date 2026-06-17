@@ -109,7 +109,7 @@
     .btn-white:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,0.15); }
 
     /* MOBILE */
-    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: 0; padding: 0; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
     .nav-hamburger span { display: block; width: 24px; height: 1.5px; background: white; transition: all 0.3s; }
     .mobile-menu {
       position: fixed; inset: 0; background: var(--navy); z-index: 200;
@@ -486,92 +486,6 @@
     @media (max-width: 640px) {
       .nav-links, .nav-cta { display: none; }
       .nav-hamburger { display: flex; }
-      #hero {
-        min-height: auto;
-        align-items: flex-end;
-        background:
-          linear-gradient(to bottom, rgba(11,29,46,0.08) 0%, rgba(11,29,46,0.42) 40%, var(--navy) 74%),
-          url('images/hero-bg-web.jpg') 58% top / auto 48vh no-repeat,
-          var(--navy);
-      }
-      .hero-pattern, .hero-glow, .hero-scroll { display: none; }
-      .hero-inner {
-        padding: clamp(15.25rem, 46vh, 20rem) 1.25rem 3.25rem;
-      }
-      .hero-tag {
-        display: flex;
-        align-items: flex-start;
-        gap: 0.45rem;
-        font-size: 0.62rem;
-        line-height: 1.45;
-        letter-spacing: 0.11em;
-        margin-bottom: 1.25rem;
-        max-width: 100%;
-      }
-      .hero-tag::before {
-        flex: 0 0 18px;
-        margin-top: 0.45rem;
-      }
-      .hero-h1 {
-        font-size: clamp(1.85rem, 9vw, 2.25rem);
-        line-height: 1.08;
-        margin-bottom: 1.15rem;
-        letter-spacing: 0;
-      }
-      .hero-h1 br { display: none; }
-      .hero-claim {
-        font-size: 1.12rem;
-        line-height: 1.35;
-      }
-      .hero-sub {
-        font-size: 0.95rem;
-        line-height: 1.68;
-        margin-bottom: 1.75rem;
-      }
-      .hero-ctas {
-        display: grid;
-        gap: 0.75rem;
-        margin-bottom: 1.75rem;
-      }
-      .hero-ctas .btn-primary,
-      .hero-ctas .btn-outline {
-        width: 100%;
-        justify-content: center;
-        text-align: center;
-        padding: 0.85rem 1rem;
-        line-height: 1.35;
-      }
-      .hero-boxes {
-        grid-template-columns: 1fr;
-        border-radius: 5px;
-      }
-      .hero-box {
-        padding: 1.15rem 1.1rem;
-      }
-      section { padding: 4rem 1.25rem; }
-      #firmenkunden { padding: 3.5rem 1.25rem !important; }
-      .firmenkunden-grid {
-        grid-template-columns: 1fr !important;
-        gap: 1.5rem !important;
-        align-items: start !important;
-      }
-      #firmenkunden .s-title {
-        font-size: clamp(2rem, 10vw, 2.65rem);
-        line-height: 1.08;
-        margin-bottom: 0;
-      }
-      #firmenkunden p {
-        font-size: 0.95rem !important;
-        line-height: 1.72 !important;
-        margin-bottom: 1.5rem !important;
-      }
-      #firmenkunden .btn-primary {
-        display: flex !important;
-        width: 100%;
-        justify-content: center;
-        text-align: center;
-        line-height: 1.35;
-      }
       .usp-grid { grid-template-columns: 1fr; }
       .f-row { grid-template-columns: 1fr; }
       .ft-top { grid-template-columns: 1fr; }
@@ -580,7 +494,7 @@
     }
   </style>
 </head>
-<body>
+<body x-data="{ menuOpen: false, tab: 'gewerbe' }">
 
   <!-- NAV -->
   <nav id="nav">
@@ -596,19 +510,19 @@
       <li><a href="#kontakt">Kontakt</a></li>
     </ul>
     <a href="#kontakt" class="btn-primary nav-cta">Gespräch vereinbaren</a>
-    <button class="nav-hamburger" id="mobileMenuOpen" type="button" aria-label="Menü öffnen" aria-controls="mobileMenu" aria-expanded="false">
+    <div class="nav-hamburger" @click="menuOpen = true">
       <span></span><span></span><span></span>
-    </button>
+    </div>
   </nav>
 
   <!-- MOBILE MENU -->
-  <div class="mobile-menu" id="mobileMenu" hidden>
-    <button class="mobile-close" id="mobileMenuClose" type="button" aria-label="Menü schließen">✕</button>
-    <a href="#leistungen">Leistungen</a>
-    <a href="beratung.html">Online-Beratung</a>
-    <a href="#usp">Über uns</a>
-    <a href="#kontakt">Kontakt</a>
-    <a href="#kontakt" class="btn-primary" style="font-size:1rem;padding:.875rem 2rem">Beratung buchen</a>
+  <div class="mobile-menu" x-show="menuOpen" x-transition style="display:none">
+    <button class="mobile-close" @click="menuOpen = false">✕</button>
+    <a href="#leistungen" @click="menuOpen = false">Leistungen</a>
+    <a href="beratung.html" @click="menuOpen = false">Online-Beratung</a>
+    <a href="#usp"        @click="menuOpen = false">Über uns</a>
+    <a href="#kontakt"    @click="menuOpen = false">Kontakt</a>
+    <a href="#kontakt"    @click="menuOpen = false" class="btn-primary" style="font-size:1rem;padding:.875rem 2rem">Beratung buchen</a>
   </div>
 
   <!-- HERO -->
@@ -633,11 +547,11 @@
         <a href="#vcheck" class="btn-outline">Bestehende Verträge prüfen lassen</a>
       </div>
       <div class="hero-boxes">
-        <a class="hero-box hero-box-link" href="#leistungen" data-tab-target="privat">
+        <a class="hero-box hero-box-link" href="#leistungen" @click="tab = 'privat'">
           <div class="hero-box-label">Für Privatkunden</div>
           <div class="hero-box-text">Sie zahlen monatlich – aber wissen Sie, was Sie dafür wirklich absichern?</div>
         </a>
-        <a class="hero-box hero-box-link" href="#leistungen" data-tab-target="gewerbe">
+        <a class="hero-box hero-box-link" href="#leistungen" @click="tab = 'gewerbe'">
           <div class="hero-box-label">Für Unternehmen</div>
           <div class="hero-box-text">Ein Schadenfall, vier Ansprechpartner. Das muss nicht so sein.</div>
         </a>
@@ -695,12 +609,12 @@
           <h2 class="s-title reveal">Leistungen, die<br><em>wirklich schützen</em></h2>
         </div>
         <div class="tab-sw reveal">
-          <button class="tab-btn active" type="button" data-tab-button="gewerbe">Gewerbekunden</button>
-          <button class="tab-btn" type="button" data-tab-button="privat">Privatkunden</button>
+          <button class="tab-btn" :class="{ active: tab === 'gewerbe' }" @click="tab = 'gewerbe'">Gewerbekunden</button>
+          <button class="tab-btn" :class="{ active: tab === 'privat'  }" @click="tab = 'privat'">Privatkunden</button>
         </div>
       </div>
 
-      <div class="srv-grid" data-tab-panel="gewerbe">
+      <div class="srv-grid" x-show="tab === 'gewerbe'" x-transition>
         <div class="srv-card reveal">
           <span class="srv-icon">🏢</span>
           <div class="srv-title">Betriebshaftpflicht</div>
@@ -734,7 +648,7 @@
       </div>
 
       <!-- Firmenkunden CTA unter Gewerbe-Karten -->
-      <div data-tab-panel="gewerbe" style="margin-top: 2.5rem; background: white; border-radius: 8px; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 4px 20px rgba(11,29,46,0.06); overflow: hidden;">
+      <div x-show="tab === 'gewerbe'" x-transition style="margin-top: 2.5rem; background: white; border-radius: 8px; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 4px 20px rgba(11,29,46,0.06); overflow: hidden;">
         <div style="height: 3px; background: var(--copper);"></div>
         <div style="padding: 2rem 2.5rem; display: flex; justify-content: space-between; align-items: center; gap: 2rem; flex-wrap: wrap;">
           <div style="max-width: 580px;">
@@ -747,7 +661,7 @@
         </div>
       </div>
 
-      <div class="srv-grid" data-tab-panel="privat" hidden>
+      <div class="srv-grid" x-show="tab === 'privat'" x-transition style="display:none">
         <div class="srv-card">
           <span class="srv-icon">🛡️</span>
           <div class="srv-title">Haftpflicht</div>
@@ -781,7 +695,7 @@
       </div>
 
       <!-- Privatkunden CTA unter Privat-Karten -->
-      <div data-tab-panel="privat" hidden style="margin-top: 2.5rem; background: white; border-radius: 8px; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 4px 20px rgba(11,29,46,0.06); overflow: hidden;">
+      <div x-show="tab === 'privat'" x-transition style="margin-top: 2.5rem; background: white; border-radius: 8px; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 4px 20px rgba(11,29,46,0.06); overflow: hidden; display: none;">
         <div style="height: 3px; background: var(--copper);"></div>
         <div style="padding: 2rem 2.5rem; display: flex; justify-content: space-between; align-items: center; gap: 2rem; flex-wrap: wrap;">
           <div style="max-width: 580px;">
@@ -1270,39 +1184,6 @@
       if (consent === 'accepted' || consent === 'declined') {
         document.getElementById('cookie-banner').style.display = 'none';
       }
-
-      const menu = document.getElementById('mobileMenu');
-      const menuOpen = document.getElementById('mobileMenuOpen');
-      const menuClose = document.getElementById('mobileMenuClose');
-      const closeMenu = () => {
-        if (!menu || !menuOpen) return;
-        menu.hidden = true;
-        menuOpen.setAttribute('aria-expanded', 'false');
-      };
-      if (menu && menuOpen && menuClose) {
-        menuOpen.addEventListener('click', () => {
-          menu.hidden = false;
-          menuOpen.setAttribute('aria-expanded', 'true');
-        });
-        menuClose.addEventListener('click', closeMenu);
-        menu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
-      }
-
-      const setServiceTab = (tab) => {
-        document.querySelectorAll('[data-tab-button]').forEach(button => {
-          button.classList.toggle('active', button.dataset.tabButton === tab);
-        });
-        document.querySelectorAll('[data-tab-panel]').forEach(panel => {
-          panel.hidden = panel.dataset.tabPanel !== tab;
-        });
-      };
-      document.querySelectorAll('[data-tab-button]').forEach(button => {
-        button.addEventListener('click', () => setServiceTab(button.dataset.tabButton));
-      });
-      document.querySelectorAll('[data-tab-target]').forEach(link => {
-        link.addEventListener('click', () => setServiceTab(link.dataset.tabTarget));
-      });
-      setServiceTab('gewerbe');
     });
 
     // Nav scroll effect

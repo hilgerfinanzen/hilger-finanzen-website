@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://hilger-finanzen.de/sitemap.xml
