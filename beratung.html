@@ -7,7 +7,7 @@
   <link rel="apple-touch-icon" href="images/favicon.png">
   <meta name="theme-color" content="#0B1D2E">
   <title>Online-Beratung – Hilger Finanzen</title>
-  <meta name="description" content="Starten Sie jetzt Ihren kostenlosen Versicherungs-Schnellcheck oder vereinbaren Sie direkt einen Beratungstermin mit Katarzyna Hilger – deutschlandweit per Video oder Telefon.">
+  <meta name="description" content="Erhalten Sie eine erste Orientierung zu Ihrer Absicherung oder vereinbaren Sie direkt ein persönliches Beratungsgespräch – deutschlandweit per Video oder Telefon.">
   <meta property="og:title" content="Online-Beratung – Hilger Finanzen">
   <meta property="og:description" content="Kostenloser Versicherungs-Schnellcheck und persönliche Beratung – unabhängig, transparent, deutschlandweit.">
   <meta property="og:type" content="website">
@@ -400,7 +400,7 @@
     <div class="hero-inner">
       <div class="hero-tag">Online-Beratung</div>
       <h1 class="hero-h1">Beratung ohne <em>Anfahrt</em> —<br>persönlich, digital, deutschlandweit.</h1>
-      <p class="hero-sub">Unsere Experten beraten Sie unabhängig von Ihrem Standort. Ob München, Berlin oder Hamburg — echte Bedarfsanalyse, wo immer Sie sind.</p>
+      <p class="hero-sub">Sie erhalten persönliche Beratung per Video oder Telefon – verständlich, unabhängig und ohne Anfahrt. Egal, ob Sie in München, Berlin, Hamburg oder anderswo in Deutschland sind.</p>
       <div class="dach-strip">
         <span class="dach-flags">🇩🇪</span>
         <div class="dach-text">
@@ -456,13 +456,13 @@
         <!-- Ergebnis -->
         <div x-show="done" x-transition>
           <div class="check-result">
-            <div class="check-result-label">Ihre persönliche Empfehlung</div>
+            <div class="check-result-label">Ihre erste Orientierung</div>
 
             <!-- Advisor photo + name -->
             <div class="check-result-advisor">
               <img src="images/portrait.jpg" alt="Katarzyna Hilger">
               <div>
-                <div class="check-result-advisor-name">Das sagt Katarzyna Hilger</div>
+                <div class="check-result-advisor-name">Erste Einschätzung zu Ihrer Situation</div>
                 <div class="check-result-advisor-titel">Unabhängige Versicherungs- &amp; Immobilienmaklerin</div>
               </div>
             </div>
@@ -503,7 +503,7 @@
         <div class="s-tag">Schritt 2</div>
         <h2 class="s-title">Termin <em>vereinbaren</em></h2>
         <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1.75rem;line-height:1.7;">
-          Melden Sie sich einfach bei mir — ich melde mich innerhalb eines Werktages und finden gemeinsam einen passenden Termin. Alle Gespräche finden per Video oder Telefon statt.
+          Senden Sie einfach Ihre Anfrage – Sie erhalten innerhalb eines Werktages eine Rückmeldung und können einen passenden Termin per Video oder Telefon vereinbaren.
         </p>
         <div style="display:flex;flex-direction:column;gap:0.875rem;">
           <a href="tel:+498938078946" style="display:flex;align-items:center;gap:0.875rem;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:1rem 1.25rem;text-decoration:none;color:white;transition:background 0.2s;"
@@ -745,7 +745,7 @@
       init() {
         setTimeout(() => {
           this.messages.push({ from: 'bot', text: 'Guten Tag! Ich bin der digitale Assistent von Hilger Finanzen und gebe Ihnen eine erste Orientierung.' });
-          this.messages.push({ from: 'bot', text: 'Für verbindliche Empfehlungen, Fristen, Gesundheitsfragen oder eine Vertragsprüfung ist immer ein persönliches Gespräch mit Frau Hilger sinnvoll.' });
+          this.messages.push({ from: 'bot', text: 'Für verbindliche Empfehlungen, Fristen, Gesundheitsfragen oder eine Vertragsprüfung sollte Ihre Situation persönlich geprüft werden.' });
           this.messages.push({ from: 'bot', text: 'Bitte teilen Sie hier keine Gesundheitsdaten, Vertragsnummern, Bankdaten oder vollständigen Adressen mit.' });
         }, 600);
       },
@@ -756,7 +756,7 @@
         if (t.includes('vertragsnummer') || t.includes('policennummer') || t.includes('iban') || t.includes('kontonummer') || t.includes('geburtsdatum') || t.includes('adresse') || t.includes('anschrift'))
           return 'Bitte geben Sie solche persönlichen Daten nicht im Chat ein. Senden Sie Unterlagen lieber direkt über den vereinbarten Kontaktweg oder besprechen Sie den Fall telefonisch mit Frau Hilger.';
         if (t.includes('diagnose') || t.includes('krankheit') || t.includes('vorerkrank') || t.includes('gesundheitsdaten') || t.includes('medikament') || t.includes('operation') || t.includes('psychotherapie') || t.includes('schwanger'))
-          return 'Gesundheitsangaben sind besonders sensibel. Bitte teilen Sie solche Details nicht im Chat. Frau Hilger klärt Gesundheitsfragen persönlich und vertraulich mit Ihnen.';
+          return 'Gesundheitsangaben sind besonders sensibel. Bitte teilen Sie solche Details nicht im Chat. Gesundheitsfragen werden persönlich und vertraulich geklärt.';
         if (t.includes('frist läuft') || t.includes('frist heute') || t.includes('mahnbescheid') || t.includes('kündigung erhalten') || t.includes('ablehnung') || t.includes('leistungsfall'))
           return 'Das klingt nach einem konkreten Fall mit möglicher Frist. Bitte kontaktieren Sie Frau Hilger direkt telefonisch unter 089 / 38078946, damit die Unterlagen und nächsten Schritte persönlich geprüft werden.';
 
@@ -792,7 +792,7 @@
         if ((t.includes('kranken') || t.includes('pkv') || t.includes('gkv')) && (t.includes('wechsel') || t.includes('wechseln') || t.includes('wann')))
           return 'Ein Wechsel in die PKV hängt von Einkommen, beruflicher Situation, Gesundheitsfragen und langfristiger Planung ab. Die maßgeblichen Grenzen ändern sich regelmäßig — bitte lassen Sie Ihre Situation persönlich prüfen.';
         if (t.includes('zusatz') || t.includes('zusatzversicherung') || t.includes('zahn'))
-          return 'Eine Zahnzusatz- oder Krankenzusatzversicherung kann Lücken der gesetzlichen Kasse ergänzen. Entscheidend sind Bedarf, Gesundheitsfragen, Wartezeiten und Erstattungsgrenzen — Frau Hilger prüft, was wirklich passt.';
+          return 'Eine Zahnzusatz- oder Krankenzusatzversicherung kann Lücken der gesetzlichen Kasse ergänzen. Entscheidend sind Bedarf, Gesundheitsfragen, Wartezeiten und Erstattungsgrenzen — in der persönlichen Beratung wird geprüft, was wirklich passt.';
         if (t.includes('kranken') || t.includes('pkv') || t.includes('gkv') || t.includes('gesundheit'))
           return 'Bei Krankenversicherung und Gesundheitsthemen ist eine individuelle Prüfung besonders wichtig. Geht es bei Ihnen um gesetzliche Zusatzversicherung, private Krankenversicherung oder einen bestehenden Vertrag?';
 
@@ -854,9 +854,9 @@
 
         // Wechsel & Kündigung allgemein
         if (t.includes('kündigung') || t.includes('kündigen') || t.includes('wechsel') || t.includes('wechseln'))
-          return 'Ein Wechsel oder eine Kündigung sollte erst nach Prüfung von Frist, Anschlussdeckung und möglichen Nachteilen erfolgen. Frau Hilger prüft Ihren Vertrag gern, bevor Sie etwas kündigen.';
+          return 'Ein Wechsel oder eine Kündigung sollte erst nach Prüfung von Frist, Anschlussdeckung und möglichen Nachteilen erfolgen. Ihr Vertrag sollte geprüft werden, bevor Sie etwas kündigen.';
         if (t.includes('bestehend') || t.includes('vertrag') || t.includes('prüfen') || t.includes('check'))
-          return 'Gerne prüft Frau Hilger Ihre bestehenden Verträge auf Lücken, Doppelversicherungen, Leistungsausschlüsse und mögliche Einsparungen. Am besten vereinbaren Sie dafür einen Termin und halten die Policen bereit.';
+          return 'Ihre bestehenden Verträge können auf Lücken, Doppelversicherungen, Leistungsausschlüsse und mögliche Einsparungen geprüft werden. Am besten vereinbaren Sie dafür einen Termin und halten die Policen bereit.';
         if (t.includes('schaden') || t.includes('schadenmeldung'))
           return 'Im Schadensfall zählt der konkrete Vertrag und die richtige Meldung. Bitte rufen Sie Frau Hilger direkt unter 089 / 38078946 an, damit nichts Wichtiges übersehen wird.';
 
