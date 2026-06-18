@@ -124,7 +124,7 @@
     /* HERO */
     #hero {
       min-height: 100vh; position: relative;
-      background: linear-gradient(to right, rgba(11,29,46,0.92) 20%, rgba(11,29,46,0) 100%), url('images/hero-bg-web.jpg') center/cover no-repeat;
+      background: linear-gradient(to right, rgba(11,29,46,0.92) 20%, rgba(11,29,46,0) 100%), url('images/hero-bg-web.jpg') center 42% / cover no-repeat;
       display: flex; align-items: center; overflow: hidden;
     }
     .hero-pattern {
@@ -179,12 +179,19 @@
     @media (max-width: 640px) { .hero-boxes { grid-template-columns: 1fr; } }
     @media (max-width: 640px) {
       #hero {
+        min-height: 100svh;
         background:
-          linear-gradient(to bottom, rgba(11,29,46,0.72) 0%, rgba(11,29,46,0.68) 45%, rgba(11,29,46,0.86) 100%),
-          url('images/hero-bg-web.jpg') 62% center / cover no-repeat;
+          linear-gradient(to bottom, rgba(11,29,46,0.74) 0%, rgba(11,29,46,0.70) 45%, rgba(11,29,46,0.88) 100%),
+          url('images/hero-bg-web.jpg') 60% 42% / cover no-repeat;
       }
+      .hero-inner { padding-top: 8.5rem; padding-bottom: 5.5rem; }
+      .hero-tag { margin-bottom: 1.4rem; font-size: 0.64rem; line-height: 1.55; }
+      .hero-h1 { font-size: clamp(2.35rem, 12vw, 3.1rem); line-height: 1.08; margin-bottom: 1.25rem; }
+      .hero-claim { font-size: 1.28rem; line-height: 1.25; margin-bottom: 1.05rem; }
+      .hero-sub { line-height: 1.65; margin-bottom: 1.75rem; max-width: 92%; }
       .hero-sub-desktop { display: none; }
       .hero-sub-mobile { display: inline; }
+      .whatsapp-float { right: 1.1rem; bottom: 5.7rem; }
     }
 
     /* TRUST BAR */
