@@ -876,6 +876,59 @@
       }
     };
   }
+
+  function setupChatbotFallback() {
+    const chat = document.getElementById('chat');
+    if (!chat) return;
+    const feed = chat.querySelector('.chat-messages');
+    const input = chat.querySelector('.chat-input');
+    const sendButton = chat.querySelector('.chat-send-btn');
+    const suggestionButtons = chat.querySelectorAll('.sug-btn');
+    if (!feed || !input || !sendButton) return;
+
+    feed.innerHTML = '';
+    const bot = typeof chatbot === 'function' ? chatbot() : null;
+    const replyFor = (message) => {
+      if (bot && typeof bot.getReply === 'function') return bot.getReply(message);
+      return 'Danke für Ihre Nachricht. Für eine verlässliche Einschätzung melden Sie sich bitte telefonisch, per WhatsApp oder über das Kontaktformular.';
+    };
+    const addMessage = (from, text) => {
+      const wrap = document.createElement('div');
+      wrap.className = `msg-wrap ${from}`;
+      const bubble = document.createElement('div');
+      bubble.className = 'msg-bubble';
+      bubble.textContent = text;
+      wrap.appendChild(bubble);
+      feed.appendChild(wrap);
+      feed.scrollTop = feed.scrollHeight;
+    };
+    const sendMessage = (preset) => {
+      const message = (preset || input.value || '').trim();
+      if (!message) return;
+      addMessage('user', message);
+      input.value = '';
+      window.setTimeout(() => addMessage('bot', replyFor(message)), 420);
+    };
+
+    window.setTimeout(() => {
+      addMessage('bot', 'Guten Tag! Ich bin der digitale Assistent von Hilger Finanzen und gebe Ihnen eine erste Orientierung.');
+      addMessage('bot', 'Für verbindliche Empfehlungen, Fristen, Gesundheitsfragen oder eine Vertragsprüfung sollte Ihre Situation persönlich geprüft werden.');
+      addMessage('bot', 'Bitte teilen Sie hier keine Gesundheitsdaten, Vertragsnummern, Bankdaten oder vollständigen Adressen mit.');
+    }, 300);
+
+    sendButton.addEventListener('click', () => sendMessage());
+    input.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        sendMessage();
+      }
+    });
+    suggestionButtons.forEach((button) => {
+      button.addEventListener('click', () => sendMessage(button.textContent.trim()));
+    });
+  }
+  document.addEventListener('DOMContentLoaded', setupChatbotFallback);
+
 </script>
 
   <!-- WHATSAPP FLOATING BUTTON -->
