@@ -155,6 +155,7 @@
       color: var(--copper-light); margin-bottom: 1.25rem; letter-spacing: 0.02em;
     }
     .hero-sub { font-size: 1rem; line-height: 1.8; color: rgba(255,255,255,0.6); margin-bottom: 2.75rem; font-weight: var(--fw-light); max-width: 640px; }
+    .hero-sub-mobile { display: none; }
     .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 4rem; }
     .hero-ctas .btn-primary, .hero-ctas .btn-outline { padding: 0.875rem 2rem; font-size: 0.9rem; }
     .hero-boxes { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: rgba(255,255,255,0.08); border-radius: 6px; overflow: hidden; }
@@ -182,6 +183,8 @@
           linear-gradient(to bottom, rgba(11,29,46,0.72) 0%, rgba(11,29,46,0.68) 45%, rgba(11,29,46,0.86) 100%),
           url('images/hero-bg-web.jpg') 62% center / cover no-repeat;
       }
+      .hero-sub-desktop { display: none; }
+      .hero-sub-mobile { display: inline; }
     }
 
     /* TRUST BAR */
@@ -569,7 +572,10 @@
       </h1>
       <p class="hero-claim">Hilger Finanzen · unabhängige Beratung seit 2009</p>
       <p class="hero-sub">
-        Sie bekommen einen klaren Überblick über Ihre Absicherung: was wirklich passt, wo Lücken bestehen und welche Verträge zu Ihrer aktuellen Lebens- oder Unternehmenssituation gehören.
+        <span class="hero-sub-desktop">Sie bekommen einen klaren Überblick über Ihre Absicherung: was wirklich passt, wo
+        Lücken bestehen und welche Verträge zu Ihrer aktuellen Lebens- oder
+        Unternehmenssituation gehören.</span>
+        <span class="hero-sub-mobile">Sie sehen klar, was passt, was fehlt und welche Verträge wirklich zu Ihrer Situation gehören.</span>
       </p>
       <div class="hero-ctas">
         <a href="#kontakt" class="btn-primary">Klarheit über meine Absicherung bekommen</a>
