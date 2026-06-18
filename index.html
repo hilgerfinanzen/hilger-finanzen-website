@@ -156,6 +156,7 @@
     }
     .hero-sub { font-size: 1rem; line-height: 1.8; color: rgba(255,255,255,0.6); margin-bottom: 2.75rem; font-weight: var(--fw-light); max-width: 640px; }
     .hero-sub-mobile { display: none; }
+    .hero-h1-mobile, .hero-cta-mobile { display: none; }
     .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 4rem; }
     .hero-ctas .btn-primary, .hero-ctas .btn-outline { padding: 0.875rem 2rem; font-size: 0.9rem; }
     .hero-boxes { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: rgba(255,255,255,0.08); border-radius: 6px; overflow: hidden; }
@@ -186,11 +187,16 @@
       }
       .hero-inner { padding-top: 5.4rem; padding-bottom: 5.25rem; }
       .hero-tag { margin-bottom: 1.1rem; font-size: 0.6rem; line-height: 1.45; }
-      .hero-h1 { font-size: clamp(2rem, 9vw, 2.45rem); line-height: 1.07; margin-bottom: 1rem; max-width: 100%; }
-      .hero-claim { font-size: 1.14rem; line-height: 1.25; margin-bottom: 0.85rem; }
-      .hero-sub { font-size: 0.95rem; line-height: 1.5; margin-bottom: 1.35rem; max-width: 92%; }
-      .hero-ctas { margin-bottom: 2.4rem; }
-      .hero-ctas .btn-primary, .hero-ctas .btn-outline { width: 100%; justify-content: center; padding: 0.82rem 1rem; font-size: 0.88rem; }
+      .hero-h1 { font-size: clamp(2.15rem, 10vw, 2.7rem); line-height: 1.08; margin-bottom: 1rem; max-width: 100%; }
+      .hero-h1-desktop { display: none; }
+      .hero-h1-mobile { display: inline; }
+      .hero-claim { font-size: 1.1rem; line-height: 1.25; margin-bottom: 0.8rem; }
+      .hero-sub { font-size: 0.94rem; line-height: 1.48; margin-bottom: 1.2rem; max-width: 92%; }
+      .hero-ctas { margin-bottom: 2.2rem; }
+      .hero-ctas .btn-primary { width: 100%; justify-content: center; padding: 0.82rem 1rem; font-size: 0.88rem; }
+      .hero-ctas .btn-outline { display: none; }
+      .hero-cta-desktop { display: none; }
+      .hero-cta-mobile { display: inline; }
       .hero-sub-desktop { display: none; }
       .hero-sub-mobile { display: inline; }
       .whatsapp-float { right: 1.1rem; bottom: 5.1rem; }
@@ -575,19 +581,20 @@
     <div class="hero-inner">
       <div class="hero-tag">Versicherungsmaklerin für Privatpersonen und Unternehmen · Garching bei München · deutschlandweit</div>
       <h1 class="hero-h1">
-        Gute Absicherung bedeutet nicht,<br>
+        <span class="hero-h1-desktop">Gute Absicherung bedeutet nicht,<br>
         viele Verträge zu haben.<br>
-        Sondern die richtigen.
+        Sondern die richtigen.</span>
+        <span class="hero-h1-mobile">Gute Absicherung heißt:<br>die richtigen Verträge.</span>
       </h1>
       <p class="hero-claim">Hilger Finanzen · klare Absicherung seit 2009</p>
       <p class="hero-sub">
         <span class="hero-sub-desktop">Sie bekommen einen klaren Überblick über Ihre Absicherung: was wirklich passt, wo
         Lücken bestehen und welche Verträge zu Ihrer aktuellen Lebens- oder
         Unternehmenssituation gehören.</span>
-        <span class="hero-sub-mobile">Sie sehen klar, was passt, was fehlt und welche Verträge wirklich zu Ihrer Situation gehören.</span>
+        <span class="hero-sub-mobile">Sie sehen, was passt, was fehlt und was wirklich wichtig ist.</span>
       </p>
       <div class="hero-ctas">
-        <a href="#kontakt" class="btn-primary">Klarheit über meine Absicherung bekommen</a>
+        <a href="#kontakt" class="btn-primary"><span class="hero-cta-desktop">Klarheit über meine Absicherung bekommen</span><span class="hero-cta-mobile">Absicherung prüfen lassen</span></a>
         <a href="#vcheck" class="btn-outline">Bestehende Verträge prüfen lassen</a>
       </div>
       <div class="hero-boxes">
