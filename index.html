@@ -176,6 +176,13 @@
     }
     @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
     @media (max-width: 640px) { .hero-boxes { grid-template-columns: 1fr; } }
+    @media (max-width: 640px) {
+      #hero {
+        background:
+          linear-gradient(to bottom, rgba(11,29,46,0.72) 0%, rgba(11,29,46,0.68) 45%, rgba(11,29,46,0.86) 100%),
+          url('images/hero-bg-web.jpg') 62% center / cover no-repeat;
+      }
+    }
 
     /* TRUST BAR */
     #trust { background: var(--cream-dark); padding: 3.5rem 2rem; border-bottom: 1px solid rgba(0,0,0,0.06); }
@@ -560,7 +567,7 @@
         viele Verträge zu haben.<br>
         Sondern die richtigen.
       </h1>
-      <p class="hero-claim">Katarzyna Hilger – Unabhängige Versicherungsmaklerin seit 2009</p>
+      <p class="hero-claim">Hilger Finanzen · unabhängige Beratung seit 2009</p>
       <p class="hero-sub">
         Sie bekommen einen klaren Überblick über Ihre Absicherung: was wirklich passt, wo Lücken bestehen und welche Verträge zu Ihrer aktuellen Lebens- oder Unternehmenssituation gehören.
       </p>
