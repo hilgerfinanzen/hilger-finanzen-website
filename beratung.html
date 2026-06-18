@@ -560,6 +560,7 @@
           <button class="sug-btn" @click="send('Kfz-Versicherung')">Kfz-Versicherung</button>
           <button class="sug-btn" @click="send('Betriebshaftpflicht')">Betriebshaftpflicht</button>
           <button class="sug-btn" @click="send('Altersvorsorge')">Altersvorsorge</button>
+          <button class="sug-btn" @click="send('Immobilie / Kapitalanlage')">Immobilie / Kapitalanlage</button>
           <button class="sug-btn" @click="send('Termin buchen')">Termin buchen</button>
           <button class="sug-btn" @click="send('Kosten und Preise')">Kosten &amp; Preise</button>
         </div>
@@ -607,7 +608,7 @@
         },
         {
           text: 'In welchem Bereich haben Sie den größten Bedarf?',
-          opts: ['Haftpflicht', 'Krankenversicherung & Gesundheit', 'Berufsunfähigkeit', 'Altersvorsorge', 'Immobilien', 'Ich bin mir nicht sicher']
+          opts: ['Haftpflicht', 'Krankenversicherung & Gesundheit', 'Berufsunfähigkeit', 'Altersvorsorge', 'Immobilie / Kapitalanlage', 'Ich bin mir nicht sicher']
         },
         {
           text: 'Haben Sie bereits Versicherungen?',
@@ -642,10 +643,10 @@
         return this.path === 'unternehmen' ? this.questionsUnternehmen : this.questionsPrivat;
       },
       get current() {
-        if (this.step === 2 && this.path === 'privat' && (this.answers[1] || '').includes('Immobilien')) {
+        if (this.step === 2 && this.path === 'privat' && ((this.answers[1] || '').includes('Immobilie') || (this.answers[1] || '').includes('Kapitalanlage'))) {
           return {
-            text: 'Was möchten Sie mit der Immobilie tun?',
-            opts: ['Kaufen', 'Verkaufen', 'Vermieten', 'Ich bin noch unentschlossen']
+            text: 'Worum geht es bei Ihrer Immobilie?',
+            opts: ['Kaufen', 'Verkaufen', 'Als Kapitalanlage prüfen', 'Absicherung prüfen', 'Ich bin noch unentschlossen']
           };
         }
         return this.currentQuestions[this.step];
@@ -665,12 +666,13 @@
           if (a1.includes('Kranken')) return 'Ob private KV oder GKV-Ergänzung – bei Gesundheitsthemen ist eine individuelle Prüfung besonders wichtig.';
           if (a1.includes('Berufsunfähigkeit')) return 'Berufsunfähigkeit kann ein großes finanzielles Risiko sein. Wegen Gesundheitsfragen und Bedingungen sollte die Absicherung persönlich geprüft werden.';
           if (a1.includes('Altersvorsorge')) return 'Gute Altersvorsorge braucht eine Strategie, die zu Einkommen, Laufzeit, Sicherheit und Risikobereitschaft passt.';
-          if (a1.includes('Immobilien')) {
+          if (a1.includes('Immobilie') || a1.includes('Kapitalanlage')) {
             const a2 = this.answers[2] || '';
-            if (a2.includes('Kaufen')) return 'Sie möchten eine Immobilie kaufen – ich begleite Sie als lizenzierte Immobilienmaklerin durch den gesamten Prozess. Sprechen Sie mich einfach an!';
-            if (a2.includes('Verkaufen')) return 'Sie möchten Ihre Immobilie verkaufen – ich unterstütze Sie bei Bewertung, Vermarktung und einer professionellen Abwicklung.';
-            if (a2.includes('Vermieten')) return 'Sie möchten vermieten – ich unterstütze Sie bei der Mietersuche und sorge für einen reibungslosen Ablauf.';
-            return 'Als lizenzierte Immobilienmaklerin begleite ich Sie beim Kauf, Verkauf oder der Vermietung – persönlich und verlässlich. Sprechen Sie mich an!';
+            if (a2.includes('Kaufen')) return 'Wenn Sie eine Immobilie kaufen möchten, lohnt sich ein gemeinsamer Blick auf Finanzierung, Absicherung und Ihre langfristige Planung. So wird sichtbar, was zu Ihrer Situation passt.';
+            if (a2.includes('Verkaufen')) return 'Wenn Sie eine Immobilie verkaufen möchten, kann eine professionelle Einordnung und Begleitung sinnvoll sein. Gemeinsam klären wir, welche nächsten Schritte zu Ihrer Situation passen.';
+            if (a2.includes('Kapitalanlage')) return 'Immobilien können ein Baustein der langfristigen Vorsorge sein. Ob das für Sie sinnvoll ist, hängt von Zielen, Budget, Laufzeit und persönlicher Situation ab.';
+            if (a2.includes('Absicherung')) return 'Bei Immobilien geht es nicht nur um Kauf oder Verkauf, sondern auch um den passenden Schutz: Wohngebäude, Hausrat, Haftpflicht, Finanzierung und Risikovorsorge sollten zusammen betrachtet werden.';
+            return 'Wenn Immobilien bei Ihnen eine Rolle spielen, betrachten wir gemeinsam, ob Kauf, Verkauf, Kapitalanlage oder Absicherung im Vordergrund steht – passend zu Ihren Zielen und Möglichkeiten.';
           }
           return 'Ich empfehle einen umfassenden Check Ihrer bestehenden Absicherung. Sprechen Sie mich an – kostenlos und unverbindlich.';
         }
@@ -849,8 +851,8 @@
           return 'Für Unternehmen und Selbstständige kommen je nach Branche z.B. Betriebshaftpflicht, Berufshaftpflicht, Cyberversicherung, Rechtsschutz oder betriebliche Altersvorsorge infrage. Was ist Ihre Branche und wie groß ist Ihr Unternehmen?';
 
         // Immobilien
-        if (t.includes('immobilie') || t.includes('haus kauf') || t.includes('wohnung kauf') || t.includes('kaufen') || t.includes('verkaufen') || t.includes('vermieten'))
-          return 'Als lizenzierte Immobilienmaklerin begleite ich Sie beim Kauf, Verkauf oder der Vermietung — persönlich und verlässlich in der Region München. Sprechen Sie mich direkt an!';
+        if (t.includes('immobilie') || t.includes('immobilien') || t.includes('kapitalanlage') || t.includes('haus kauf') || t.includes('wohnung kauf') || t.includes('kaufen') || t.includes('verkaufen') || t.includes('vermieten'))
+          return 'Immobilien können bei Kauf, Verkauf, Finanzierung oder Vorsorge eine wichtige Rolle spielen. Sinnvoll ist eine individuelle Prüfung: Welche Ziele haben Sie, welche Risiken bestehen und welche Absicherung gehört dazu?';
 
         // Wechsel & Kündigung allgemein
         if (t.includes('kündigung') || t.includes('kündigen') || t.includes('wechsel') || t.includes('wechseln'))
