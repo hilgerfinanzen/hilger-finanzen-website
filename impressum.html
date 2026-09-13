@@ -65,6 +65,13 @@
     footer p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
     footer a { color: rgba(255,255,255,0.5); text-decoration: none; margin: 0 0.75rem; }
     footer a:hover { color: white; }
+    .page-content { overflow-wrap: anywhere; }
+    @media (max-width: 480px) {
+      nav { padding: 1rem; gap: 1rem; flex-wrap: wrap; }
+      .page-content { padding: 2rem 1.25rem 5rem; }
+      .kontakt-box { padding: 1.25rem; }
+      .page-h1 { overflow-wrap: anywhere; }
+    }
   </style>
 </head>
 <body>
@@ -86,7 +93,7 @@
   <div class="page-content">
 
     <div class="imp-block">
-      <h2>Angaben gemäß § 5 TMG</h2>
+      <h2>Angaben gemäß § 5 DDG</h2>
       <div class="kontakt-box">
         <p>
           <strong>Hilger Finanzen</strong><br>
@@ -111,9 +118,11 @@
       <h2>Berufsrechtliche Angaben</h2>
 
       <h3>Immobilienmaklerin</h3>
-      <p>Gemeldet bei der <strong style="color:var(--navy)">IHK München und Oberbayern</strong><br>
-      Balanstr. 55–59, 81541 München<br>
-      als Immobilienmaklerin mit einer Erlaubnis nach § 34c Absatz 1 Satz 1 Nummer 1 GewO.</p>
+      <p>Erlaubnis gemäß § 34c Abs. 1 Satz 1 Nr. 1 GewO.</p>
+      <p>Zuständige Erlaubnisbehörde:<br>
+      Industrie- und Handelskammer für München und Oberbayern<br>
+      Max-Joseph-Straße 2<br>80333 München<br>
+      <a href="https://www.ihk-muenchen.de" target="_blank" rel="noopener noreferrer">www.ihk-muenchen.de</a></p>
 
       <h3>Versicherungsmaklerin</h3>
       <p>Gemeldet bei der <strong style="color:var(--navy)">IHK München und Oberbayern</strong><br>
@@ -121,11 +130,11 @@
       als Versicherungsmaklerin mit einer Erlaubnis nach § 34d Abs. 1 der Gewerbeordnung.</p>
       <p><strong style="color:var(--navy)">Vermittlerregisternummer Versicherungsvermittlung:</strong> D-6YRS-045E9-58</p>
       <p>
-        Deutscher Industrie- und Handelskammertag (DIHK) e.V.<br>
+        Deutsche Industrie- und Handelskammer (DIHK)<br>
         Breite Straße 29, 10178 Berlin<br>
         Telefon: 0180 600 58 50<br>
         (Festnetzpreis 0,20 €/Anruf; Mobilfunkpreise maximal 0,60 €/Anruf)<br>
-        <a href="https://www.vermittlerregister.info" target="_blank" rel="noopener">www.vermittlerregister.info</a>
+        <a href="https://www.vermittlerregister.info" target="_blank" rel="noopener noreferrer">www.vermittlerregister.info</a>
       </p>
     </div>
 
@@ -136,14 +145,14 @@
         Postfach 08 06 32, 10006 Berlin<br>
         Tel.: 0800 3696000 (kostenfrei aus deutschen Telefonnetzen)<br>
         Fax: 0800 3699000 (kostenfrei aus deutschen Telefonnetzen)<br>
-        <a href="https://www.versicherungsombudsmann.de" target="_blank" rel="noopener">www.versicherungsombudsmann.de</a>
+        <a href="https://www.versicherungsombudsmann.de" target="_blank" rel="noopener noreferrer">www.versicherungsombudsmann.de</a>
       </p>
       <h3>Ombudsmann für die Private Kranken- und Pflegeversicherung</h3>
       <p>
         Postfach 06 02 22, 10052 Berlin<br>
         Tel.: 0800 2550444 (kostenfrei aus deutschen Telefonnetzen)<br>
         Fax: 030 20458931<br>
-        <a href="https://www.pkv-ombudsmann.de" target="_blank" rel="noopener">www.pkv-ombudsmann.de</a>
+        <a href="https://www.pkv-ombudsmann.de" target="_blank" rel="noopener noreferrer">www.pkv-ombudsmann.de</a>
       </p>
     </div>
 
@@ -154,10 +163,15 @@
     </div>
 
     <div class="imp-block">
-      <h2>Online-Streitbeilegung</h2>
-      <p>Die Europäische Kommission stellt eine Plattform zur außergerichtlichen Online-Streitbeilegung bereit:<br>
-      <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr/</a></p>
-      <p>Wir sind weder verpflichtet noch bereit, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+      <h2>Berufsrechtliche Regelungen</h2>
+      <ul>
+        <li>§ 34c Gewerbeordnung (GewO)</li>
+        <li>§ 34d Gewerbeordnung (GewO)</li>
+        <li>Makler- und Bauträgerverordnung (MaBV)</li>
+        <li>Versicherungsvermittlungsverordnung (VersVermV)</li>
+        <li>§§ 59 bis 68 Versicherungsvertragsgesetz (VVG)</li>
+      </ul>
+      <p>Die Vorschriften sind unter <a href="https://www.gesetze-im-internet.de" target="_blank" rel="noopener noreferrer">www.gesetze-im-internet.de</a> abrufbar.</p>
     </div>
 
   </div>
@@ -172,7 +186,7 @@
   </footer>
 
   <!-- WHATSAPP FLOATING BUTTON -->
-  <a href="https://wa.me/4917662633104" target="_blank" rel="noopener" title="WhatsApp schreiben"
+  <a href="https://wa.me/4917662633104" target="_blank" rel="noopener noreferrer" title="WhatsApp schreiben"
     style="position:fixed;bottom:1.75rem;right:1.75rem;z-index:999;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,0.45);transition:transform 0.2s,box-shadow 0.2s;"
     onmouseover="this.style.transform='scale(1.1)';this.style.boxShadow='0 6px 24px rgba(37,211,102,0.55)'"
     onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 4px 16px rgba(37,211,102,0.45)'">

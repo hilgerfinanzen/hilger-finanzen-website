@@ -236,7 +236,7 @@
       transition: all 0.25s; color: var(--muted); font-family: 'DM Sans', sans-serif;
     }
     .tab-btn.active { background: white; color: var(--navy); box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
-    .srv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 1.5rem; }
+    .srv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px),1fr)); gap: 1.5rem; }
     .srv-card {
       background: white; border-radius: 4px; padding: 2rem 1.75rem;
       position: relative; overflow: hidden; transition: all 0.3s; cursor: pointer;
@@ -468,22 +468,7 @@
     .form-success { display: none; text-align: center; padding: 2rem; }
     .form-success.show { display: block; }
 
-    /* COOKIE BANNER */
-    #cookie-banner {
-      position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
-      background: var(--navy); border-top: 2px solid var(--copper);
-      padding: 1rem 2rem; display: flex; align-items: center;
-      justify-content: space-between; gap: 1.5rem; flex-wrap: wrap;
-    }
-    #cookie-banner p { font-size: 0.8rem; color: rgba(255,255,255,0.65); line-height: 1.6; margin: 0; max-width: 680px; font-weight: var(--fw-light); }
-    #cookie-banner a { color: var(--copper-light); text-decoration: none; }
-    #cookie-banner a:hover { text-decoration: underline; }
-    .cookie-btns { display: flex; gap: 0.75rem; flex-shrink: 0; }
-    .cookie-accept { background: var(--copper); color: white; border: none; padding: 0.5rem 1.25rem; border-radius: 2px; font-size: 0.8rem; font-family: inherit; cursor: pointer; font-weight: 500; transition: background 0.2s; }
-    .cookie-accept:hover { background: var(--copper-light); }
-    .cookie-decline { background: transparent; color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.2); padding: 0.5rem 1.25rem; border-radius: 2px; font-size: 0.8rem; font-family: inherit; cursor: pointer; transition: all 0.2s; }
-    .cookie-decline:hover { color: white; border-color: rgba(255,255,255,0.4); }
-
+    [hidden] { display: none !important; }
     /* MAPS PLACEHOLDER */
     #maps-placeholder { height: 200px; background: var(--cream-dark); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.75rem; }
     #maps-placeholder p { font-size: 0.8rem; color: var(--muted); text-align: center; max-width: 260px; line-height: 1.5; margin: 0; }
@@ -540,6 +525,10 @@
         white-space: normal;
         line-height: 1.35;
       }
+    }
+    @media (max-width: 360px) {
+      .vcheck-wrap > * { min-width: 0; overflow-wrap: anywhere; }
+      .btn-primary { max-width: 100%; white-space: normal; text-align: center; }
     }
   </style>
 </head>
@@ -604,7 +593,7 @@
         </a>
         <a class="hero-box hero-box-link" href="#leistungen" @click="tab = 'gewerbe'">
           <div class="hero-box-label">Für Unternehmen</div>
-          <div class="hero-box-text">Mehr Übersicht, klare Zuständigkeit und Verträge, die im Schadenfall greifen.</div>
+          <div class="hero-box-text">Mehr Übersicht, klare Zuständigkeit und Verträge, deren Leistungen und Bedingungen geprüft werden.</div>
         </a>
         <div class="hero-box">
           <div class="hero-box-label">Bestandskunden</div>
@@ -642,7 +631,7 @@
         <div class="reveal">
           <p style="font-size: 1rem; line-height: 1.8; color: rgba(255,255,255,0.6); font-weight: var(--fw-light); margin-bottom: 1.75rem;">
             Als Geschäftsführer wissen Sie: Im Schadenfall zählt nicht, was im Angebot stand – sondern was im Vertrag steht.<br><br>
-            Sie gewinnen Struktur in Ihrem Versicherungsbestand und wissen, welche Verträge im Ernstfall wirklich greifen. Zuständigkeiten werden klar, Lücken sichtbar und unnötige Doppelungen vermieden.<br><br>
+            Sie gewinnen Struktur in Ihrem Versicherungsbestand und erfahren, welche Leistungen und Bedingungen Ihre Verträge vorsehen. Zuständigkeiten werden geklärt, erkennbare Lücken und mögliche Doppelungen aufgezeigt.<br><br>
             Keine Hotlines. Kein Weiterverbinden. Kein Suchen, wer zuständig ist.
           </p>
           <a href="#kontakt" class="btn-primary" style="display: inline-block;">Unternehmensschutz prüfen lassen</a>
@@ -856,7 +845,7 @@
               <div class="usp-d">Wenn sich Ihr Leben, Ihr Unternehmen oder Ihre Risiken verändern, wird Ihre Absicherung neu eingeordnet. So bleibt Ihr Schutz nicht irgendwann von gestern.</div>
             </div>
           </div>
-          <p class="reveal" style="font-size: 0.9rem; line-height: 1.75; color: var(--muted); font-weight: var(--fw-light); margin-bottom: 1.5rem; max-width: 480px;">Das Ergebnis: Sie wissen, was Sie haben. Keine Lücken, die Sie nicht kennen. Keine Überraschungen, wenn es darauf ankommt.</p>
+          <p class="reveal" style="font-size: 0.9rem; line-height: 1.75; color: var(--muted); font-weight: var(--fw-light); margin-bottom: 1.5rem; max-width: 480px;">Ich prüfe die Leistungen und Bedingungen Ihrer Verträge, um erkennbare Lücken transparent aufzuzeigen. So können Sie Ihre Absicherung besser einschätzen.</p>
           <a href="#kontakt" class="btn-primary reveal" style="display:inline-block">Erstes Gespräch vereinbaren</a>
         </div>
 
@@ -965,7 +954,7 @@
             <div class="app-feat"><div class="app-feat-icon">💎</div><div class="app-feat-t">Wertsachen einfügen & verwalten</div></div>
             <div class="app-feat"><div class="app-feat-icon">✏️</div><div class="app-feat-t">Adresse & Daten ändern</div></div>
           </div>
-          <a href="https://login.myinsure.de/start/?inviteKey=H7Wbj7Zv" target="_blank" rel="noopener" class="btn-primary reveal">Jetzt registrieren →</a>
+          <a href="https://login.myinsure.de/start/?inviteKey=H7Wbj7Zv" target="_blank" rel="noopener noreferrer" class="btn-primary reveal">Jetzt registrieren →</a>
         </div>
         <div class="reveal">
           <div class="app-qr-card">
@@ -973,7 +962,7 @@
             <div class="app-qr-sub">Ihr digitaler Versicherungsordner</div>
             <img src="images/qrcode-myinsure.png" alt="QR-Code myinsure App" width="180" height="180">
             <div class="app-qr-label">QR-Code scannen und<br>direkt loslegen</div>
-            <a href="https://login.myinsure.de/start/?inviteKey=H7Wbj7Zv" target="_blank" rel="noopener" class="btn-app">App öffnen</a>
+            <a href="https://login.myinsure.de/start/?inviteKey=H7Wbj7Zv" target="_blank" rel="noopener noreferrer" class="btn-app">App öffnen</a>
           </div>
         </div>
       </div>
@@ -1114,7 +1103,7 @@
       <h2 class="s-title reveal">Lassen Sie Ihre Absicherung prüfen</h2>
       <div class="kontakt-grid">
         <div>
-          <form id="contactForm" action="https://formspree.io/f/mzdypjyg" method="POST">
+          <form id="contactForm" aria-describedby="form-privacy" action="https://formspree.io/f/mzdypjyg" method="POST">
             <input type="hidden" name="_subject" value="Neue Anfrage über hilger-finanzen.de">
             <input type="hidden" name="_language" value="de">
             <div class="f-row">
@@ -1135,6 +1124,7 @@
               </select>
             </div>
             <div class="f-group"><label class="f-label">Ihr Anliegen</label><textarea name="nachricht" class="f-ta" placeholder="Kurz beschreiben, wobei wir Ihnen helfen können…"></textarea></div>
+            <p id="form-privacy" style="font-size:.875rem;line-height:1.65;margin:0 0 1rem;color:var(--text)">Bitte übermitteln Sie über dieses Formular keine Gesundheitsdaten, Bankdaten, Vertrags- oder Schadennummern und keine vertraulichen Dokumente.<br>Informationen zur Verarbeitung Ihrer Angaben: <a href="datenschutz.html" style="color:var(--copper);text-decoration:underline">Datenschutzerklärung</a>.</p>
             <button type="submit" class="btn-primary" style="width:100%;padding:.875rem;font-size:.9rem">Anfrage absenden</button>
           </form>
           <div class="form-success" id="formSuccess">
@@ -1149,19 +1139,20 @@
           <div class="k-det"><div class="k-det-icon">📞</div><span><a href="tel:+498938078946" style="color:inherit;text-decoration:none">089 / 38078946</a></span></div>
           <div class="k-det"><div class="k-det-icon">📱</div><span><a href="tel:+4917662633104" style="color:inherit;text-decoration:none">0176 / 62633104</a></span></div>
 
-          <div class="k-det"><div class="k-det-icon">💬</div><span><a href="https://wa.me/4917662633104" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">WhatsApp schreiben</a></span></div>
+          <div class="k-det"><div class="k-det-icon">💬</div><span><a href="https://wa.me/4917662633104" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none">WhatsApp schreiben</a></span></div>
           <div class="k-det"><div class="k-det-icon">✉️</div><span><a href="mailto:info@hilger-finanzen.de" style="color:inherit;text-decoration:none">info@hilger-finanzen.de</a></span></div>
           <div class="k-det"><div class="k-det-icon">📍</div><span>Hilger Finanzen<br>Am Mühlbach 2A<br>85748 Garching b. München</span></div>
           <div style="margin-top:1.25rem;border-radius:6px;overflow:hidden;border:1px solid rgba(0,0,0,0.08);">
             <div id="maps-placeholder">
-              <p>Google Maps wird erst nach Ihrer Einwilligung geladen.</p>
-              <button class="maps-load-btn" onclick="loadMaps()">Karte jetzt laden</button>
+              <p>Mit „Karte jetzt laden“ willigen Sie in die Datenverarbeitung durch Google ein (auch in den USA). <a href="datenschutz.html">Datenschutz</a>.</p>
+              <button class="maps-load-btn" type="button" onclick="loadMaps()">Karte jetzt laden</button>
             </div>
             <iframe id="maps-iframe" style="display:none;border:0;width:100%;height:200px;"
               data-src="https://www.google.com/maps?q=Am+M%C3%BChlbach+2a,+85748+Garching+bei+M%C3%BCnchen&output=embed"
               allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
               title="Hilger Finanzen – Am Mühlbach 2a, Garching bei München">
             </iframe>
+            <button id="maps-disable" type="button" class="maps-load-btn" hidden onclick="unloadMaps()">Karte deaktivieren</button>
           </div>
           <div class="k-note">
             <div class="k-note-tag">Erstes Gespräch</div>
@@ -1221,23 +1212,16 @@
       const iframe = document.getElementById('maps-iframe');
       if (placeholder) placeholder.style.display = 'none';
       if (iframe) { iframe.src = iframe.dataset.src; iframe.style.display = 'block'; }
+      document.getElementById('maps-disable').hidden = false;
     }
-    function cookieAccept() {
-      localStorage.setItem('hf-consent', 'accepted');
-      document.getElementById('cookie-banner').style.display = 'none';
+    function unloadMaps() {
+      const iframe = document.getElementById('maps-iframe');
+      iframe.removeAttribute('src');
+      iframe.style.display = 'none';
+      document.getElementById('maps-placeholder').style.display = 'flex';
+      document.getElementById('maps-disable').hidden = true;
     }
-    function cookieDecline() {
-      localStorage.setItem('hf-consent', 'declined');
-      document.getElementById('cookie-banner').style.display = 'none';
-    }
-    document.addEventListener('DOMContentLoaded', function() {
-      const consent = localStorage.getItem('hf-consent');
-      if (consent === 'accepted' || consent === 'declined') {
-        document.getElementById('cookie-banner').style.display = 'none';
-      }
-    });
-
-    // Nav scroll effect
+// Nav scroll effect
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 50);
@@ -1336,17 +1320,8 @@
     });
   </script>
 
-  <!-- COOKIE BANNER -->
-  <div id="cookie-banner">
-    <p>Diese Website kann auf Ihren Wunsch <strong style="color:white;font-weight:500;">Google Maps</strong> laden. Dabei werden Daten an Google-Server in den USA übertragen. Mit „Akzeptieren" stimmen Sie dem zu. Details in unserer <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
-    <div class="cookie-btns">
-      <button class="cookie-decline" onclick="cookieDecline()">Ablehnen</button>
-      <button class="cookie-accept" onclick="cookieAccept()">Akzeptieren</button>
-    </div>
-  </div>
-
   <!-- WHATSAPP FLOATING BUTTON -->
-  <a href="https://wa.me/4917662633104" target="_blank" rel="noopener" title="WhatsApp schreiben"
+  <a href="https://wa.me/4917662633104" target="_blank" rel="noopener noreferrer" title="WhatsApp schreiben"
     style="position:fixed;bottom:1.75rem;right:1.75rem;z-index:999;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,0.45);transition:transform 0.2s,box-shadow 0.2s;"
     onmouseover="this.style.transform='scale(1.1)';this.style.boxShadow='0 6px 24px rgba(37,211,102,0.55)'"
     onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 4px 16px rgba(37,211,102,0.45)'">
