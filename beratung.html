@@ -13,7 +13,6 @@
   <meta property="og:type" content="website">
   <meta property="og:locale" content="de_DE">
   <link rel="stylesheet" href="fonts/fonts.css">
-  <script defer src="js/alpine.min.js"></script>
   <style>
     :root {
       --navy: #0B1D2E;
@@ -197,6 +196,9 @@
       font-size: 0.82rem; color: rgba(255,255,255,0.65);
       cursor: pointer; transition: all 0.2s;
     }
+    .check-opt { width: 100%; text-align: left; font-family: inherit; }
+    [hidden] { display: none !important; }
+    .check-opt:focus-visible { outline: 2px solid var(--copper-light); outline-offset: 3px; }
     .check-opt:hover { border-color: var(--copper); color: white; }
     .check-opt.is-selected { border-color: var(--copper); color: white; background: rgba(26,107,184,0.07); }
     .check-radio {
@@ -366,7 +368,7 @@
     .footer-text a:hover { text-decoration: underline; }
   </style>
 </head>
-<body x-data="{ menuOpen: false }">
+<body>
 
   <nav>
     <a href="index.html" class="nav-logo">
@@ -379,18 +381,18 @@
       <li><a href="index.html#kontakt">Kontakt</a></li>
     </ul>
     <a href="#termin" class="btn-primary nav-cta">Termin buchen</a>
-    <div class="nav-hamburger" @click="menuOpen = true" role="button" aria-label="Menü öffnen" tabindex="0" @keydown.enter="menuOpen = true">
+    <div class="nav-hamburger" role="button" aria-label="Menü öffnen" tabindex="0">
       <span></span><span></span><span></span>
     </div>
   </nav>
 
-  <div class="mobile-menu" x-show="menuOpen" x-transition>
-    <button class="mobile-close" @click="menuOpen = false">✕</button>
-    <a href="index.html#leistungen" @click="menuOpen = false">Leistungen</a>
-    <a href="beratung.html"         @click="menuOpen = false">Online-Beratung</a>
-    <a href="index.html#usp"        @click="menuOpen = false">Über uns</a>
-    <a href="index.html#kontakt"    @click="menuOpen = false">Kontakt</a>
-    <a href="#termin" @click="menuOpen = false" class="btn-primary btn-mobile-cta">Termin buchen</a>
+  <div class="mobile-menu" x-transition>
+    <button class="mobile-close">✕</button>
+    <a href="index.html#leistungen">Leistungen</a>
+    <a href="beratung.html">Online-Beratung</a>
+    <a href="index.html#usp">Über uns</a>
+    <a href="index.html#kontakt">Kontakt</a>
+    <a href="#termin" class="btn-primary btn-mobile-cta">Termin buchen</a>
   </div>
 
   <!-- HERO -->
@@ -417,46 +419,27 @@
     <!-- LINKE SPALTE -->
     <div class="col-left">
       <!-- SCHNELLCHECK -->
-      <div x-data="schnellcheck()">
+      <div id="schnellcheck">
         <div class="s-tag">Schritt 1</div>
         <h2 class="s-title">Ihr persönlicher<br><em>Bedarfs-Schnellcheck</em></h2>
 
-        <!-- Fortschrittsbalken -->
-        <div class="progress-track" x-show="!done">
-          <template x-for="(q, i) in currentQuestions" :key="i">
-            <div class="prog-seg" :class="{ done: i < step, active: i === step }"></div>
-          </template>
-        </div>
-
-        <!-- Fragen -->
-        <div x-show="!done">
-          <div class="check-step-label" x-text="'Frage ' + (step + 1) + ' von ' + currentQuestions.length"></div>
-          <div class="check-question" x-text="current.text"></div>
-          <div class="check-options">
-            <template x-for="opt in current.opts" :key="opt">
-              <div class="check-opt" :class="{ 'is-selected': selected === opt }" @click="select(opt)">
-                <div class="check-radio"></div>
-                <span x-text="opt"></span>
-              </div>
-            </template>
-          </div>
+        <noscript><p>Bitte aktivieren Sie JavaScript für den Schnellcheck. Alternativ erreichen Sie uns unter <a href="tel:+498938078946">089 / 38078946</a>.</p></noscript>
+        <div class="progress-track" id="check-progress" aria-hidden="true"></div>
+        <div id="check-questions">
+          <div class="check-step-label" id="check-step-label"></div>
+          <div class="check-question" id="check-question" tabindex="-1"></div>
+          <div class="check-options" id="check-options" role="group" aria-labelledby="check-question"></div>
           <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap">
-            <button class="btn-weiter" @click="next()" :disabled="!selected">
-              <span x-text="step < currentQuestions.length - 1 ? 'Weiter →' : 'Auswertung anzeigen →'"></span>
-            </button>
-            <button x-show="step > 0" @click="back()"
-              style="background:none;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.55);padding:0.75rem 1.25rem;border-radius:2px;font-size:0.82rem;cursor:pointer;font-family:inherit;transition:all 0.2s"
-              onmouseover="this.style.borderColor='rgba(255,255,255,0.5)';this.style.color='white'"
-              onmouseout="this.style.borderColor='rgba(255,255,255,0.2)';this.style.color='rgba(255,255,255,0.55)'">
-              ← Zurück
-            </button>
+            <button type="button" class="btn-weiter" id="check-next" disabled>Weiter →</button>
+            <button type="button" id="check-back" hidden
+              style="background:none;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.55);padding:0.75rem 1.25rem;border-radius:2px;font-size:0.82rem;cursor:pointer;font-family:inherit">← Zurück</button>
           </div>
         </div>
 
         <!-- Ergebnis -->
-        <div x-show="done" x-transition>
+        <div id="check-result" hidden>
           <div class="check-result">
-            <div class="check-result-label">Ihre erste Orientierung</div>
+            <div class="check-result-label" id="check-result-heading" tabindex="-1">Ihre erste Orientierung</div>
 
             <!-- Advisor photo + name -->
             <div class="check-result-advisor">
@@ -467,12 +450,12 @@
               </div>
             </div>
 
-            <p class="check-result-text" x-text="resultText"></p>
+            <p class="check-result-text" id="check-result-text"></p>
 
             <!-- Urgency box (only shown when "Sofort" selected) -->
-            <div class="check-result-urgent" x-show="urgencyText" x-transition>
+            <div class="check-result-urgent" id="check-urgent" hidden>
               <span style="font-size:1rem;">⚡</span>
-              <span x-text="urgencyText"></span>
+              <span id="check-urgency-text"></span>
             </div>
 
             <!-- Contact buttons -->
@@ -487,7 +470,7 @@
 
             <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:1.25rem">
               <a href="#termin" class="btn-weiter" style="display:inline-block;text-decoration:none;">Jetzt Termin buchen →</a>
-              <button @click="reset()"
+              <button type="button" id="check-reset"
                 style="background:none;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.55);padding:0.75rem 1.25rem;border-radius:2px;font-size:0.82rem;cursor:pointer;font-family:inherit">
                 ↺ Neu starten
               </button>
@@ -536,7 +519,7 @@
 
     <!-- RECHTE SPALTE: CHAT -->
     <div class="col-right" id="chat">
-      <div x-data="chatbot()" style="display:contents">
+      <div style="display:contents">
         <!-- Header -->
         <div class="chat-header-bar">
           <div class="chat-avatar">KI</div>
@@ -547,22 +530,17 @@
         </div>
 
         <!-- Nachrichten -->
-        <div class="chat-messages" x-ref="feed">
-          <template x-for="(msg, i) in messages" :key="i">
-            <div class="msg-wrap" :class="msg.from">
-              <div class="msg-bubble" x-text="msg.text"></div>
-            </div>
-          </template>
+        <div class="chat-messages">
         </div>
 
         <!-- Schnellauswahl -->
         <div class="chat-suggestions">
-          <button class="sug-btn" @click="send('Kfz-Versicherung')">Kfz-Versicherung</button>
-          <button class="sug-btn" @click="send('Betriebshaftpflicht')">Betriebshaftpflicht</button>
-          <button class="sug-btn" @click="send('Altersvorsorge')">Altersvorsorge</button>
-          <button class="sug-btn" @click="send('Immobilie / Kapitalanlage')">Immobilie / Kapitalanlage</button>
-          <button class="sug-btn" @click="send('Termin buchen')">Termin buchen</button>
-          <button class="sug-btn" @click="send('Kosten und Preise')">Kosten &amp; Preise</button>
+          <button class="sug-btn">Kfz-Versicherung</button>
+          <button class="sug-btn">Betriebshaftpflicht</button>
+          <button class="sug-btn">Altersvorsorge</button>
+          <button class="sug-btn">Immobilie / Kapitalanlage</button>
+          <button class="sug-btn">Termin buchen</button>
+          <button class="sug-btn">Kosten &amp; Preise</button>
         </div>
 
         <!-- Eingabe -->
@@ -571,10 +549,8 @@
             class="chat-input"
             type="text"
             placeholder="Ihre Frage..."
-            x-model="input"
-            @keydown.enter="send()"
           >
-          <button class="chat-send-btn" @click="send()" aria-label="Nachricht senden">→</button>
+          <button class="chat-send-btn" aria-label="Nachricht senden">→</button>
         </div>
         <div class="chat-privacy-note">
           Bitte keine Gesundheitsdaten, Vertragsnummern, Bankdaten oder vollständigen Adressen im Chat eingeben. Für persönliche Fälle nutzen Sie bitte Telefon, WhatsApp oder das Kontaktformular.
@@ -719,6 +695,64 @@
       }
     };
   }
+
+  // Explicit DOM updates work with the existing CSP; no expression evaluation required.
+  function setupSchnellcheck() {
+    const root = document.getElementById('schnellcheck');
+    if (!root) return;
+    const state = schnellcheck();
+    const el = (id) => root.querySelector('#check-' + id);
+    const render = (moveFocus = false) => {
+      el('progress').hidden = state.done;
+      el('questions').hidden = state.done;
+      el('result').hidden = !state.done;
+      if (state.done) {
+        el('result-text').textContent = state.resultText;
+        el('urgency-text').textContent = state.urgencyText;
+        el('urgent').hidden = !state.urgencyText;
+        if (moveFocus) el('result-heading').focus({ preventScroll: true });
+        return;
+      }
+      el('step-label').textContent = 'Frage ' + (state.step + 1) + ' von ' + state.currentQuestions.length;
+      el('question').textContent = state.current.text;
+      el('progress').replaceChildren(...state.currentQuestions.map((_, i) => {
+        const segment = document.createElement('div');
+        segment.className = 'prog-seg' + (i < state.step ? ' done' : i === state.step ? ' active' : '');
+        return segment;
+      }));
+      el('options').replaceChildren(...state.current.opts.map((option) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'check-opt' + (state.selected === option ? ' is-selected' : '');
+        button.setAttribute('aria-pressed', String(state.selected === option));
+        const radio = document.createElement('span');
+        radio.className = 'check-radio';
+        radio.setAttribute('aria-hidden', 'true');
+        const label = document.createElement('span');
+        label.textContent = option;
+        button.append(radio, label);
+        button.addEventListener('click', () => {
+          state.select(option);
+          el('options').querySelectorAll('button').forEach((item) => {
+            const active = item === button;
+            item.classList.toggle('is-selected', active);
+            item.setAttribute('aria-pressed', String(active));
+          });
+          el('next').disabled = false;
+        });
+        return button;
+      }));
+      el('next').disabled = !state.selected;
+      el('next').textContent = state.step < state.currentQuestions.length - 1 ? 'Weiter →' : 'Auswertung anzeigen →';
+      el('back').hidden = state.step === 0;
+      if (moveFocus) el('question').focus({ preventScroll: true });
+    };
+    el('next').addEventListener('click', () => { state.next(); render(true); });
+    el('back').addEventListener('click', () => { state.back(); render(true); });
+    el('reset').addEventListener('click', () => { state.reset(); render(true); });
+    render();
+  }
+  document.addEventListener('DOMContentLoaded', setupSchnellcheck);
 
   function terminbuchung_unused() {
     return {
