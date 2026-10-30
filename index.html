@@ -147,8 +147,8 @@
     }
     .hero-tag::before { content: ''; display: block; width: 24px; height: 1px; background: var(--copper-light); }
     .hero-h1 {
-      font-size: clamp(2.5rem, 5vw, 4.25rem); font-weight: 400; line-height: 1.1;
-      color: white; margin-bottom: 1.5rem; letter-spacing: -0.01em; max-width: 780px;
+      font-size: clamp(2.5rem, 4.4vw, 3.6rem); font-weight: 400; line-height: 1.1;
+      color: white; margin-bottom: 1.5rem; letter-spacing: -0.01em; max-width: 820px;
     }
     .hero-claim {
       font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 400;
@@ -159,7 +159,7 @@
     .hero-h1-mobile, .hero-cta-mobile { display: none; }
     .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 4rem; }
     .hero-ctas .btn-primary, .hero-ctas .btn-outline { padding: 0.875rem 2rem; font-size: 0.9rem; }
-    .hero-boxes { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: rgba(255,255,255,0.08); border-radius: 6px; overflow: hidden; }
+    .hero-boxes { display: grid; grid-template-columns: repeat(2,1fr); max-width: 720px; gap: 1px; background: rgba(255,255,255,0.08); border-radius: 6px; overflow: hidden; }
     .hero-box {
       background: rgba(255,255,255,0.04); padding: 1.75rem 1.5rem;
       transition: background 0.2s;
@@ -177,7 +177,7 @@
       animation: bounce 2s ease-in-out infinite;
     }
     @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
-    @media (max-width: 640px) { .hero-boxes { grid-template-columns: 1fr; } }
+    @media (max-width: 640px) { .hero-boxes { grid-template-columns: 1fr; } .beraterin-img { max-height: 440px; object-fit: cover; object-position: center 20%; } }
     @media (max-width: 640px) {
       #hero {
         min-height: 100svh;
@@ -355,8 +355,8 @@
     .beraterin-titel { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--copper); font-weight: 500; margin-bottom: 1.75rem; }
     .beraterin-text { font-size: 0.95rem; line-height: 1.85; color: var(--muted); font-weight: var(--fw-light); margin-bottom: 1.25rem; }
     .beraterin-punkte { list-style: none; margin: 1.5rem 0 2rem; display: flex; flex-direction: column; gap: 0.6rem; }
-    .beraterin-punkte li { display: flex; align-items: center; gap: 0.75rem; font-size: 0.875rem; color: var(--text); }
-    .beraterin-punkte li::before { content: ''; display: block; width: 6px; height: 6px; border-radius: 50%; background: var(--copper); flex-shrink: 0; }
+    .beraterin-punkte li { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.875rem; color: var(--text); }
+    .beraterin-punkte li::before { content: ''; display: block; margin-top: 0.55em; width: 6px; height: 6px; border-radius: 50%; background: var(--copper); flex-shrink: 0; }
     @media (max-width: 960px) { .beraterin-wrap { grid-template-columns: 1fr; gap: 3rem; } .beraterin-badge { bottom: 1rem; right: 1rem; } }
 
     /* VERSICHERUNGSCHECK */
@@ -542,13 +542,12 @@
     <ul class="nav-links">
       <li><a href="#leistungen">Leistungen</a></li>
       <li><a href="altersvorsorge.html">Altersvorsorge</a></li>
-      <li><a href="beratung.html">Online-Beratung</a></li>
-      <li><a href="#usp">Über uns</a></li>
-      <li><a href="#app">App</a></li>
       <li><a href="#vcheck">Versicherungscheck</a></li>
+      <li><a href="#beraterin">Über mich</a></li>
+      <li><a href="beratung.html">Online-Beratung</a></li>
       <li><a href="#kontakt">Kontakt</a></li>
     </ul>
-    <a href="#kontakt" class="btn-primary nav-cta">Gespräch vereinbaren</a>
+    <a href="#kontakt" class="btn-primary nav-cta">Check anfragen</a>
     <div class="nav-hamburger" @click="menuOpen = true">
       <span></span><span></span><span></span>
     </div>
@@ -559,10 +558,11 @@
     <button class="mobile-close" @click="menuOpen = false">✕</button>
     <a href="#leistungen" @click="menuOpen = false">Leistungen</a>
     <a href="altersvorsorge.html" @click="menuOpen = false">Altersvorsorge</a>
+    <a href="#vcheck" @click="menuOpen = false">Versicherungscheck</a>
+    <a href="#beraterin" @click="menuOpen = false">Über mich</a>
     <a href="beratung.html" @click="menuOpen = false">Online-Beratung</a>
-    <a href="#usp"        @click="menuOpen = false">Über uns</a>
-    <a href="#kontakt"    @click="menuOpen = false">Kontakt</a>
-    <a href="#kontakt"    @click="menuOpen = false" class="btn-primary" style="font-size:1rem;padding:.875rem 2rem">Beratung buchen</a>
+    <a href="#kontakt" @click="menuOpen = false">Kontakt</a>
+    <a href="#kontakt" @click="menuOpen = false" class="btn-primary" style="font-size:1rem;padding:.875rem 2rem">Kostenlosen Check anfragen</a>
   </div>
 
   <!-- HERO -->
@@ -570,7 +570,7 @@
     <div class="hero-pattern"></div>
     <div class="hero-glow"></div>
     <div class="hero-inner">
-      <div class="hero-tag">Versicherungsmaklerin für Privatpersonen und Unternehmen · Garching bei München · deutschlandweit</div>
+      <div class="hero-tag">Versicherungsmaklerin · Garching bei München · deutschlandweit</div>
       <h1 class="hero-h1">
         <span class="hero-h1-desktop">Gute Absicherung bedeutet nicht,<br>
         viele Verträge zu haben.<br>
@@ -579,28 +579,23 @@
       </h1>
       <p class="hero-claim">Hilger Finanzen · klare Absicherung seit 2009</p>
       <p class="hero-sub">
-        <span class="hero-sub-desktop">Sie bekommen einen klaren Überblick über Ihre Absicherung: was wirklich passt, wo
-        Lücken bestehen und welche Verträge zu Ihrer aktuellen Lebens- oder
-        Unternehmenssituation gehören.</span>
-        <span class="hero-sub-mobile">Sie sehen, was passt, was fehlt und was wirklich wichtig ist.</span>
+        <span class="hero-sub-desktop">Sie wissen danach genau, wofür Sie zahlen, was im Ernstfall greift
+        und wo Sie sparen können. Unabhängig und persönlich.</span>
+        <span class="hero-sub-mobile">Wissen, wofür Sie zahlen – und was im Ernstfall greift.</span>
       </p>
       <div class="hero-ctas">
-        <a href="#kontakt" class="btn-primary"><span class="hero-cta-desktop">Klarheit über meine Absicherung bekommen</span><span class="hero-cta-mobile">Absicherung prüfen lassen</span></a>
-        <a href="#vcheck" class="btn-outline">Bestehende Verträge prüfen lassen</a>
+        <a href="#kontakt" class="btn-primary"><span class="hero-cta-desktop">Kostenlosen Check anfragen</span><span class="hero-cta-mobile">Kostenlosen Check anfragen</span></a>
+        <a href="https://wa.me/4917662633104" target="_blank" rel="noopener noreferrer" class="btn-outline">WhatsApp schreiben</a>
       </div>
       <div class="hero-boxes">
         <a class="hero-box hero-box-link" href="#leistungen" @click="tab = 'privat'">
           <div class="hero-box-label">Für Privatkunden</div>
-          <div class="hero-box-text">Sie sehen, wofür Sie zahlen – und ob Ihr Schutz im Ernstfall wirklich reicht.</div>
+          <div class="hero-box-text">Wissen, wofür Sie zahlen – und ob es im Ernstfall reicht.</div>
         </a>
         <a class="hero-box hero-box-link" href="#leistungen" @click="tab = 'gewerbe'">
           <div class="hero-box-label">Für Unternehmen</div>
-          <div class="hero-box-text">Mehr Übersicht, klare Zuständigkeit und Verträge, deren Leistungen und Bedingungen geprüft werden.</div>
+          <div class="hero-box-text">Alle Verträge in einer Hand. Eine Ansprechpartnerin statt vier.</div>
         </a>
-        <div class="hero-box">
-          <div class="hero-box-label">Bestandskunden</div>
-          <div class="hero-box-text">Bestehende Verträge werden verständlich geprüft – ohne unnötige Neuabschlüsse.</div>
-        </div>
       </div>
     </div>
     <div class="hero-scroll">
@@ -621,26 +616,6 @@
       <div class="reveal d3"><div class="trust-num" style="font-size:2.5rem;font-style:normal;">§34d</div><div class="trust-lbl">Zugelassene Maklerin</div></div>
     </div>
   </div>
-
-  <!-- FIRMENKUNDEN TEASER -->
-  <section id="firmenkunden" style="background: var(--navy); padding: 4rem 2rem;">
-    <div class="s-inner">
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;" class="firmenkunden-grid">
-        <div>
-          <div class="s-tag light reveal">Für Unternehmen</div>
-          <h2 class="s-title light reveal">Ihre Verträge –<br><em>strukturiert,<br>in einer Hand.</em></h2>
-        </div>
-        <div class="reveal">
-          <p style="font-size: 1rem; line-height: 1.8; color: rgba(255,255,255,0.6); font-weight: var(--fw-light); margin-bottom: 1.75rem;">
-            Als Geschäftsführer wissen Sie: Im Schadenfall zählt nicht, was im Angebot stand – sondern was im Vertrag steht.<br><br>
-            Sie gewinnen Struktur in Ihrem Versicherungsbestand und erfahren, welche Leistungen und Bedingungen Ihre Verträge vorsehen. Zuständigkeiten werden geklärt, erkennbare Lücken und mögliche Doppelungen aufgezeigt.<br><br>
-            Keine Hotlines. Kein Weiterverbinden. Kein Suchen, wer zuständig ist.
-          </p>
-          <a href="#kontakt" class="btn-primary" style="display: inline-block;">Unternehmensschutz prüfen lassen</a>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- LEISTUNGEN -->
   <section id="leistungen">
@@ -712,9 +687,9 @@
         <div style="height: 3px; background: var(--copper);"></div>
         <div style="padding: 2rem 2.5rem; display: flex; justify-content: space-between; align-items: center; gap: 2rem; flex-wrap: wrap;">
           <div style="max-width: 580px;">
-            <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600; color: var(--navy); margin-bottom: 0.5rem;">Bereits versichert – aber noch richtig aufgestellt?</div>
+            <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600; color: var(--navy); margin-bottom: 0.5rem;">Für Geschäftsführer: Im Schadenfall zählt, was im Vertrag steht.</div>
             <p style="font-size: 0.875rem; line-height: 1.75; color: var(--muted); font-weight: var(--fw-light); margin: 0;">
-              Viele Unternehmen haben Versicherungen, die über Jahre gewachsen sind. Im Check wird sichtbar, ob der Schutz noch zur heutigen Größe, Branche und Risikolage Ihres Unternehmens passt.
+              Ich prüfe Ihren Firmenbestand und bündle alles in einer Hand. Keine Hotlines, kein Weiterverbinden.
             </p>
           </div>
           <a href="#kontakt" class="btn-primary" style="white-space: nowrap; flex-shrink: 0;">Bestandscheck vereinbaren</a>
@@ -777,122 +752,69 @@
         <div style="height: 3px; background: var(--copper);"></div>
         <div style="padding: 2rem 2.5rem; display: flex; justify-content: space-between; align-items: center; gap: 2rem; flex-wrap: wrap;">
           <div style="max-width: 580px;">
-            <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600; color: var(--navy); margin-bottom: 0.5rem;">Sie haben bereits Versicherungen – und möchten wissen, ob alles wirklich zusammenpasst?</div>
+            <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600; color: var(--navy); margin-bottom: 0.5rem;">Schon versichert?</div>
             <p style="font-size: 0.875rem; line-height: 1.75; color: var(--muted); font-weight: var(--fw-light); margin: 0;">
-              Sie erhalten eine verständliche Einschätzung: Was sinnvoll ist, was fehlt und was möglicherweise nicht mehr gebraucht wird. Wenn Eigentum, Immobilienkauf oder Verkauf eine Rolle spielt, betrachten wir auch die passende Absicherung rund um Gebäude, Hausrat, Haftpflicht und Finanzierung.
+              Ich prüfe, ob alles zusammenpasst – und sage Ihnen auch, wenn ein Vertrag gut ist.
             </p>
           </div>
-          <a href="#kontakt" class="btn-primary" style="white-space: nowrap; flex-shrink: 0;">Persönliches Gespräch anfragen</a>
+          <a href="#kontakt" class="btn-primary" style="white-space: nowrap; flex-shrink: 0;">Kostenlosen Check anfragen</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PROZESS -->
-  <section id="prozess">
+  <!-- VERSICHERUNGSCHECK -->
+  <section id="vcheck">
     <div class="s-inner">
-      <div class="s-tag light reveal">So arbeiten wir</div>
-      <h2 class="s-title light reveal">Vier Schritte zu Ihrer<br><em>optimalen Absicherung</em></h2>
-      <p class="s-desc light reveal">Strukturiert, transparent und auf Ihre Bedürfnisse ausgerichtet.</p>
-      <div class="prozess-steps">
-        <div class="p-step reveal">
-          <img src="images/schritt1-analyse.png" alt="Analyse" class="p-img" width="200" height="133">
-          <div class="p-title">Analyse</div>
-          <div class="p-desc">Ihre Situation wird vollständig erfasst – Branche, Risiken, Lebenslage und bestehende Absicherung.</div>
+      <div class="vcheck-wrap">
+        <div>
+          <div class="s-tag reveal">Kostenlos &amp; unverbindlich</div>
+          <h2 class="s-title reveal">Ihr kostenloser<br><em>Versicherungscheck</em></h2>
+          <p class="vcheck-intro reveal">In 3 Schritten zum klaren Überblick – ohne Verpflichtung.</p>
+          <ul class="vcheck-list reveal" style="margin-top:1.5rem">
+            <li>Mehr Schutz, oft für weniger Beitrag</li>
+            <li>Lücken und doppelte Verträge erkannt</li>
+            <li>Eine Ansprechpartnerin – auch im Schadenfall</li>
+          </ul>
+          <a href="#kontakt" class="btn-primary reveal" style="display:inline-block;margin-top:2rem">Kostenlosen Check anfragen</a>
         </div>
-        <div class="p-step reveal d1">
-          <img src="images/schritt2-vergleich.png" alt="Vergleich" class="p-img" width="200" height="133">
-          <div class="p-title">Vergleich</div>
-          <div class="p-desc">Unabhängiger Marktvergleich der führenden Anbieter – ohne Präferenzen, nur Ihr Vorteil zählt.</div>
-        </div>
-        <div class="p-step reveal d2">
-          <img src="images/schritt3-empfehlung.png" alt="Empfehlung" class="p-img" width="200" height="133">
-          <div class="p-title">Empfehlung</div>
-          <div class="p-desc">Klare, verständliche Empfehlung mit Begründung – damit Sie eine fundierte Entscheidung treffen.</div>
-        </div>
-        <div class="p-step reveal d3">
-          <img src="images/schritt4-betreuung.png" alt="Betreuung" class="p-img" width="200" height="133">
-          <div class="p-title">Betreuung</div>
-          <div class="p-desc">Auch nach dem Abschluss bleibt Ihre Absicherung aktuell – bei Änderungen, Schadensfällen und neuen Lebenssituationen.</div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- PROZESS CTA -->
-  <section style="background: var(--light); padding: 3.5rem 2rem;">
-    <div style="max-width: 1200px; margin: 0 auto;">
-      <div style="background: white; border-radius: 8px; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 4px 20px rgba(11,29,46,0.06); overflow: hidden;">
-        <div style="height: 3px; background: var(--copper);"></div>
-        <div style="padding: 2rem 2.5rem; display: flex; justify-content: space-between; align-items: center; gap: 2rem; flex-wrap: wrap;">
-          <div style="max-width: 580px;">
-            <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600; color: var(--navy); margin-bottom: 0.5rem;">Dieser Prozess gilt auch für bestehende Versicherungen.</div>
-            <p style="font-size: 0.875rem; line-height: 1.75; color: var(--muted); font-weight: var(--fw-light); margin: 0;">
-              Ihr Bestand wird strukturiert geprüft. Danach ist klar, was vorhanden ist, was fehlt und welche Absicherung zu Ihrem Unternehmen heute passt.
-            </p>
-          </div>
-          <a href="#kontakt" class="btn-primary" style="white-space: nowrap; flex-shrink: 0;">Verträge in eine Hand übergeben</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- USP -->
-  <section id="usp">
-    <div class="s-inner">
-      <div class="usp-wrap">
-
-        <!-- Linke Spalte: Foto -->
-        <div class="usp-photo-wrap reveal">
-          <img src="images/usp-photo.jpg" alt="Katarzyna Hilger" class="usp-photo" width="300" height="400">
-          <div class="usp-photo-badge">
-            <div class="usp-photo-badge-icon">⭐</div>
-            <div class="usp-photo-badge-text">
-              Seit 2009 für Sie da
-              <span>Unabhängige Versicherungsmaklerin</span>
+        <div class="reveal">
+          <div class="vcheck-card">
+            <div class="vcheck-card-header">
+              <img src="images/portrait.jpg" alt="Katarzyna Hilger" width="600" height="800">
+              <div>
+                <div class="vcheck-card-header-name">Katarzyna Hilger</div>
+                <div class="vcheck-card-header-sub">Unabhängige Versicherungsmaklerin · Seit 2009</div>
+              </div>
+            </div>
+            <div class="vcheck-card-body">
+              <div class="vcheck-card-title">So einfach geht's</div>
+              <div class="vcheck-card-sub">Persönlich, per Video oder Telefon.</div>
+              <div class="vcheck-steps">
+                <div class="vcheck-step">
+                  <img src="images/schritt1-analyse.png" alt="Analyse" class="vcheck-step-img" width="200" height="133">
+                  <div class="vcheck-step-t"><strong style="color:var(--navy)">1. Unterlagen senden.</strong><br>Per Foto, WhatsApp oder E-Mail.</div>
+                </div>
+                <div class="vcheck-step">
+                  <img src="images/schritt2-vergleich.png" alt="Vergleich" class="vcheck-step-img" width="200" height="133">
+                  <div class="vcheck-step-t"><strong style="color:var(--navy)">2. Ich prüfe.</strong><br>Lücken, Doppelungen, Sparpotenzial.</div>
+                </div>
+                <div class="vcheck-step">
+                  <img src="images/schritt3-empfehlung.png" alt="Empfehlung" class="vcheck-step-img" width="200" height="133">
+                  <div class="vcheck-step-t"><strong style="color:var(--navy)">3. Sie entscheiden.</strong><br>Mit klarer Empfehlung – ohne Druck.</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-
-        <!-- Rechte Spalte: Text + Karten -->
-        <div class="usp-right">
-          <div>
-            <div class="s-tag reveal">Was Sie davon haben</div>
-            <h2 class="s-title reveal">Ihre Versicherungen sollen<br>verständlich sein – <em>nicht kompliziert.</em></h2>
-            <p class="s-desc reveal">Viele Menschen haben Versicherungen, aber keinen klaren Überblick. Manche Verträge passen noch, andere sind veraltet, doppelt oder greifen im entscheidenden Moment nicht wie erwartet. Sie erhalten eine strukturierte Prüfung, eine verständliche Erklärung und klare Empfehlungen für Ihre aktuelle Situation.</p>
-          </div>
-          <div class="usp-grid">
-            <div class="usp-card reveal">
-              <div class="usp-icon">🔍</div>
-              <div class="usp-t">Erst verstehen, dann entscheiden</div>
-              <div class="usp-d">Bevor über neue Verträge gesprochen wird, steht Ihre Situation im Mittelpunkt: Was ist vorhanden, was ist wichtig, was soll geschützt werden? Danach können Sie bewusst entscheiden.</div>
-            </div>
-            <div class="usp-card reveal d1">
-              <div class="usp-icon">⚖️</div>
-              <div class="usp-t">Empfehlungen, die zu Ihnen passen</div>
-              <div class="usp-d">Verglichen werden passende Anbieter und Tarife – nicht nur nach Beitrag, sondern nach Leistung, Bedingungen und Nutzen im Ernstfall.</div>
-            </div>
-            <div class="usp-card reveal d2">
-              <div class="usp-icon">🤝</div>
-              <div class="usp-t">Eine feste Ansprechpartnerin</div>
-              <div class="usp-d">Keine wechselnden Hotlines, keine unklare Zuständigkeit. Sie wissen, wohin Sie sich wenden können, wenn Fragen auftauchen oder ein Schaden passiert.</div>
-            </div>
-            <div class="usp-card reveal d3">
-              <div class="usp-icon">🏆</div>
-              <div class="usp-t">Ordnung, die aktuell bleibt</div>
-              <div class="usp-d">Wenn sich Ihr Leben, Ihr Unternehmen oder Ihre Risiken verändern, wird Ihre Absicherung neu eingeordnet. So bleibt Ihr Schutz nicht irgendwann von gestern.</div>
-            </div>
-          </div>
-          <p class="reveal" style="font-size: 0.9rem; line-height: 1.75; color: var(--muted); font-weight: var(--fw-light); margin-bottom: 1.5rem; max-width: 480px;">Ich prüfe die Leistungen und Bedingungen Ihrer Verträge, um erkennbare Lücken transparent aufzuzeigen. So können Sie Ihre Absicherung besser einschätzen.</p>
-          <a href="#kontakt" class="btn-primary reveal" style="display:inline-block">Erstes Gespräch vereinbaren</a>
-        </div>
-
       </div>
     </div>
   </section>
 
   <!-- BERATERIN -->
   <section id="beraterin">
+    <span id="usp"></span>
     <div class="s-inner">
       <div class="beraterin-wrap">
         <div class="beraterin-img-wrap reveal">
@@ -903,21 +825,19 @@
           </div>
         </div>
         <div>
-          <div class="s-tag reveal">Ihre Beraterin</div>
+          <div class="s-tag reveal">Über mich</div>
           <div class="beraterin-name reveal">Katarzyna Hilger</div>
           <div class="beraterin-titel reveal">Unabhängige Versicherungsmaklerin · Seit 2009</div>
-          <p class="beraterin-text reveal">Wenn Versicherungen unübersichtlich werden, hilft eine feste Ansprechpartnerin, die Verträge ordnet, Leistungen erklärt und auch im Schadenfall erreichbar bleibt. Genau dafür steht Katarzyna Hilger seit 2009 – persönlich, unabhängig und verständlich.</p>
           <blockquote class="reveal" style="border-left: 3px solid var(--copper); margin: 1.5rem 0; padding: 1rem 1.5rem; background: var(--cream-dark); border-radius: 0 4px 4px 0;">
             <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 400; color: var(--navy); line-height: 1.4; font-style: italic; margin: 0;">„Am Ende zählt, dass Sie wissen, was greift – bevor etwas passiert."</p>
           </blockquote>
           <ul class="beraterin-punkte reveal">
-            <li>Bestehende Verträge verständlich eingeordnet</li>
-            <li>Lücken und Doppelversicherungen klar benannt</li>
-            <li>Persönliche Ansprechpartnerin für Rückfragen und Schadenfälle</li>
-            <li>Unabhängig von einzelnen Versicherungsgesellschaften</li>
-            <li>Vergütung transparent erklärt</li>
+            <li><span><strong>Unabhängig:</strong> Ich vergleiche den Markt, nicht nur einen Anbieter.</span></li>
+            <li><span><strong>Persönlich:</strong> Sie erreichen immer mich – keine Hotline.</span></li>
+            <li><span><strong>Im Schadenfall an Ihrer Seite:</strong> bis alles geklärt ist.</span></li>
+            <li><span><strong>Ehrlich:</strong> auch wenn das heißt, dass Sie nichts Neues brauchen.</span></li>
           </ul>
-          <a href="#kontakt" class="btn-primary reveal">Erstes Gespräch vereinbaren</a>
+          <a href="#kontakt" class="btn-primary reveal">Kostenlosen Check anfragen</a>
         </div>
       </div>
     </div>
@@ -928,14 +848,14 @@
     <div class="s-inner">
       <div style="text-align: center; margin-bottom: 3.5rem;">
         <div class="s-tag reveal" style="justify-content: center;">Kundenbewertungen</div>
-        <h2 class="s-title reveal" style="text-align: center;">Das sagen unsere Kunden über die Zusammenarbeit</h2>
+        <h2 class="s-title reveal" style="text-align: center;">Das sagen meine Kunden</h2>
       </div>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 1.5rem;">
 
         <div class="reveal" style="background: white; border-radius: 8px; padding: 2rem 2.25rem; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 4px 16px rgba(11,29,46,0.05); display: flex; flex-direction: column; justify-content: space-between;">
           <div>
             <div style="font-family: 'Cormorant Garamond', serif; font-size: 3rem; color: var(--copper); line-height: 1; margin-bottom: 0.75rem; opacity: 0.6;">"</div>
-            <p style="font-size: 0.9rem; line-height: 1.85; color: var(--text); font-weight: var(--fw-light); margin-bottom: 1.5rem; font-style: italic;">Frau Hilger hat die Betreuung unserer Versicherungen übernommen und unsere bestehenden Verträge sehr sorgfältig geprüft und strukturiert. Dabei wurden wichtige Punkte erkannt, die für unser Unternehmen im Schadenfall entscheidend sein können. Besonders schätzen wir, dass Frau Hilger regelmäßig mit uns im Austausch bleibt, unsere betrieblichen Anforderungen versteht und dabei auch unser Budget im Blick behält. Es ist für uns sehr wertvoll, eine feste Ansprechpartnerin zu haben, die mitdenkt und sich zuverlässig kümmert.</p>
+            <p style="font-size: 0.9rem; line-height: 1.85; color: var(--text); font-weight: var(--fw-light); margin-bottom: 1.5rem; font-style: italic;">Frau Hilger hat unsere Verträge sorgfältig geprüft und dabei Punkte erkannt, die im Schadenfall entscheidend sein können. Wir haben endlich eine feste Ansprechpartnerin, die mitdenkt und unser Budget im Blick behält.</p>
           </div>
           <div style="display: flex; align-items: center; gap: 0.875rem; padding-top: 1.25rem; border-top: 1px solid rgba(0,0,0,0.06);">
             <div style="width: 42px; height: 42px; background: linear-gradient(135deg, var(--copper), var(--copper-light)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; flex-shrink: 0;">01</div>
@@ -949,7 +869,7 @@
         <div class="reveal d1" style="background: white; border-radius: 8px; padding: 2rem 2.25rem; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 4px 16px rgba(11,29,46,0.05); display: flex; flex-direction: column; justify-content: space-between;">
           <div>
             <div style="font-family: 'Cormorant Garamond', serif; font-size: 3rem; color: var(--copper); line-height: 1; margin-bottom: 0.75rem; opacity: 0.6;">"</div>
-            <p style="font-size: 0.9rem; line-height: 1.85; color: var(--text); font-weight: var(--fw-light); margin-bottom: 1.5rem; font-style: italic;">Wir sind seit vielen Jahren Kunden bei Frau Hilger und fühlen uns bei unseren Versicherungsthemen sehr gut betreut. Besonders bei der Absicherung unserer Tochter wurden wir sehr sorgfältig vorbereitet und verständlich durch die einzelnen Schritte begleitet. Man merkt, dass Frau Hilger nicht einfach nur ein Angebot erstellt, sondern wirklich prüft, was zur persönlichen Situation passt.</p>
+            <p style="font-size: 0.9rem; line-height: 1.85; color: var(--text); font-weight: var(--fw-light); margin-bottom: 1.5rem; font-style: italic;">Wir sind seit vielen Jahren Kunden und fühlen uns sehr gut betreut. Bei der Absicherung unserer Tochter wurden wir sorgfältig und verständlich begleitet.</p>
           </div>
           <div style="display: flex; align-items: center; gap: 0.875rem; padding-top: 1.25rem; border-top: 1px solid rgba(0,0,0,0.06);">
             <div style="width: 42px; height: 42px; background: linear-gradient(135deg, var(--copper), var(--copper-light)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; flex-shrink: 0;">02</div>
@@ -963,7 +883,7 @@
         <div class="reveal d2" style="background: white; border-radius: 8px; padding: 2rem 2.25rem; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 4px 16px rgba(11,29,46,0.05); display: flex; flex-direction: column; justify-content: space-between;">
           <div>
             <div style="font-family: 'Cormorant Garamond', serif; font-size: 3rem; color: var(--copper); line-height: 1; margin-bottom: 0.75rem; opacity: 0.6;">"</div>
-            <p style="font-size: 0.9rem; line-height: 1.85; color: var(--text); font-weight: var(--fw-light); margin-bottom: 1.5rem; font-style: italic;">Wenn etwas passiert, ist Frau Hilger sofort erreichbar und hilft konkret weiter. Ob Panne, Unfall oder Rückfragen zur Schadenmeldung – sie erklärt verständlich, was zu tun ist, unterstützt bei der Kommunikation mit der Versicherung und begleitet den Vorgang bis zur Klärung. Gerade in stressigen Situationen ist es sehr beruhigend, jemanden an der Seite zu haben, der sich auskennt und sich kümmert.</p>
+            <p style="font-size: 0.9rem; line-height: 1.85; color: var(--text); font-weight: var(--fw-light); margin-bottom: 1.5rem; font-style: italic;">Wenn etwas passiert, ist Frau Hilger sofort erreichbar. Sie erklärt, was zu tun ist, und begleitet den Schaden bis zur Klärung – das ist sehr beruhigend.</p>
           </div>
           <div style="display: flex; align-items: center; gap: 0.875rem; padding-top: 1.25rem; border-top: 1px solid rgba(0,0,0,0.06);">
             <div style="width: 42px; height: 42px; background: linear-gradient(135deg, var(--copper), var(--copper-light)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; flex-shrink: 0;">03</div>
@@ -985,7 +905,7 @@
         <div>
           <div class="s-tag light reveal">Was Sie bekommen</div>
           <h2 class="s-title light reveal">Ihre Versicherungen<br><em>immer in der Tasche.</em></h2>
-          <p class="s-desc light reveal">Mit der myinsure-App haben Sie Ihre Versicherungen digital im Blick: Verträge, Dokumente und Schadensmeldungen an einem Ort. Kein Suchen, kein Papierchaos – jederzeit verfügbar.</p>
+          <p class="s-desc light reveal">Alle Verträge in einer App: Schäden melden, Dokumente finden, Daten ändern – jederzeit.</p>
           <div class="app-features reveal">
             <div class="app-feat"><div class="app-feat-icon">📋</div><div class="app-feat-t">Verträge anlegen & verwalten</div></div>
             <div class="app-feat"><div class="app-feat-icon">🚨</div><div class="app-feat-t">Schäden direkt melden</div></div>
@@ -1007,57 +927,6 @@
     </div>
   </section>
 
-  <!-- VERSICHERUNGSCHECK -->
-  <section id="vcheck">
-    <div class="s-inner">
-      <div class="vcheck-wrap">
-        <div>
-          <div class="s-tag reveal">Ihr Versicherungscheck</div>
-          <h2 class="s-title reveal">Ihr persönlicher<br><em>Versicherungscheck</em></h2>
-          <p class="vcheck-intro reveal">Wissen Sie, was Ihre Versicherungen wirklich leisten – und was nicht?</p>
-          <p class="vcheck-body reveal">Viele Versicherte wissen es nicht. Nicht weil sie nicht aufgepasst hätten – sondern weil Verträge selten verständlich erklärt werden.<br><br>Ihre Verträge werden Schritt für Schritt verständlich: Was passt, bleibt. Was nicht passt, wird sichtbar. Was fehlt, wird klar benannt – damit Sie bewusst entscheiden können.</p>
-          <ul class="vcheck-list reveal" style="margin-top:1.75rem">
-            <li>Preis und Leistung Ihrer Verträge im Vergleich</li>
-            <li>Versorgungslücken und Doppelversicherungen aufdecken</li>
-            <li>Klare Empfehlungen – persönlich und konkret</li>
-            <li>Ohne Verpflichtung – Sie entscheiden nach unserem Gespräch</li>
-          </ul>
-          <a href="#kontakt" class="btn-primary reveal" style="display:inline-block;margin-top:2rem">Meinen Bestand analysieren lassen</a>
-        </div>
-
-        <div class="reveal">
-          <div class="vcheck-card">
-            <div class="vcheck-card-header">
-              <img src="images/portrait.jpg" alt="Katarzyna Hilger" width="600" height="800">
-              <div>
-                <div class="vcheck-card-header-name">Katarzyna Hilger</div>
-                <div class="vcheck-card-header-sub">Unabhängige Versicherungsmaklerin · Seit 2009</div>
-              </div>
-            </div>
-            <div class="vcheck-card-body">
-              <div class="vcheck-card-title">So läuft der Check ab</div>
-              <div class="vcheck-card-sub">Strukturiert. Persönlich. In 3 Schritten – ohne Druck, ohne Verpflichtung.</div>
-              <div class="vcheck-steps">
-                <div class="vcheck-step">
-                  <img src="images/schritt1-analyse.png" alt="Analyse" class="vcheck-step-img" width="200" height="133">
-                  <div class="vcheck-step-t"><strong style="color:var(--navy)">Sie senden Ihre Anfrage.</strong><br>Per Formular, Telefon oder WhatsApp.</div>
-                </div>
-                <div class="vcheck-step">
-                  <img src="images/schritt2-vergleich.png" alt="Vergleich" class="vcheck-step-img" width="200" height="133">
-                  <div class="vcheck-step-t"><strong style="color:var(--navy)">Ihre Verträge werden strukturiert geprüft.</strong><br>Auf Lücken, Doppelversicherungen und Einsparpotenziale.</div>
-                </div>
-                <div class="vcheck-step">
-                  <img src="images/schritt3-empfehlung.png" alt="Empfehlung" class="vcheck-step-img" width="200" height="133">
-                  <div class="vcheck-step-t"><strong style="color:var(--navy)">Sie erhalten klare Empfehlungen.</strong><br>Verständlich erklärt, ohne Fachsprache.</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- FAQ -->
   <section id="faq">
     <div class="s-inner">
@@ -1069,18 +938,18 @@
 
         <div class="faq-item reveal">
           <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-            Was kostet eine Beratung bei Hilger Finanzen?
+            Was kostet der Check?
             <i class="faq-icon">+</i>
           </div>
-          <div class="faq-a">Die erste Orientierung – das Gespräch, in dem wir Ihre Situation gemeinsam einschätzen – ist für Sie ohne direkte Kosten. Als zugelassene Versicherungsmaklerin erhalte ich bei einer Vermittlung eine Courtage des Versicherers.<br><br>Bei umfangreicheren Aufgaben – etwa der vollständigen Analyse und Neustrukturierung eines Unternehmensbestands – arbeite ich auf Wunsch auch auf Honorarbasis. Das besprechen wir transparent, bevor wir beginnen.<br><br>Ziel ist eine Empfehlung, die zu Ihrer Situation passt – transparent erklärt und ohne Druck.</div>
+          <div class="faq-a">Das erste Gespräch ist für Sie kostenlos und unverbindlich. Bei einer Vermittlung erhalte ich eine Courtage vom Versicherer; umfangreiche Firmenanalysen biete ich auf Wunsch auch auf Honorarbasis an – immer transparent vorab besprochen.</div>
         </div>
 
         <div class="faq-item reveal d1">
           <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-            Wie läuft ein erstes Beratungsgespräch ab?
+            Wie läuft das erste Gespräch ab?
             <i class="faq-icon">+</i>
           </div>
-          <div class="faq-a">Wir besprechen in ca. 30–45 Minuten Ihre aktuelle Situation, Ihren Bedarf und Ihre Wünsche. Danach erhalten Sie ein konkretes, vergleichendes Angebot — ohne Druck und ohne Verpflichtung.</div>
+          <div class="faq-a">Wir sprechen 30–45 Minuten über Ihre Situation – vor Ort, per Video oder Telefon. Innerhalb von 1–2 Werktagen erhalten Sie eine klare Empfehlung.</div>
         </div>
 
         <div class="faq-item reveal d2">
@@ -1088,57 +957,34 @@
             Beraten Sie auch außerhalb von München?
             <i class="faq-icon">+</i>
           </div>
-          <div class="faq-a">Ja, ich berate deutschlandweit — vollständig digital per Video oder Telefon. Ein Ortstermin ist nicht nötig. Kunden aus Hamburg, Berlin, Frankfurt und ganz Deutschland werden bereits betreut.</div>
+          <div class="faq-a">Ja, deutschlandweit – bequem per Video oder Telefon.</div>
         </div>
 
         <div class="faq-item reveal d3">
           <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-            Was ist der Unterschied zwischen einem Makler und einem Vertreter?
+            Was unterscheidet eine Maklerin von einem Vertreter?
             <i class="faq-icon">+</i>
           </div>
-          <div class="faq-a">Ein Versicherungsvertreter arbeitet für eine bestimmte Gesellschaft und kann nur deren Produkte vermitteln. Als unabhängige Maklerin steht Ihr Bedarf im Mittelpunkt. Verglichen werden passende Anbieter und Tarife, damit Sie eine nachvollziehbare Entscheidung treffen können.</div>
+          <div class="faq-a">Ein Vertreter verkauft die Produkte seiner Gesellschaft. Ich bin unabhängig und vergleiche viele Anbieter – für Ihre beste Lösung.</div>
         </div>
 
         <div class="faq-item reveal">
           <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-            Kann ich meine bestehenden Verträge prüfen lassen?
+            Ich habe gerade keinen Bedarf – lohnt sich ein Gespräch trotzdem?
             <i class="faq-icon">+</i>
           </div>
-          <div class="faq-a">Ja – und ich würde sagen: Das ist der sinnvollste Ausgangspunkt überhaupt.<br><br>Bevor wir über neue Verträge sprechen, schaue ich mir an, was Sie haben. Meistens gibt es Lücken, die gravierender sind als gedacht – und Ausgaben, die sich reduzieren lassen, ohne den Schutz zu schwächen.<br><br>Ich sage Ihnen konkret, was ich finde. Ohne Beschönigung.</div>
-        </div>
-
-        <div class="faq-item reveal d1">
-          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-            Wie schnell erhalte ich ein Angebot?
-            <i class="faq-icon">+</i>
-          </div>
-          <div class="faq-a">In der Regel erhalten Sie nach unserem Erstgespräch innerhalb von 1–2 Werktagen ein konkretes, vergleichendes Angebot — übersichtlich aufbereitet und verständlich erklärt.</div>
-        </div>
-
-        <div class="faq-item reveal d2">
-          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-            Ich habe gerade keinen akuten Bedarf – lohnt sich ein Gespräch trotzdem?
-            <i class="faq-icon">+</i>
-          </div>
-          <div class="faq-a">Gerade dann. Die meisten Probleme in der Absicherung entstehen nicht im Schadenfall – sondern in den Jahren davor, wenn niemand nachschaut.<br><br>Ein kurzes Gespräch ist unverbindlich – ich berechne es nicht. Es zeigt Ihnen, wo Sie stehen. Ob alles passt – oder ob es Stellen gibt, die man kennen sollte, bevor etwas passiert.</div>
+          <div class="faq-a">Gerade dann. Lücken fallen meist erst im Schadenfall auf. Ein kurzer Check zeigt Ihnen vorher, wo Sie stehen.</div>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- CTA BAND -->
-  <section id="cta-band">
-    <div class="cta-h reveal">Bereit für die richtige Absicherung?</div>
-    <div class="cta-d reveal">Unverbindlich – ich höre zuerst zu. Sie entscheiden danach, ob Sie weitermachen möchten.</div>
-    <a href="#kontakt" class="btn-white reveal">Erstes Gespräch vereinbaren</a>
-  </section>
-
   <!-- KONTAKT -->
   <section id="kontakt">
     <div class="s-inner">
       <div class="s-tag reveal">Kontakt</div>
-      <h2 class="s-title reveal">Lassen Sie Ihre Absicherung prüfen</h2>
+      <h2 class="s-title reveal">Ihr kostenloser Check –<br><em>ich melde mich innerhalb eines Werktages</em></h2>
       <div class="kontakt-grid">
         <div>
           <form id="contactForm" aria-describedby="form-privacy" action="https://formspree.io/f/mzdypjyg" method="POST">
@@ -1192,10 +1038,6 @@
             </iframe>
             <button id="maps-disable" type="button" class="maps-load-btn" hidden onclick="unloadMaps()">Karte deaktivieren</button>
           </div>
-          <div class="k-note">
-            <div class="k-note-tag">Erstes Gespräch</div>
-            <div class="k-note-txt">Im ersten Gespräch klären Sie unverbindlich, wo Sie stehen, welche Fragen offen sind und ob eine weitere Prüfung sinnvoll ist. Danach entscheiden Sie, ob Sie weitermachen möchten.</div>
-          </div>
         </div>
       </div>
     </div>
@@ -1206,30 +1048,30 @@
     <div class="ft-top">
       <div>
         <img src="images/logo.png" alt="Hilger Finanzen" width="1231" height="538" style="height:52px;width:auto;background:white;padding:6px 14px;border-radius:4px;display:block;margin-bottom:1rem;">
-        <div class="ft-desc">Unabhängige Versicherungsmaklerin für Privatkunden und Unternehmen. Zugelassen gem. §34d GewO. Maßgeschneidert. Langfristig. Persönlich.</div>
+        <div class="ft-desc">Unabhängige Versicherungsmaklerin für Privatkunden und Unternehmen. Zugelassen gem. §34d und §34c GewO. Maßgeschneidert. Langfristig. Persönlich.</div>
       </div>
       <div class="ft-col">
         <div class="ft-col-t">Leistungen</div>
         <ul>
           <li><a href="#leistungen">Betriebshaftpflicht</a></li>
-          <li><a href="#leistungen">Cyberversicherung</a></li>
-          <li><a href="#leistungen">Rechtsschutz</a></li>
-          <li><a href="#leistungen">Betriebliche AV</a></li>
-          <li><a href="#leistungen">Flottenversicherung</a></li>
+          <li><a href="#leistungen">D&amp;O-Versicherung</a></li>
+          <li><a href="#leistungen">Krankenzusatz</a></li>
+          <li><a href="#leistungen">Berufsunfähigkeit</a></li>
+          <li><a href="altersvorsorge.html">Altersvorsorge</a></li>
         </ul>
       </div>
       <div class="ft-col">
         <div class="ft-col-t">Unternehmen</div>
         <ul>
-          <li><a href="#usp">Über uns</a></li>
-          <li><a href="#prozess">Beratungsprozess</a></li>
+          <li><a href="#vcheck">Versicherungscheck</a></li>
           <li><a href="#beraterin">Über mich</a></li>
+          <li><a href="beratung.html">Online-Beratung</a></li>
         </ul>
       </div>
       <div class="ft-col">
         <div class="ft-col-t">Kontakt</div>
         <ul>
-          <li><a href="#kontakt">Beratung buchen</a></li>
+          <li><a href="#kontakt">Check anfragen</a></li>
           <li><a href="mailto:info@hilger-finanzen.de">E-Mail schreiben</a></li>
           <li><a href="tel:+498938078946">Jetzt anrufen</a></li>
         </ul>
