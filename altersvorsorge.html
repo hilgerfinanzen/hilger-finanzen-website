@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/favicon.png">
+  <meta name="theme-color" content="#0B1D2E">
+  <title>Altersvorsorge & Vermögensaufbau – Hilger Finanzen, Garching bei München</title>
+  <meta name="description" content="Altersvorsorge-Beratung in Garching und München: Rentenlücke kennen, Riester-Check zur Reform 2027, fondsgebundene Rente, Basisrente, bAV und Immobilien als Kapitalanlage. Unabhängige Maklerin seit 2009.">
+  <meta name="keywords" content="Altersvorsorge, Riester-Reform 2027, Riester prüfen, Altersvorsorgedepot Beratung, Rentenlücke, Basisrente, Rürup, fondsgebundene Rentenversicherung, betriebliche Altersvorsorge, Immobilie Kapitalanlage, Garching, München">
+  <meta name="author" content="Katarzyna Hilger – Hilger Finanzen">
+  <meta property="og:title" content="Altersvorsorge & Vermögensaufbau – Hilger Finanzen">
+  <meta property="og:description" content="Wissen Sie, wie groß Ihre Rentenlücke ist? Persönlicher Vorsorge-Check – unabhängig und unverbindlich.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:image" content="https://hilger-finanzen.de/images/portrait.jpg">
+  <meta property="og:url" content="https://hilger-finanzen.de/altersvorsorge.html">
+  <link rel="canonical" href="https://hilger-finanzen.de/altersvorsorge.html">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+    {"@type":"Question","name":"Ab wann sollte ich mit der Altersvorsorge anfangen?","acceptedAnswer":{"@type":"Answer","text":"So früh wie möglich – je länger das Geld arbeitet, desto kleiner die Beiträge. Aber auch mit 45 oder 55 lässt sich noch viel gestalten, vor allem steuerlich."}},
+    {"@type":"Question","name":"Fondsrente oder eigenes Depot – was passt zu mir?","acceptedAnswer":{"@type":"Answer","text":"Eine fondsgebundene Rentenversicherung verbindet Fondsanlage mit lebenslanger Rente und steuerlichen Vorteilen bei der Auszahlung. Ob das für Sie passt, hängt von Ihren Zielen und Ihrem Steuersatz ab – das klären wir im Vorsorge-Check."}},
+    {"@type":"Question","name":"Soll ich meinen Riester-Vertrag jetzt kündigen?","acceptedAnswer":{"@type":"Answer","text":"Bitte nicht vorschnell. Bei einer Kündigung können Zulagen und Steuervorteile zurückgefordert werden. Bestehende Verträge laufen auch nach 2027 weiter. Ich prüfe mit Ihnen, ob Behalten, Ruhenlassen oder ein Wechsel am besten ist."}},
+    {"@type":"Question","name":"Was kostet der Vorsorge-Check?","acceptedAnswer":{"@type":"Answer","text":"Das erste Gespräch ist ohne direkte Kosten und unverbindlich. Bei einer Vermittlung erhalte ich eine Courtage vom Versicherer – das erkläre ich Ihnen transparent."}}]}
+  </script>
+  <link rel="stylesheet" href="fonts/fonts.css">
+  <script defer src="js/alpine.min.js"></script>
+  <style>
+    :root {
+      --navy: #0B1D2E;
+      --navy-mid: #122640;
+      --cream: #EEF3FA;
+      --cream-dark: #E2EAF4;
+      --copper: #1A6BB8;
+      --copper-light: #3B82D4;
+      --text: #1C2B3A;
+      --muted: #6B7A8D;
+      --light: #F4F7FB;
+      --fw-light: 300;
+    }
+    body.system-fonts { --fw-light: 400; }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', system-ui, -apple-system, sans-serif; color: var(--text); background: var(--cream); overflow-x: hidden; }
+    h1, h2, h3 { font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1.25rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: all 0.4s ease;
+    }
+    nav.scrolled {
+      background: rgba(11,29,46,0.96);
+      backdrop-filter: blur(12px);
+      padding: 0.875rem 2rem;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.2);
+    }
+    .nav-logo { display: flex; align-items: center; }
+    .nav-logo-img { height: 52px; width: auto; object-fit: contain; background: white; padding: 5px 12px; border-radius: 4px; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.875rem;
+      transition: color 0.2s; position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; right: 100%; height: 1px;
+      background: var(--copper-light); transition: right 0.3s ease;
+    }
+    .nav-links a:hover { color: white; }
+    .nav-links a:hover::after { right: 0; }
+
+    /* BUTTONS */
+    .btn-primary {
+      background: var(--copper); color: white; padding: 0.625rem 1.5rem;
+      border-radius: 2px; font-size: 0.875rem; font-weight: 500; text-decoration: none;
+      transition: all 0.2s; border: none; cursor: pointer; letter-spacing: 0.03em;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .btn-primary:hover { background: var(--copper-light); transform: translateY(-1px); box-shadow: 0 8px 20px rgba(26,107,184,0.3); }
+    .btn-outline {
+      background: transparent; color: white; padding: 0.625rem 1.5rem;
+      border-radius: 2px; font-size: 0.875rem; font-weight: 500; text-decoration: none;
+      transition: all 0.2s; border: 1px solid rgba(255,255,255,0.4); cursor: pointer;
+    }
+    .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.08); }
+    .btn-white {
+      background: white; color: var(--copper); padding: 0.875rem 2.5rem;
+      border-radius: 2px; font-size: 0.9rem; font-weight: 600; text-decoration: none;
+      display: inline-block; transition: all 0.2s; border: none; cursor: pointer;
+    }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,0.15); }
+
+    /* MOBILE */
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .nav-hamburger span { display: block; width: 24px; height: 1.5px; background: white; transition: all 0.3s; }
+    .mobile-menu {
+      position: fixed; inset: 0; background: var(--navy); z-index: 200;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2rem;
+    }
+    .mobile-menu a { font-family: 'Cormorant Garamond', serif; font-size: 2.25rem; color: white; text-decoration: none; }
+    .mobile-close {
+      position: absolute; top: 1.5rem; right: 1.75rem;
+      background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer;
+    }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh; position: relative;
+      background: linear-gradient(to right, rgba(11,29,46,0.92) 20%, rgba(11,29,46,0) 100%), url('images/hero-bg-web.jpg') center 42% / cover no-repeat;
+      display: flex; align-items: center; overflow: hidden;
+    }
+    .hero-pattern {
+      position: absolute; inset: 0; opacity: 0.03;
+      background-image: repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(255,255,255,0.5) 40px, rgba(255,255,255,0.5) 41px);
+    }
+    .hero-glow {
+      position: absolute; top: -20%; right: -10%; width: 60%; height: 140%;
+      background: radial-gradient(ellipse, rgba(26,107,184,0.09) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      position: relative; z-index: 2; max-width: 900px; margin: 0 auto;
+      padding: 9rem 2rem 6rem; width: 100%;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--copper-light); font-weight: 500; margin-bottom: 2rem;
+    }
+    .hero-tag::before { content: ''; display: block; width: 24px; height: 1px; background: var(--copper-light); }
+    .hero-h1 {
+      font-size: clamp(2.5rem, 5vw, 4.25rem); font-weight: 400; line-height: 1.1;
+      color: white; margin-bottom: 1.5rem; letter-spacing: -0.01em; max-width: 780px;
+    }
+    .hero-claim {
+      font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 400;
+      color: var(--copper-light); margin-bottom: 1.25rem; letter-spacing: 0.02em;
+    }
+    .hero-sub { font-size: 1rem; line-height: 1.8; color: rgba(255,255,255,0.6); margin-bottom: 2.75rem; font-weight: var(--fw-light); max-width: 640px; }
+    .hero-sub-mobile { display: none; }
+    .hero-h1-mobile, .hero-cta-mobile { display: none; }
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 4rem; }
+    .hero-ctas .btn-primary, .hero-ctas .btn-outline { padding: 0.875rem 2rem; font-size: 0.9rem; }
+    .hero-boxes { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: rgba(255,255,255,0.08); border-radius: 6px; overflow: hidden; }
+    .hero-box {
+      background: rgba(255,255,255,0.04); padding: 1.75rem 1.5rem;
+      transition: background 0.2s;
+    }
+    .hero-box:hover { background: rgba(255,255,255,0.07); }
+    .hero-box-link { cursor: pointer; text-decoration: none; display: block; }
+    .hero-box-link .hero-box-label::after { content: ' →'; opacity: 0; transition: opacity 0.2s; }
+    .hero-box-link:hover .hero-box-label::after { opacity: 1; }
+    .hero-box-label { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--copper-light); font-weight: 600; margin-bottom: 0.75rem; }
+    .hero-box-text { font-size: 0.875rem; color: rgba(255,255,255,0.65); line-height: 1.6; font-weight: var(--fw-light); }
+    .hero-scroll {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      color: rgba(255,255,255,0.35); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+      animation: bounce 2s ease-in-out infinite;
+    }
+    @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
+    @media (max-width: 640px) { .hero-boxes { grid-template-columns: 1fr; } }
+    @media (max-width: 640px) {
+      #hero {
+        min-height: 100svh;
+        background:
+          linear-gradient(to bottom, rgba(11,29,46,0.74) 0%, rgba(11,29,46,0.70) 45%, rgba(11,29,46,0.88) 100%),
+          url('images/hero-bg-web.jpg') 62% center / cover no-repeat;
+      }
+      .hero-inner { padding-top: 5.4rem; padding-bottom: 5.25rem; }
+      .hero-tag { margin-bottom: 1.1rem; font-size: 0.6rem; line-height: 1.45; }
+      .hero-h1 { font-size: clamp(2.15rem, 10vw, 2.7rem); line-height: 1.08; margin-bottom: 1rem; max-width: 100%; }
+      .hero-h1-desktop { display: none; }
+      .hero-h1-mobile { display: inline; }
+      .hero-claim { font-size: 1.1rem; line-height: 1.25; margin-bottom: 0.8rem; }
+      .hero-sub { font-size: 0.94rem; line-height: 1.48; margin-bottom: 1.2rem; max-width: 92%; }
+      .hero-ctas { margin-bottom: 2.2rem; }
+      .hero-ctas .btn-primary { width: 100%; justify-content: center; padding: 0.82rem 1rem; font-size: 0.88rem; }
+      .hero-ctas .btn-outline { display: none; }
+      .hero-cta-desktop { display: none; }
+      .hero-cta-mobile { display: inline; }
+      .hero-sub-desktop { display: none; }
+      .hero-sub-mobile { display: inline; }
+      .whatsapp-float { right: 1.1rem; bottom: 5.1rem; }
+    }
+
+    /* TRUST BAR */
+    #trust { background: var(--cream-dark); padding: 3.5rem 2rem; border-bottom: 1px solid rgba(0,0,0,0.06); }
+    .trust-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4,1fr); gap: 2rem; text-align: center; }
+    .trust-num { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 600; font-style: italic; color: var(--copper); line-height: 1; letter-spacing: -0.02em; }
+    .trust-lbl { font-size: 0.78rem; color: var(--muted); letter-spacing: 0.05em; margin-top: 0.35rem; }
+
+    /* SECTION COMMONS */
+    section { padding: 6rem 2rem; }
+    .s-inner { max-width: 1200px; margin: 0 auto; }
+    .s-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--copper); font-weight: 500; margin-bottom: 0.875rem;
+    }
+    .s-tag::before { content: ''; display: block; width: 20px; height: 1px; background: var(--copper); }
+    .s-tag.light { color: var(--copper-light); }
+    .s-tag.light::before { background: var(--copper-light); }
+    .s-title { font-size: clamp(2.25rem, 3.5vw, 3.5rem); font-weight: 400; line-height: 1.1; color: var(--navy); margin-bottom: 1.25rem; letter-spacing: -0.01em; }
+    .s-title.light { color: white; }
+    .s-title em { font-style: italic; color: var(--copper); }
+    .s-title.light em { color: var(--copper-light); }
+    .s-desc { font-size: 1rem; line-height: 1.75; color: var(--muted); max-width: 560px; font-weight: var(--fw-light); }
+    .s-desc.light { color: rgba(255,255,255,0.5); }
+
+    /* LEISTUNGEN */
+    #leistungen { background: var(--light); }
+    .leistungen-hdr { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; flex-wrap: wrap; gap: 1.5rem; }
+    .tab-sw { display: flex; background: var(--cream-dark); border-radius: 4px; padding: 3px; gap: 3px; }
+    .tab-btn {
+      padding: 0.5rem 1.25rem; font-size: 0.82rem; font-weight: 500;
+      border: none; background: transparent; cursor: pointer; border-radius: 3px;
+      transition: all 0.25s; color: var(--muted); font-family: 'DM Sans', sans-serif;
+    }
+    .tab-btn.active { background: white; color: var(--navy); box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+    .srv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px),1fr)); gap: 1.5rem; }
+    .srv-card {
+      background: white; border-radius: 4px; padding: 2rem 1.75rem;
+      position: relative; overflow: hidden; transition: all 0.3s; cursor: pointer;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    .srv-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--copper); transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+    }
+    .srv-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+    .srv-card:hover::before { transform: scaleX(1); }
+    .srv-icon { font-size: 1.75rem; margin-bottom: 1rem; display: block; }
+    .srv-title { font-family: 'Cormorant Garamond', serif; font-size: 1.28rem; font-weight: 600; color: var(--navy); margin-bottom: 0.5rem; line-height: 1.2; white-space: normal; overflow-wrap: normal; hyphens: manual; }
+    .srv-desc { font-size: 0.82rem; line-height: 1.65; color: var(--muted); font-weight: var(--fw-light); }
+    .srv-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.775rem; font-weight: 500; color: var(--copper); text-decoration: none; margin-top: 1rem; transition: gap 0.2s; }
+    .srv-link:hover { gap: 0.6rem; }
+
+    /* PROZESS */
+    #prozess { background: var(--navy); }
+    .prozess-steps {
+      display: grid; grid-template-columns: repeat(4,1fr);
+      gap: 0; margin-top: 4rem; position: relative;
+    }
+    .prozess-steps::before {
+      content: ''; position: absolute; top: 2rem;
+      left: 12.5%; right: 12.5%; height: 1px;
+      background: linear-gradient(to right, var(--copper), rgba(26,107,184,0.15));
+    }
+    .p-step { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 1.5rem; position: relative; z-index: 1; }
+    .p-img {
+      width: 5rem; height: 5rem; border-radius: 50%;
+      object-fit: cover; object-position: center;
+      margin-bottom: 1.5rem;
+      border: 2px solid var(--copper);
+      box-shadow: 0 0 0 4px rgba(26,107,184,0.18);
+    }
+    .p-title { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 500; color: white; margin-bottom: 0.625rem; }
+    .p-desc { font-size: 0.8rem; line-height: 1.65; color: rgba(255,255,255,0.4); font-weight: var(--fw-light); }
+
+    /* USP */
+    #usp { background: var(--cream); }
+    .usp-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .usp-photo-wrap { position: relative; }
+    .usp-photo { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: top; border-radius: 6px; display: block; }
+    .usp-photo-badge { position: absolute; bottom: 1.5rem; left: -1.5rem; background: white; border-radius: 6px; padding: 1rem 1.25rem; box-shadow: 0 8px 24px rgba(11,29,46,0.12); display: flex; align-items: center; gap: 0.75rem; }
+    .usp-photo-badge-icon { width: 36px; height: 36px; background: var(--copper); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .usp-photo-badge-text { font-size: 0.75rem; color: var(--navy); font-weight: 500; line-height: 1.4; }
+    .usp-photo-badge-text span { display: block; color: var(--muted); font-weight: var(--fw-light); font-size: 0.7rem; }
+    .usp-right { display: flex; flex-direction: column; gap: 1.5rem; }
+    .usp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 2rem; }
+    .usp-card { background: white; border-radius: 8px; padding: 1.5rem; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 4px 16px rgba(11,29,46,0.05); transition: transform 0.2s, box-shadow 0.2s; }
+    .usp-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(11,29,46,0.1); }
+    .usp-icon { width: 44px; height: 44px; border-radius: 10px; background: linear-gradient(135deg, var(--copper), var(--copper-light)); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 1rem; }
+    .usp-t { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; color: var(--navy); margin-bottom: 0.4rem; }
+    .usp-d { font-size: 0.8rem; line-height: 1.7; color: var(--muted); font-weight: var(--fw-light); }
+
+    /* KI */
+    #ki { background: var(--navy-mid); position: relative; overflow: hidden; }
+    .ki-bg {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 20% 50%, rgba(26,107,184,0.07) 0%, transparent 60%),
+                  radial-gradient(ellipse at 80% 30%, rgba(255,255,255,0.02) 0%, transparent 60%);
+    }
+    .ki-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 1.25rem; margin-top: 3rem; }
+    .ki-card {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px; padding: 2rem; transition: all 0.3s;
+    }
+    .ki-card:hover { background: rgba(255,255,255,0.07); border-color: rgba(26,107,184,0.4); transform: translateY(-3px); }
+    .ki-icon { width: 64px; height: 64px; border-radius: 10px; object-fit: cover; margin-bottom: 1.25rem; border: 1px solid rgba(26,107,184,0.35); }
+    .ki-t { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600; color: white; margin-bottom: 0.5rem; }
+    .ki-d { font-size: 0.8rem; line-height: 1.65; color: rgba(255,255,255,0.45); font-weight: var(--fw-light); }
+
+    /* APP */
+    #app { background: var(--navy-mid); position: relative; overflow: hidden; }
+    #app::before {
+      content: ''; position: absolute; top: -30%; left: -10%; width: 50%; height: 160%;
+      background: radial-gradient(ellipse, rgba(26,107,184,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .app-wrap { display: grid; grid-template-columns: 1fr 340px; gap: 5rem; align-items: center; position: relative; z-index: 1; }
+    .app-features { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2.5rem 0; }
+    .app-feat {
+      display: flex; align-items: flex-start; gap: 0.875rem;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 6px; padding: 1rem 1.25rem; transition: background 0.2s;
+    }
+    .app-feat:hover { background: rgba(255,255,255,0.07); }
+    .app-feat-icon { font-size: 1.25rem; flex-shrink: 0; }
+    .app-feat-t { font-size: 0.83rem; color: rgba(255,255,255,0.75); font-weight: 400; line-height: 1.45; }
+    .app-qr-card {
+      background: white; border-radius: 10px; padding: 2rem;
+      text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    }
+    .app-qr-card img { width: 180px; height: 180px; display: block; margin: 0 auto 1.25rem; }
+    .app-qr-label { font-size: 0.75rem; color: var(--muted); margin-bottom: 1.25rem; line-height: 1.5; }
+    .app-qr-name { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 600; color: var(--navy); margin-bottom: 0.25rem; }
+    .app-qr-sub { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .btn-app { display: block; background: var(--copper); color: white; text-decoration: none; padding: 0.75rem 1rem; border-radius: 4px; font-size: 0.83rem; font-weight: 500; transition: background 0.2s; }
+    .btn-app:hover { background: var(--copper-light); }
+    @media (max-width: 960px) { .app-wrap { grid-template-columns: 1fr; gap: 3rem; } .app-features { grid-template-columns: 1fr; } }
+
+    /* BERATERIN */
+    #beraterin { background: var(--light); }
+    .beraterin-wrap { display: grid; grid-template-columns: 2fr 3fr; gap: 4rem; align-items: start; }
+    .beraterin-img-wrap { position: relative; min-width: 0; }
+    .beraterin-img { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: top; border-radius: 6px; display: block; box-shadow: 0 20px 60px rgba(11,29,46,0.18); }
+    .beraterin-badge {
+      position: absolute; bottom: -1.5rem; right: -1.5rem;
+      background: var(--copper); color: white; border-radius: 6px;
+      padding: 1rem 1.5rem; text-align: center; box-shadow: 0 8px 24px rgba(26,107,184,0.3);
+    }
+    .beraterin-badge-num { font-family: 'Cormorant Garamond', serif; font-size: 2.25rem; font-weight: 600; line-height: 1; }
+    .beraterin-badge-lbl { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.85; margin-top: 0.2rem; }
+    .beraterin-name { font-family: 'Cormorant Garamond', serif; font-size: 2.75rem; font-weight: 400; color: var(--navy); line-height: 1.1; margin-bottom: 0.4rem; }
+    .beraterin-titel { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--copper); font-weight: 500; margin-bottom: 1.75rem; }
+    .beraterin-text { font-size: 0.95rem; line-height: 1.85; color: var(--muted); font-weight: var(--fw-light); margin-bottom: 1.25rem; }
+    .beraterin-punkte { list-style: none; margin: 1.5rem 0 2rem; display: flex; flex-direction: column; gap: 0.6rem; }
+    .beraterin-punkte li { display: flex; align-items: center; gap: 0.75rem; font-size: 0.875rem; color: var(--text); }
+    .beraterin-punkte li::before { content: ''; display: block; width: 6px; height: 6px; border-radius: 50%; background: var(--copper); flex-shrink: 0; }
+    @media (max-width: 960px) { .beraterin-wrap { grid-template-columns: 1fr; gap: 3rem; } .beraterin-badge { bottom: 1rem; right: 1rem; } }
+
+    /* VERSICHERUNGSCHECK */
+    #vcheck { background: var(--light); }
+    .vcheck-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .vcheck-intro { font-size: 1.05rem; line-height: 1.8; color: var(--muted); font-weight: var(--fw-light); margin-bottom: 1.75rem; }
+    .vcheck-body { font-size: 0.9rem; line-height: 1.85; color: var(--muted); font-weight: var(--fw-light); margin-bottom: 1.25rem; }
+    .vcheck-list { list-style: none; margin: 0 0 1.75rem; display: flex; flex-direction: column; gap: 0.65rem; }
+    .vcheck-list li { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.875rem; color: var(--text); line-height: 1.55; }
+    .vcheck-list li::before { content: ''; display: block; width: 18px; height: 18px; background: var(--copper); border-radius: 50%; flex-shrink: 0; margin-top: 1px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='8' viewBox='0 0 10 8'%3E%3Cpath d='M1 4l2.5 2.5L9 1' stroke='white' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: center; }
+    .vcheck-steps { display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 2rem; }
+    .vcheck-step { display: flex; gap: 1rem; align-items: center; }
+    .vcheck-step-img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; object-position: center; flex-shrink: 0; border: 2px solid var(--copper); }
+    .vcheck-step-t { font-size: 0.875rem; color: var(--text); line-height: 1.6; }
+    .vcheck-card { background: white; border-radius: 6px; overflow: hidden; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 8px 30px rgba(11,29,46,0.07); position: sticky; top: 6rem; }
+    .vcheck-card-header { background: var(--navy); padding: 2rem 2.5rem; display: flex; align-items: center; gap: 1rem; }
+    .vcheck-card-header img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; object-position: top; border: 2px solid rgba(255,255,255,0.3); flex-shrink: 0; }
+    .vcheck-card-header-name { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: white; font-weight: 500; }
+    .vcheck-card-header-sub { font-size: 0.7rem; color: rgba(255,255,255,0.5); margin-top: 0.15rem; }
+    .vcheck-card-body { padding: 2rem 2.5rem; }
+    .vcheck-card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.75rem; font-weight: 500; color: var(--navy); margin-bottom: 0.5rem; line-height: 1.2; }
+    .vcheck-card-sub { font-size: 0.83rem; color: var(--muted); margin-bottom: 1.75rem; font-weight: var(--fw-light); line-height: 1.6; }
+    .vcheck-for { background: var(--cream); border-radius: 4px; padding: 1.25rem 1.5rem; margin-bottom: 1.75rem; }
+    .vcheck-for-t { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--copper); margin-bottom: 0.75rem; }
+    .vcheck-for p { font-size: 0.83rem; color: var(--muted); line-height: 1.7; font-weight: var(--fw-light); }
+    @media (max-width: 960px) { .vcheck-wrap { grid-template-columns: 1fr; gap: 3rem; } .vcheck-card { position: static; } }
+
+    /* FAQ */
+    #faq { background: var(--cream); }
+    .faq-grid { max-width: 780px; margin: 3rem auto 0; }
+    .faq-item {
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+      overflow: hidden;
+    }
+    .faq-q {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.25rem 0; cursor: pointer; gap: 1rem;
+      font-size: 0.95rem; font-weight: 500; color: var(--navy);
+      user-select: none;
+    }
+    .faq-q:hover { color: var(--copper); }
+    .faq-icon {
+      font-size: 1.25rem; color: var(--copper); flex-shrink: 0;
+      transition: transform 0.3s; font-style: normal;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+      font-size: 0.875rem; line-height: 1.8; color: var(--muted); font-weight: var(--fw-light);
+    }
+    .faq-item.open .faq-a { max-height: 300px; padding-bottom: 1.25rem; }
+
+    /* CTA BAND */
+    #cta-band { background: var(--copper); padding: 5rem 2rem; text-align: center; }
+    .cta-h { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem,4vw,3.5rem); font-weight: 400; color: white; margin-bottom: 0.875rem; letter-spacing: -0.01em; }
+    .cta-d { font-size: 1rem; color: rgba(255,255,255,0.8); margin-bottom: 2.5rem; font-weight: var(--fw-light); }
+
+    /* KONTAKT */
+    #kontakt { background: var(--cream); }
+    .kontakt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; margin-top: 3.5rem; align-items: start; }
+    .f-group { margin-bottom: 1.25rem; }
+    .f-label { display: block; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+    .f-in, .f-sel, .f-ta {
+      width: 100%; padding: 0.75rem 1rem;
+      background: white; border: 1px solid rgba(0,0,0,0.1); border-radius: 2px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--text);
+      transition: border-color 0.2s; appearance: none;
+    }
+    .f-in:focus, .f-sel:focus, .f-ta:focus { outline: none; border-color: var(--copper); box-shadow: 0 0 0 3px rgba(26,107,184,0.1); }
+    .f-ta { min-height: 120px; resize: vertical; }
+    .f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .k-info-t { font-family: 'Cormorant Garamond', serif; font-size: 1.75rem; color: var(--navy); margin-bottom: 0.5rem; }
+    .k-info-d { font-size: 0.875rem; color: var(--muted); line-height: 1.7; margin-bottom: 2rem; font-weight: var(--fw-light); }
+    .k-det { display: flex; align-items: center; gap: 0.875rem; margin-bottom: 1rem; font-size: 0.875rem; color: var(--text); }
+    .k-det-icon { width: 36px; height: 36px; background: var(--cream-dark); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .k-note { margin-top: 2.5rem; padding: 1.5rem; background: var(--cream-dark); border-radius: 4px; border-left: 3px solid var(--copper); }
+    .k-note-tag { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--copper); margin-bottom: 0.5rem; }
+    .k-note-txt { font-size: 0.83rem; color: var(--muted); line-height: 1.6; font-weight: var(--fw-light); }
+
+    /* FOOTER */
+    footer { background: var(--navy); padding: 3.5rem 2rem 2rem; }
+    .ft-top { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 2.5rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .ft-name { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; color: white; }
+    .ft-sub { font-size: 0.65rem; color: var(--copper-light); letter-spacing: 0.15em; text-transform: uppercase; }
+    .ft-desc { font-size: 0.8rem; color: rgba(255,255,255,0.38); line-height: 1.7; margin-top: 1rem; font-weight: var(--fw-light); max-width: 230px; }
+    .ft-col-t { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 1.125rem; }
+    .ft-col ul { list-style: none; }
+    .ft-col li { margin-bottom: 0.625rem; }
+    .ft-col a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; font-weight: var(--fw-light); }
+    .ft-col a:hover { color: white; }
+    .ft-bot { max-width: 1200px; margin: 0 auto; padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .ft-copy { font-size: 0.75rem; color: rgba(255,255,255,0.28); font-weight: var(--fw-light); }
+    .ft-legal { display: flex; gap: 1.5rem; }
+    .ft-legal a { font-size: 0.75rem; color: rgba(255,255,255,0.28); text-decoration: none; transition: color 0.2s; }
+    .ft-legal a:hover { color: rgba(255,255,255,0.6); }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(24px); transition: all 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.1s; }
+    .d2 { transition-delay: 0.2s; }
+    .d3 { transition-delay: 0.3s; }
+    .d4 { transition-delay: 0.4s; }
+
+    /* SUCCESS state */
+    .form-success { display: none; text-align: center; padding: 2rem; }
+    .form-success.show { display: block; }
+
+    [hidden] { display: none !important; }
+    /* MAPS PLACEHOLDER */
+    #maps-placeholder { height: 200px; background: var(--cream-dark); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.75rem; }
+    #maps-placeholder p { font-size: 0.8rem; color: var(--muted); text-align: center; max-width: 260px; line-height: 1.5; margin: 0; }
+    .maps-load-btn { font-family: inherit; font-size: 0.8rem; padding: 0.5rem 1.25rem; background: var(--copper); color: white; border: none; border-radius: 2px; cursor: pointer; transition: background 0.2s; }
+    .maps-load-btn:hover { background: var(--copper-light); }
+
+    /* RESPONSIVE */
+    @media (max-width: 960px) {
+      .hero-inner { grid-template-columns: 1fr; padding: 7rem 1.5rem 4rem; }
+      .hero-right { display: none; }
+      .trust-inner { grid-template-columns: repeat(2,1fr); }
+      .prozess-steps { grid-template-columns: repeat(2,1fr); gap: 2.5rem; }
+      .prozess-steps::before { display: none; }
+      .usp-wrap { grid-template-columns: 1fr; gap: 3rem; }
+      .usp-photo-badge { left: 0; }
+      .testi-grid { grid-template-columns: 1fr; }
+      .kontakt-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .ft-top { grid-template-columns: 1fr 1fr; }
+      .firmenkunden-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+    @media (max-width: 780px) {
+      .beraterin-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
+      .beraterin-badge { bottom: 1rem; right: 1rem; }
+    }
+    @media (max-width: 640px) {
+      .nav-links, .nav-cta { display: none; }
+      .nav-hamburger { display: flex; }
+      .usp-grid { grid-template-columns: 1fr; }
+      .f-row { grid-template-columns: 1fr; }
+      .ft-top { grid-template-columns: 1fr; }
+      .prozess-steps { grid-template-columns: 1fr; }
+      .trust-inner { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+      #firmenkunden { padding: 3.5rem 1.25rem !important; overflow: hidden; }
+      #firmenkunden .firmenkunden-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+        align-items: start !important;
+      }
+      #firmenkunden .s-title {
+        font-size: clamp(2rem, 10vw, 2.65rem);
+        line-height: 1.08;
+        margin-bottom: 0;
+      }
+      #firmenkunden p {
+        font-size: 0.95rem !important;
+        line-height: 1.72 !important;
+        margin-bottom: 1.5rem !important;
+      }
+      #firmenkunden .btn-primary {
+        display: flex !important;
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+        white-space: normal;
+        line-height: 1.35;
+      }
+    }
+    @media (max-width: 360px) {
+      .vcheck-wrap > * { min-width: 0; overflow-wrap: anywhere; }
+      .btn-primary { max-width: 100%; white-space: normal; text-align: center; }
+    }
+  </style>
+</head>
+<body x-data="{ menuOpen: false, tab: 'gewerbe' }">
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="index.html" class="nav-logo">
+      <img src="images/logo.png" alt="Hilger Finanzen" class="nav-logo-img" width="1231" height="538">
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#leistungen">Leistungen</a></li>
+      <li><a href="altersvorsorge.html" style="color:var(--copper)">Altersvorsorge</a></li>
+      <li><a href="beratung.html">Online-Beratung</a></li>
+      <li><a href="index.html#usp">Über uns</a></li>
+      <li><a href="index.html#app">App</a></li>
+      <li><a href="index.html#vcheck">Versicherungscheck</a></li>
+      <li><a href="index.html#kontakt">Kontakt</a></li>
+    </ul>
+    <a href="index.html#kontakt" class="btn-primary nav-cta">Gespräch vereinbaren</a>
+    <div class="nav-hamburger" @click="menuOpen = true">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" x-show="menuOpen" x-transition style="display:none">
+    <button class="mobile-close" @click="menuOpen = false">✕</button>
+    <a href="index.html#leistungen" @click="menuOpen = false">Leistungen</a>
+    <a href="altersvorsorge.html" @click="menuOpen = false">Altersvorsorge</a>
+    <a href="beratung.html" @click="menuOpen = false">Online-Beratung</a>
+    <a href="index.html#usp"        @click="menuOpen = false">Über uns</a>
+    <a href="index.html#kontakt"    @click="menuOpen = false">Kontakt</a>
+    <a href="index.html#kontakt"    @click="menuOpen = false" class="btn-primary" style="font-size:1rem;padding:.875rem 2rem">Beratung buchen</a>
+  </div>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-pattern"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-inner">
+      <div class="hero-tag">Altersvorsorge &amp; Vermögensaufbau · Garching bei München · Deutschlandweit</div>
+      <h1 class="hero-h1">
+        Wissen Sie, wie groß<br>
+        Ihre Rentenlücke ist?
+      </h1>
+      <p class="hero-claim">Katarzyna Hilger – Unabhängige Versicherungsmaklerin seit 2009</p>
+      <p class="hero-sub">
+        Die gesetzliche Rente reicht für die meisten nicht. Ich zeige Ihnen Ihre Zahl –
+        und einen klaren Weg, die Lücke zu schließen.
+      </p>
+      <div class="hero-ctas">
+        <a href="index.html#kontakt" class="btn-primary">Vorsorge-Check vereinbaren</a>
+        <a href="#vorsorge" class="btn-outline">Meine Möglichkeiten</a>
+      </div>
+      <div class="hero-boxes">
+        <a class="hero-box hero-box-link" href="#vorsorge">
+          <div class="hero-box-label">Angestellte &amp; Familien</div>
+          <div class="hero-box-text">Vorsorge aufbauen, die flexibel bleibt.</div>
+        </a>
+        <a class="hero-box hero-box-link" href="#vorsorge">
+          <div class="hero-box-label">Selbstständige &amp; Geschäftsführer</div>
+          <div class="hero-box-text">Vorsorgen und dabei Steuern sparen.</div>
+        </a>
+        <div class="hero-box">
+          <div class="hero-box-label">Riester-Reform 2027</div>
+          <div class="hero-box-text">Was wird aus Ihrem Riester? Ich prüfe ihn.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MÖGLICHKEITEN -->
+  <section id="leistungen">
+    <div class="s-inner" id="vorsorge">
+      <div class="leistungen-hdr">
+        <div>
+          <div class="s-tag reveal">Ihre Möglichkeiten</div>
+          <h2 class="s-title reveal">Vorsorge, die<br><em>zu Ihnen passt</em></h2>
+        </div>
+      </div>
+      <div class="srv-grid">
+        <div class="srv-card reveal">
+          <span class="srv-icon">📈</span>
+          <div class="srv-title">Fondsgebundene Rente</div>
+          <div class="srv-desc">Vermögen mit Fonds aufbauen – mit lebenslanger Rente und Steuervorteil bei der Auszahlung.</div>
+          <a href="index.html#kontakt" class="srv-link">Anfragen →</a>
+        </div>
+        <div class="srv-card reveal d1">
+          <span class="srv-icon">🧾</span>
+          <div class="srv-title">Basisrente</div>
+          <div class="srv-desc">Für Selbstständige und Geschäftsführer: Beiträge weitgehend steuerlich absetzbar.</div>
+          <a href="index.html#kontakt" class="srv-link">Anfragen →</a>
+        </div>
+        <div class="srv-card reveal d2">
+          <span class="srv-icon">💼</span>
+          <div class="srv-title">Betriebliche Altersvorsorge</div>
+          <div class="srv-desc">Vorsorge für Ihr Team – und ein starkes Argument für gute Mitarbeiter.</div>
+          <a href="index.html#kontakt" class="srv-link">Anfragen →</a>
+        </div>
+        <div class="srv-card reveal d3">
+          <span class="srv-icon">🏠</span>
+          <div class="srv-title">Immobilie als Kapitalanlage</div>
+          <div class="srv-desc">Sachwert und Mieteinnahmen – sinnvoll eingebettet in Ihre gesamte Vorsorge.</div>
+          <a href="index.html#kontakt" class="srv-link">Anfragen →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RIESTER-REFORM 2027 -->
+  <section style="background: var(--navy-mid); padding: 5rem 2rem; border-top: 1px solid rgba(255,255,255,0.06);">
+    <div class="s-inner">
+      <div class="leistungen-hdr">
+        <div>
+          <div class="s-tag light reveal">Neu ab 2027</div>
+          <h2 class="s-title light reveal">Riester-Reform:<br><em>Was wird aus Ihrem Vertrag?</em></h2>
+          <p class="s-desc light reveal">Ab 1. Januar 2027 gibt es die neue staatlich geförderte Altersvorsorge – mit bis zu 540 € Grundzulage im Jahr, plus Kinderzulage. Ihr bestehender Riester-Vertrag läuft weiter. Ob sich ein Wechsel lohnt, prüfe ich mit Ihnen.</p>
+        </div>
+      </div>
+      <div class="srv-grid">
+        <div class="srv-card reveal">
+          <span class="srv-icon">🔍</span>
+          <div class="srv-title">Riester-Check</div>
+          <div class="srv-desc">Kosten, Garantie, Rendite: Was bringt Ihr Vertrag wirklich?</div>
+          <a href="index.html#kontakt" class="srv-link">Prüfen lassen →</a>
+        </div>
+        <div class="srv-card reveal d1">
+          <span class="srv-icon">⏸️</span>
+          <div class="srv-title">Beitragsfreier Riester</div>
+          <div class="srv-desc">Vertrag ruht? Reaktivieren, weiterlaufen lassen oder neu ordnen.</div>
+          <a href="index.html#kontakt" class="srv-link">Prüfen lassen →</a>
+        </div>
+        <div class="srv-card reveal d2">
+          <span class="srv-icon">🧮</span>
+          <div class="srv-title">Zulagen berechnen</div>
+          <div class="srv-desc">Wie viel Förderung steht Ihnen zu – alt und neu im Vergleich.</div>
+          <a href="index.html#kontakt" class="srv-link">Berechnen lassen →</a>
+        </div>
+        <div class="srv-card reveal d3">
+          <span class="srv-icon">🔄</span>
+          <div class="srv-title">Wechsel ja oder nein?</div>
+          <div class="srv-desc">Behalten oder umsteigen: klare Empfehlung, bevor Sie etwas kündigen.</div>
+          <a href="index.html#kontakt" class="srv-link">Beraten lassen →</a>
+        </div>
+      </div>
+      <p class="reveal" style="margin-top:2.5rem;font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-style:italic;color:white;line-height:1.5;max-width:760px;">
+        Banken empfehlen ihr eigenes Depot, Versicherer ihren eigenen Tarif. Ich bin an keinen Anbieter gebunden – und sage Ihnen ehrlich, wenn Ihr alter Vertrag besser ist.
+      </p>
+      <p class="reveal" style="margin-top:1rem;font-size:0.9rem;color:rgba(255,255,255,0.6);font-weight:var(--fw-light);">Neu: Auch Selbstständige werden ab 2027 erstmals direkt gefördert.</p>
+    </div>
+  </section>
+
+  <!-- ABLAUF -->
+  <section id="prozess">
+    <div class="s-inner">
+      <div class="s-tag light reveal">Der Vorsorge-Check</div>
+      <h2 class="s-title light reveal">In drei Schritten<br><em>zu Ihrem Plan</em></h2>
+      <div class="prozess-steps">
+        <div class="p-step reveal">
+          <img src="images/schritt1-analyse.png" alt="Analyse" class="p-img" width="200" height="133">
+          <div class="p-title">Ihre Zahl</div>
+          <div class="p-desc">Wir berechnen Ihre persönliche Rentenlücke.</div>
+        </div>
+        <div class="p-step reveal d1">
+          <img src="images/schritt2-vergleich.png" alt="Vergleich" class="p-img" width="200" height="133">
+          <div class="p-title">Ihre Möglichkeiten</div>
+          <div class="p-desc">Unabhängiger Vergleich passender Lösungen.</div>
+        </div>
+        <div class="p-step reveal d2">
+          <img src="images/schritt3-empfehlung.png" alt="Empfehlung" class="p-img" width="200" height="133">
+          <div class="p-title">Ihr Plan</div>
+          <div class="p-desc">Klare Empfehlung – Sie entscheiden in Ruhe.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BERATERIN -->
+  <section id="beraterin">
+    <div class="s-inner">
+      <div class="beraterin-wrap">
+        <div class="beraterin-img-wrap reveal">
+          <img src="images/portrait.jpg" alt="Katarzyna Hilger" class="beraterin-img" width="600" height="800">
+          <div class="beraterin-badge">
+            <div class="beraterin-badge-num">15+</div>
+            <div class="beraterin-badge-lbl">Jahre Erfahrung</div>
+          </div>
+        </div>
+        <div>
+          <div class="s-tag reveal">Ihre Beraterin</div>
+          <div class="beraterin-name reveal">Katarzyna Hilger</div>
+          <div class="beraterin-titel reveal">Unabhängige Versicherungsmaklerin · Seit 2009</div>
+          <blockquote class="reveal" style="border-left: 3px solid var(--copper); margin: 1.5rem 0; padding: 1rem 1.5rem; background: var(--cream-dark); border-radius: 0 4px 4px 0;">
+            <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 400; color: var(--navy); line-height: 1.4; font-style: italic; margin: 0;">„Gute Vorsorge ist kein Produkt.<br>Sondern ein Plan, der zu Ihrem Leben passt."</p>
+          </blockquote>
+          <ul class="beraterin-punkte reveal">
+            <li>Zugelassen gem. §34d und §34c GewO</li>
+            <li>Unabhängig von Versicherungsgesellschaften</li>
+            <li>Vor Ort in Garching oder per Video</li>
+          </ul>
+          <a href="index.html#kontakt" class="btn-primary reveal">Vorsorge-Check vereinbaren</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="s-inner">
+      <div style="text-align:center">
+        <div class="s-tag reveal">Häufige Fragen</div>
+        <h2 class="s-title reveal">Was Kunden<br><em>oft fragen</em></h2>
+      </div>
+      <div class="faq-grid">
+        <div class="faq-item reveal">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+            Ab wann sollte ich mit der Altersvorsorge anfangen?
+            <i class="faq-icon">+</i>
+          </div>
+          <div class="faq-a">So früh wie möglich – je länger das Geld arbeitet, desto kleiner die Beiträge. Aber auch mit 45 oder 55 lässt sich noch viel gestalten, vor allem steuerlich.</div>
+        </div>
+        <div class="faq-item reveal d1">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+            Soll ich meinen Riester-Vertrag jetzt kündigen?
+            <i class="faq-icon">+</i>
+          </div>
+          <div class="faq-a">Bitte nicht vorschnell. Bei einer Kündigung können Zulagen und Steuervorteile zurückgefordert werden. Bestehende Verträge laufen auch nach 2027 weiter. Ich prüfe mit Ihnen, ob Behalten, Ruhenlassen oder ein Wechsel für Sie am besten ist.</div>
+        </div>
+        <div class="faq-item reveal d1">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+            Fondsrente oder eigenes Depot – was passt zu mir?
+            <i class="faq-icon">+</i>
+          </div>
+          <div class="faq-a">Eine fondsgebundene Rentenversicherung verbindet Fondsanlage mit lebenslanger Rente und steuerlichen Vorteilen bei der Auszahlung. Ob das für Sie passt, hängt von Ihren Zielen und Ihrem Steuersatz ab – das klären wir im Vorsorge-Check.</div>
+        </div>
+        <div class="faq-item reveal d2">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+            Was kostet der Vorsorge-Check?
+            <i class="faq-icon">+</i>
+          </div>
+          <div class="faq-a">Das erste Gespräch ist ohne direkte Kosten und unverbindlich. Bei einer Vermittlung erhalte ich eine Courtage vom Versicherer – das erkläre ich Ihnen transparent.</div>
+        </div>
+      </div>
+      <p style="font-size:0.75rem;line-height:1.6;color:var(--muted);text-align:center;max-width:720px;margin:2.5rem auto 0;">Fondsgebundene Versicherungen unterliegen Wertschwankungen. Steuerliche Vorteile hängen von Ihrer persönlichen Situation ab.</p>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <section id="cta-band">
+    <div class="cta-h reveal">Kennen Sie Ihre Zahl?</div>
+    <div class="cta-d reveal">Im Vorsorge-Check erfahren Sie Ihre Rentenlücke – unverbindlich und verständlich.</div>
+    <a href="index.html#kontakt" class="btn-white reveal">Vorsorge-Check vereinbaren</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="ft-top">
+      <div>
+        <img src="images/logo.png" alt="Hilger Finanzen" width="1231" height="538" style="height:52px;width:auto;background:white;padding:6px 14px;border-radius:4px;display:block;margin-bottom:1rem;">
+        <div class="ft-desc">Unabhängige Versicherungsmaklerin für Privatkunden und Unternehmen. Zugelassen gem. §34d und §34c GewO. Maßgeschneidert. Langfristig. Persönlich.</div>
+      </div>
+      <div class="ft-col">
+        <div class="ft-col-t">Leistungen</div>
+        <ul>
+          <li><a href="index.html#leistungen">Betriebshaftpflicht</a></li>
+          <li><a href="index.html#leistungen">Cyberversicherung</a></li>
+          <li><a href="index.html#leistungen">Rechtsschutz</a></li>
+          <li><a href="index.html#leistungen">Betriebliche AV</a></li>
+          <li><a href="index.html#leistungen">Flottenversicherung</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <div class="ft-col-t">Unternehmen</div>
+        <ul>
+          <li><a href="index.html#usp">Über uns</a></li>
+          <li><a href="index.html#prozess">Beratungsprozess</a></li>
+          <li><a href="index.html#beraterin">Über mich</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <div class="ft-col-t">Kontakt</div>
+        <ul>
+          <li><a href="index.html#kontakt">Beratung buchen</a></li>
+          <li><a href="mailto:info@hilger-finanzen.de">E-Mail schreiben</a></li>
+          <li><a href="tel:+498938078946">Jetzt anrufen</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <div class="ft-copy">© 2026 Hilger Finanzen. Alle Rechte vorbehalten.</div>
+      <div class="ft-legal">
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    }, { passive: true });
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  </script>
+
+  <!-- WHATSAPP FLOATING BUTTON -->
+  <a href="https://wa.me/4917662633104" target="_blank" rel="noopener noreferrer" title="WhatsApp schreiben"
+    style="position:fixed;bottom:1.75rem;right:1.75rem;z-index:999;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,0.45);transition:transform 0.2s,box-shadow 0.2s;"
+    onmouseover="this.style.transform='scale(1.1)';this.style.boxShadow='0 6px 24px rgba(37,211,102,0.55)'"
+    onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 4px 16px rgba(37,211,102,0.45)'">
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const menu = document.querySelector('.mobile-menu');
+      const opener = document.querySelector('.nav-hamburger');
+      const closer = document.querySelector('.mobile-close');
+      if (!menu || !opener) return;
+      const openMenu = () => { menu.style.display = 'flex'; opener.setAttribute('aria-expanded', 'true'); };
+      const closeMenu = () => { menu.style.display = 'none'; opener.setAttribute('aria-expanded', 'false'); };
+      closeMenu();
+      opener.setAttribute('role', opener.getAttribute('role') || 'button');
+      opener.setAttribute('tabindex', opener.getAttribute('tabindex') || '0');
+      opener.addEventListener('click', openMenu);
+      opener.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          openMenu();
+        }
+      });
+      if (closer) closer.addEventListener('click', closeMenu);
+      menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+    });
+  </script>
+</body>
+</html>
