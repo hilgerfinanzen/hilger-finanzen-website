@@ -699,7 +699,7 @@
         <div class="beraterin-img-wrap reveal">
           <img src="images/portrait.jpg" alt="Katarzyna Hilger" class="beraterin-img" width="600" height="800">
           <div class="beraterin-badge">
-            <div class="beraterin-badge-num">15+</div>
+            <div class="beraterin-badge-num" data-since="2009">17</div>
             <div class="beraterin-badge-lbl">Jahre Erfahrung</div>
           </div>
         </div>
@@ -817,6 +817,12 @@
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 50);
     }, { passive: true });
+    // Jahre seit 2009 automatisch berechnen
+    document.querySelectorAll('[data-since]').forEach(el => {
+      const y = new Date().getFullYear() - parseInt(el.dataset.since, 10);
+      if ('count' in el.dataset) el.dataset.count = y;
+      el.textContent = y + (el.dataset.suffix || '');
+    });
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
